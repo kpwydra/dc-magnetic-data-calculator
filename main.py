@@ -1,8 +1,9 @@
-print('xD')
+from diamag import calc_diamag_contrib
 
-print('test xD')
+def main():
+    formula = 'C45H65'
+    result = calc_diamag_contrib(formula=formula)
+    print(result)
 
-print('test test')
-print('test test')
-print('test test')
-print('test test')
+if __name__ == '__main__': # entry point, first execution step
+    main()
