@@ -1,7 +1,7 @@
 from diamag import calc_diamag_contrib
 
 def main():
-    formula = 'C45H65'
+    formula = input('>')
     result = calc_diamag_contrib(formula=formula)
     print(result)
 
