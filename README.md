@@ -1,1 +1,34 @@
 # dc-magnetic-data-calculator
+
+## Git Instructions
+
+### Definitions
+- **Repository (repo):** a project folder tracked by Git (can be local on your computer or remote on GitHub/GitLab).  
+- **Commit:** a snapshot of your changes with a message describing what was done.  
+- **Push:** upload your local commits to the remote repository.  
+- **Pull:** download and merge the latest changes from the remote repository to your local copy.  
+- **Staging (git add):** selecting which files/changes will go into the next commit.  
+
+---
+
+# Git Instructions
+## How to push local changes to repository?
+### 1. add files to commit
+```bash
+git add --all
+```
+
+### 2. create commit with added files (staged files)
+```bash
+git commit -m 'what was changed? what is the new feature name?'
+```
+
+### 3. push changes (push commit)
+```bash
+git push
+```
+
+## How to pull changes (commits) from repository to local workstation?
+```bash
+git pull
+```
