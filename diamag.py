@@ -1,14 +1,10 @@
+import re
+
 def calc_diamag_contrib(formula: str):
-    result = {}
-
-    for character in formula:
-        ...
+    pattern = r"([A-Z][a-z]*)(\d+)"
+    matches = re.findall(pattern, formula)
     
-    result['C'] = 45
-    result['H'] = 65
-
-    return result
-
+    return {element: int(count) for element, count in matches}
 
 # elements = {
 #     "C": "carbon",
