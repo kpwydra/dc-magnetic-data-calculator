@@ -1,7 +1,6 @@
-def calc_diamag_contrib(formula: str):
+def calc_atoms_no(formula: str):
     result = {}
 
-    formula = formula.upper()
     key, value = '', ''
     for i in range(len(formula)):
         curr = formula[i]
@@ -16,10 +15,11 @@ def calc_diamag_contrib(formula: str):
                 value += curr
             elif curr.isdigit() and next.isalpha():
                 value += curr
-                result[key] = int(value)
+                result[key.capitalize()] = int(value)
                 key, value = '', ''
         else:
-            result[key] = int(curr)
+            value += curr
+            result[key.capitalize()] = int(value)
 
     return result
 
@@ -35,6 +35,32 @@ def calc_diamag_contrib(formula: str):
 # -> gdy litera zakończ stringa -> zamień stringa na liczbę z int()
 # 4) w pętlach dodać komendę result['pierwiastek'] = [liczba]
 
+
+# unit: 10^(-6) cm^3/mol
+diamag_const_atoms = {
+    "Ag": -31.0,
+    "Al": -13.0,
+    "B": -7.0,
+    "Br": -30.6,
+    "C": -6.00, # aliphatic
+    "Cl": -20.1,
+    "F": -6.3,
+    "H": -2.93,
+    "I": -44.6,
+    "N": -5.57, # open chain
+    "O": -4.6,
+    "P": -26.3,
+    "S": -15.0,
+    "Se": -23.0,
+    "Si": -13
+}
+
+def calc_diamag_contr(result):
+    
+    sum_dia_contr = 0
+    for element in result:
+        sum_dia_contr += result[element] * diamag_const_atoms[element]
+    return sum_dia_contr
 
 
 
