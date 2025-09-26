@@ -32,3 +32,18 @@ git push
 ```bash
 git pull
 ```
+
+## Git Branches
+### 1. check available branches
+```
+git branch
+```
+### 2. Change branch
+```
+git checkout <BRANCH_NAME>
+```
+### 3. Create new branch
+```
+git checkout -b <BRANCH_NAME>
+```
+
