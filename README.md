@@ -52,6 +52,11 @@ git checkout -b <BRANCH_NAME>
 git push -u origin <BRANCH_NAME>
 ```
 
+### 5. Delete local branch
+```
+git branch --delete <BRANCH_NAME>
+```
+
 ## How to see flags documentation
 >  Use arrows to go up / down if using vim, press "q" to exit, or search in google `git push manual` or `git pull documentation`
 ```
