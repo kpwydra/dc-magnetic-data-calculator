@@ -32,3 +32,30 @@ git push
 ```bash
 git pull
 ```
+
+## Git Branches
+### 1. check available branches
+```
+git branch
+```
+### 2. Change branch
+```
+git checkout <BRANCH_NAME>
+```
+### 3. Create new branch
+```
+git checkout -b <BRANCH_NAME>
+```
+
+### 4. Push branch **for the first time**
+```
+git push -u origin <BRANCH_NAME>
+```
+
+## How to see flags documentation
+>  Use arrows to go up / down if using vim, press "q" to exit, or search in google `git push manual` or `git pull documentation`
+```
+git push --help
+git pull --help
+git --help
+```
