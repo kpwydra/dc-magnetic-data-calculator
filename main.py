@@ -17,19 +17,85 @@ def main():
     input_data = [
       { # Element 1
         'name': 'C',
-        'total_atom_no': 66,
-        'aliphatic_atom_no': 36,
-        'aromatic_atom_no': 30,
-        'ox_state': '+4',
-        'character': 'covalent', # options: covalent / ionic
+        'total_atom_no': 20,
+          'covalent_atom_no': 20,
+            'ring_atom_no': 12,
+            'open_chain_atom_no': 8,
+            'ox_state': {
+                'I': 0,
+                'II': 0,
+                'III': 0,
+                'IV': 0,
+                'V': 0,
+            }
+        'ionic_atom_no': 0,
+          'charge': {
+              '+8': 0,
+              '+7': 0,
+              '+6': 0,
+              '+5': 0,
+              '+4': 0,
+              '+3': 0,
+              '+2': 0,
+              '+1': 0,
+              '-1': 0,
+              '-2': 0,
+          }
+        
       },
       { # Element 2
         'name': 'H',
-        'total_atom_no': 30,
-        'aliphatic_atom_no': 30,
-        'aromatic_atom_no': 0,
-        'ox_state': '-1',
-        'character': 'ionic', # options: covalent / ionic
+        'total_atom_no': 25,
+          'covalent_atom_no': 25,
+            'ring_atom_no': 0,
+            'open_chain_atom_no': 25,
+            'ox_state': {
+                'I': 0,
+                'II': 0,
+                'III': 0,
+                'IV': 0,
+                'V': 0,
+            }
+        'ionic_atom_no': 0,
+          'charge': {
+              '+8': 0,
+              '+7': 0,
+              '+6': 0,
+              '+5': 0,
+              '+4': 0,
+              '+3': 0,
+              '+2': 0,
+              '+1': 0,
+              '-1': 0,
+              '-2': 0,
+          },
+      },
+      { # Element 3
+        'name': 'N',
+        'total_atom_no': 1,
+          'covalent_atom_no': 1,
+            'ring_atom_no': 1,
+            'open_chain_atom_no': 0,
+            'ox_state': {
+                'I': 0,
+                'II': 0,
+                'III': 0,
+                'IV': 0,
+                'V': 0,
+            }
+        'ionic_atom_no': 0,
+          'charge': {
+              '+8': 0,
+              '+7': 0,
+              '+6': 0,
+              '+5': 0,
+              '+4': 0,
+              '+3': 0,
+              '+2': 0,
+              '+1': 0,
+              '-1': 0,
+              '-2': 0,
+          },
       },
     ]
     

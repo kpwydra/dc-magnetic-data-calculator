@@ -1,69 +1,91 @@
 # unit: 10^(-6) cm^3/mol
 diamag_const_atoms = {
-  "Ag": -31.0,
-  "Al": -13.0,
-  "B": -7.0,
-  "Br": -30.6,
+# This dictionary represents the diamagnetic constants for elements in
+# different bonding/oxidation_state scenarios. Here's a breakdown of the values:
   "C": {
     'covalent': {
-      'default': None,
-      'aromatic': -6.24,
-      'aliphatic': -6.0,
+      'ring': -6.24,
+      'open_chain': -6.0,
+      'ox_state': None,
     },
     'ionic': {
-      'aromatic': None,
-      'aliphatic': None,
-      'ox_state': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
         '+4': -0.1,
       },
     },
   },
-  "Cl": -20.1,
-  "F": -6.3,
-  "H": # This dictionary represents the diamagnetic constants for the element H (Hydrogen) in
-  # different bonding scenarios. Here's a breakdown of the values:
-  {
+    "H": {
     'covalent': {
-      'default': None,
-      'aromatic': None,
-      'aliphatic': -2.93,
+      'ring': None,
+      'open_chain': -2.93,
+      'ox_state': None,
     },
     'ionic': {
-      'aromatic': None,
-      'aliphatic': None,
-      'ox_state': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
         '+1': 0,
-        '-1': 999,  # todo - update real vlaue
+        '-1': -5.7,
       },
     },
   },
-  "I": -44.6,
-  "N": -5.57, # open chain
-  "O": -4.6,
-  "P": -26.3,
-  "S": -15.0,
-  "Se": -23.0,
-  "Si": -13,
+  "N": {
+    'covalent': {
+      'ring': -4.61,
+      'open_chain': -5.57,
+      'ox_state': None,
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+5': -0.1,
+      },
+    }, 
+  },
+  "Cl": {
+    'covalent': {
+      'ring': None,
+      'open_chain': -20.1,
+      'ox_state': None,
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '-1': -23.4,
+      },
+    },
+  },
 }
 
 def get_diamag_contr_for_element(element: dict):
   """ TODO: Search diamag_const_atoms table to return proper diamag
     for given input object """
+  
   el_const = diamag_const_atoms[element['name']]
-  el_const_character = el_const[element['character']]
-  el_const_ox_state = el_const_character[element['ox_state']]
+  el_covalent_const = el_const[element['']]
+
+
+
   
-  is_aliphatic: bool = element['aliphatic_atom_no'] > 0
-  is_aromatic: bool = element['aromatic_atom_no'] > 0
-  if is_aromatic:
-    ...
-  if is_aliphatic:
-    ...
   
-  return ...
+  #el_const_character = el_const[element['character']]
+  #el_const_charge = el_const_character[element['charge']]
+  
+  #is_open_chain: bool = element['open_chain_atom_no'] > 0
+  #is_ring: bool = element['ring_atom_no'] > 0
+  #if is_ring:
+  #  ...
+  #if is_open_chain:
+  #  ...
+  
+  #return ...
 
 def calc_diamag_contr(input_data: dict):
-  """ TODO: include aliphatic / aromatic logic, not just 'total_atom_no' """
+  """ TODO: include open_chain / ring logic, not just 'total_atom_no' """
   sum_dia_contr = 0
   for element in input_data:
     sum_dia_contr += get_diamag_contr_for_element(element=element) * element['total_atom_no']
