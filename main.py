@@ -10,14 +10,9 @@ input_data = [
 ]
 
 def main():
-  print(calc_diamag_contr(input_data))
+  print(f' X(D) = {calc_diamag_contr(input_data)} cm^3/mol')
 
 
-
-
-
-
-    
 #sum_dia_contr = calc_diamag_contr(input_data=input_data)
 #print(f'X(D) = {sum_dia_contr} cm^3/mol')
 

@@ -1,7 +1,7 @@
 # unit: 10^(-6) cm^3/mol
 diamag_const_atoms = {
 # This dictionary represents the diamagnetic constants for elements in
-# different bonding/oxidation_state scenarios. Here's a breakdown of the values:
+# different bonding/oxidation_state/ionic_charge scenarios. Here's a breakdown of the values:
   "C": {
     'covalent': {
       'ring': -6.24,
@@ -45,6 +45,183 @@ diamag_const_atoms = {
       },
     }, 
   },
+  "Ag": {
+     'covalent': {
+      'ring': None,
+      'open_chain': -31.0,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+1': -28,
+        '+2': -24, # uncetrain value according to the article (DOI: 10.1021/ed085p532)
+      },
+    },   
+  },
+  "Al": {
+     'covalent': {
+      'ring': None,
+      'open_chain': -13.0,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+3': -2,
+      },
+    },     
+  },
+  'As': {
+     'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {
+         '(III)': -20.9,
+         '(V)': -43.0,
+      },
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+3': -9, # uncetrain value according to the article (DOI: 10.1021/ed085p532)
+        '+5': -6,
+      },
+    },     
+  },
+  'Au': {
+     'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+1': -40, # uncetrain value according to the article (DOI: 10.1021/ed085p532)
+        '+3': -32,
+       },
+    },     
+  },
+  'B': {
+     'covalent': {
+      'ring': None,
+      'open_chain': -7.0,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+3': -0.2,
+       },
+    },     
+  },
+  'Ba': {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+2': -26.5,
+      },
+    },
+  },
+  'Be': {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+2': -0.4,
+      },
+    },
+  },
+  'Bi': {
+    'covalent': {
+      'ring': None,
+      'open_chain': -192.0,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+3': -25, # uncetrain value according to the article (DOI: 10.1021/ed085p532)
+        '+5': -23,
+      },
+    },
+  },
+  "Br": {
+    'covalent': {
+      'ring': None,
+      'open_chain': -30.6,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '-1': -34.6,
+        '+5': -6, 
+      },
+    },
+  },
+  "Ca": {
+    'covalent': {
+      'ring': None,
+      'open_chain': -15.9,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+2': -10.4, 
+      },
+    },
+  },
+  "Cd": {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+2': -24, 
+      },
+    },
+  },
+  "Ce": {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+3': -20,
+        '+4': -17,
+      },
+    },
+  },
   "Cl": {
     'covalent': {
       'ring': None,
@@ -56,6 +233,289 @@ diamag_const_atoms = {
       'open_chain': None,
       'charge': {
         '-1': -23.4,
+        '+5': -2,
+      },
+    },
+  },
+  "Co": {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+2': -12,
+        '+3': -10,
+      },
+    },
+  },
+  'Cr': {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+2': -15,
+        '+3': -11,
+        '+4': -8,
+        '+5': -5,
+        '+6': -3,
+      },
+    },
+  },
+  'Cs': {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+1': -35.0,
+      },
+    },
+  },
+  'Cu': {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+1': -12,
+        '+2': -11,
+      },
+    },
+  },
+  'Dy': {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+3': -19,
+      },
+    },
+  },
+  'Er': {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+3': -18,
+      },
+    },
+  },
+  'Eu': {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+2': -22,
+        '+3': -20,
+      },
+    },
+  },
+  'F': {
+    'covalent': {
+      'ring': None,
+      'open_chain': -6.3,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '-1': -9.1,
+      },
+    },
+  },
+  'Fe': {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+2': -13,
+        '+3': -10,
+      },
+    },
+  },
+  'Ga': {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+3': -8,
+      },
+    },
+  },
+  'Ge': {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+4': -7,
+      },
+    },
+  },
+  'Gd': {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+3': -20,
+      },
+    },
+  },
+  'Hf': {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+4': -16,
+      },
+    },
+  },
+  'Hg': {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {
+         '(II)': -33.0,
+      },
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+2': -40.0,
+      },
+    },
+  },
+  'Ho': {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+3': -19,
+      },
+    },
+  },
+  'I': {
+    'covalent': {
+      'ring': None,
+      'open_chain': -44.6,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '-1': -50.6,
+        '+5': -12,
+        '+7': -10,
+      },
+    },
+  },
+  'In': {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+3': -19,
+      },
+    },
+  },
+  'Ir': {
+    'covalent': {
+      'ring': None,
+      'open_chain': None,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+1': -50,
+        '+2': -42,
+        '+3': -35,
+        '+4': -29,
+        '+5': -20,
+      },
+    },
+  },
+  'K': {
+    'covalent': {
+      'ring': None,
+      'open_chain': -18.5,
+      'ox_state': {},
+    },
+    'ionic': {
+      'ring': None,
+      'open_chain': None,
+      'charge': {
+        '+1': -14.9,
       },
     },
   },
