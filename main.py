@@ -1,16 +1,17 @@
-from diamag import calc_atoms_no
+#from diamag import calc_atoms_no
 from diamag import calc_diamag_contr
 from element import Element
 
-input = [
+input_data = [
   Element(symbol='C', total_at_no=20, ring_at_no=12, chain_at_no=8),
   Element(symbol='H', total_at_no=25, chain_at_no=25),
-  Element(symbol='N', total_at_no=1, ring_at_no=1)
+  Element(symbol='N', total_at_no=1, ring_at_no=1),
+  Element(symbol='Cl', total_at_no=1, first_ion_charge='-1', first_ion_no=1),
 ]
 
 def main():
-  for element in input:
-     print(element.symbol)
+  print(calc_diamag_contr(input_data))
+
 
 
 
