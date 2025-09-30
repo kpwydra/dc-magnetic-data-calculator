@@ -3,14 +3,16 @@ from diamag import calc_diamag_contr
 from element import Element
 
 input_data = [
-  Element(symbol='C', total_at_no=20, ring_at_no=12, chain_at_no=8),
-  Element(symbol='H', total_at_no=25, chain_at_no=25),
-  Element(symbol='N', total_at_no=1, ring_at_no=1),
-  Element(symbol='Cl', total_at_no=1, first_ion_charge='-1', first_ion_no=1),
+  Element(symbol='C', total=20, ring=12, chain=8),
+  Element(symbol='H', total=25, chain=25),
+  Element(symbol='N', total=1, ring=1),
+  Element(symbol='Cl', total=1, first_ion_charge='-1', first_ion_no=1),
 ]
 
 def main():
-  print(f' X(D) = {calc_diamag_contr(input_data)} cm^3/mol')
+  result = calc_diamag_contr(input_data)
+  print(f' X(D) = {result} cm^3/mol')
+  assert round(result, 2) == -224.14
 
 
 #sum_dia_contr = calc_diamag_contr(input_data=input_data)

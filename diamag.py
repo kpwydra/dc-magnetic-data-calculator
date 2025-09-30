@@ -1,5 +1,5 @@
 # unit: 10^(-6) cm^3/mol
-diamag_const_atoms = {
+diamag_const = {
 # This dictionary represents the diamagnetic constants for elements in
 # different bonding/oxidation_state/ionic_charge scenarios. Here's a breakdown of the values:
   "C": {
@@ -432,7 +432,7 @@ diamag_const_atoms = {
       'ring': None,
       'open_chain': None,
       'ox_state': {
-         '(II)': -33.0,
+        '(II)': -33.0,
       },
     },
     'ionic': {
@@ -528,18 +528,18 @@ def calc_diamag_contr(input_data: list):
   for element in input_data:
     
     # searching for elements of input in dictionary
-    if element.symbol in diamag_const_atoms:  
-        covalent_data = diamag_const_atoms[element.symbol]["covalent"]
-        ionic_data = diamag_const_atoms[element.symbol]["ionic"]["charge"]
-        ox_state_data = diamag_const_atoms[element.symbol]["covalent"]["ox_state"]
+    if element.symbol in diamag_const:  
+        covalent_data = diamag_const[element.symbol]["covalent"]
+        ionic_data = diamag_const[element.symbol]["ionic"]["charge"]
+        ox_state_data = diamag_const[element.symbol]["covalent"]["ox_state"]
         
         # for given element it takes ring constant and multiplies it with related atom No of the element
-        if element.ring_at_no is not None and covalent_data["ring"] is not None:
-          sum_dia_contr += covalent_data["ring"] * element.ring_at_no
+        if element.ring is not None and covalent_data["ring"] is not None:
+          sum_dia_contr += covalent_data["ring"] * element.ring
 
         # for given element it takes chain constant and multiplies it with related atom No of the element
-        if element.chain_at_no is not None and covalent_data["open_chain"] is not None:
-          sum_dia_contr += covalent_data["open_chain"] * element.chain_at_no
+        if element.chain is not None and covalent_data["open_chain"] is not None:
+          sum_dia_contr += covalent_data["open_chain"] * element.chain
         
         # if oxidation state was provided for given element: 1. Checks if the oxidation state is the same as in dictionary,
         # 2. Takes appropriate constant, 3. Perform multiplication with atom No of this oxidation state
@@ -569,10 +569,10 @@ def calc_diamag_contr(input_data: list):
 
 # sum_dia_contr = 0
 # for element in input:
-#   for atom, bond_type in diamag_const_atoms.items():
+#   for atom, bond_type in diamag_const.items():
 #       for const in bond_type:
-#         if element.ring_at_no > 0:
-#           sum_dia_contr += diamag_const_atoms.get('ring', {}) * element.ring_at_no
+#         if element.ring > 0:
+#           sum_dia_contr += diamag_const.get('ring', {}) * element.ring
 #   print(sum_dia_contr)
 
 
@@ -582,11 +582,11 @@ def calc_diamag_contr(input_data: list):
 
 
 # def get_diamag_contr_for_element(element: dict):
-#   """ TODO: Search diamag_const_atoms table to return proper diamag
+#   """ TODO: Search diamag_const table to return proper diamag
 #     for given input object """
   
 
-#   el_const = diamag_const_atoms[element['C']]
+#   el_const = diamag_const[element['C']]
 #   print(el_const)
 
 
