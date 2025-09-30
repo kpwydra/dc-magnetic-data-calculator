@@ -11,16 +11,6 @@ def main():
 
   result = calc_diamag_contr(input_data)
   print(f' X(D) = {result} cm^3/mol')
-  
-  mydict = {
-  'some_key': 'some value',
-  'another_key': 0.1,
-  'yet_another_key': ['yet', 'another', 'value'],
-  }
-  x = mydict.get('i_dont_exist', 'default value')
-  y = mydict.get('some_key', 'default value')
-  print(f'x is: "{x}", y is: "{y}"')
-
 
 if __name__ == '__main__': # entry point, first execution step
     main()
