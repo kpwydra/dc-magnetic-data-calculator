@@ -10,8 +10,8 @@ class Element:
     ox_states: dict = None,
     ):
       """ Examples:
-        - Element("C", total=7, ring=3, open_chain=4, ox_states={"+4": 7})
-        - Element("Fe", total=2, ox_states={"+3": 1, "+2": 1})
+        - Element("C", total=7, ring=3, open_chain=4, ox_states={"(IV)": 7})
+        - Element(symbol='As', total=3, ox_states={'(III)': 3})
       """
       self.symbol = symbol
       self.total = total
