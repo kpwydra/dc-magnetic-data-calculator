@@ -79,7 +79,7 @@ mydict: dict = {
 ```
 
 ## 1.1 **Most common loop** - iterate over every `key, value` using `.items()`
-> [!WARNING]
+> [!IMPORTANT]
 > Must know
 ```python
 for key, value in mydict.items():
@@ -93,7 +93,7 @@ key: "yet_another_key" -> value: "['yet', 'another', 'value']"
 ```
 
 ## 1.2 Check if `key` exists in a `dict`
-> [!WARNING]
+> [!IMPORTANT]
 > Must know, below examples evaluate the same
 ```python
 if 'some_key' in mydict.keys(): # EXPLICIT call
@@ -104,7 +104,7 @@ if 'some_key' in mydict:        # IMPLICIT call - "hidden default call"
 ```
 
 ## 1.3 Setting defaults: `.get()`
-> [!WARNING]
+> [!IMPORTANT]
 > Must know
 ```python
 x = mydict.get('i_dont_exist', 'default value')
@@ -116,7 +116,7 @@ print(f'x is: "{x}", y is: "{y}"')
 x is: "default value", y is: "some value"
 ```
 ### 1.3.1 `.get()` use case
-> [!WARNING]
+> [!IMPORTANT]
 > Must know, below examples evaluate the same
 ```python
 if symbol in ox_state_data.keys():  # not optimal
@@ -126,7 +126,7 @@ sum_dia_contr += ox_state_data.get(symbol, 0) * atoms # optimal
 ```
 
 ## 1.4 Loop over keys using `.keys()`
-> [!INFO]  
+> [!NOTE]  
 > Useful to know
 ```python
 for key in mydict.keys():
@@ -141,7 +141,7 @@ key: "yet_another_key" -> value: "['yet', 'another', 'value']"
 ```
 
 ## 1.5 Loop over values using `.values()`
-> [!INFO]  
+> [!NOTE]  
 > Rarely used. Only when `key` is not needed
 ```python
 for value in mydict.values():
