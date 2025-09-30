@@ -1,5 +1,5 @@
 # unit: 10^(-6) cm^3/mol
-diamag_const = {
+diamag_const_atoms = {
 # This dictionary represents the diamagnetic constants for elements in
 # different bonding/oxidation_state/ionic_charge scenarios. Here's a breakdown of the values:
   "C": {
@@ -527,11 +527,11 @@ def calc_diamag_contr(input_data: list):
 
   for element in input_data:
     
-    if element.symbol in diamag_const:
+    if element.symbol in diamag_const_atoms:
         # retrieve const data
-        covalent_data = diamag_const[element.symbol]["covalent"]
-        ionic_data = diamag_const[element.symbol]["ionic"]["charge"]
-        ox_state_data = diamag_const[element.symbol]["covalent"]["ox_state"]
+        covalent_data = diamag_const_atoms[element.symbol]["covalent"]
+        ionic_data = diamag_const_atoms[element.symbol]["ionic"]["charge"]
+        ox_state_data = diamag_const_atoms[element.symbol]["covalent"]["ox_state"]
         
         # for given element it takes ring constant and multiplies it with related atom No of the element
         if element.ring is not None and covalent_data["ring"] is not None:
