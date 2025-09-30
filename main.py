@@ -1,22 +1,26 @@
-#from diamag import calc_atoms_no
 from diamag import calc_diamag_contr
 from element import Element
 
-input_data = [
-  Element(symbol='C', total=20, ring=12, chain=8),
-  Element(symbol='H', total=25, chain=25),
-  Element(symbol='N', total=1, ring=1),
-  Element(symbol='Cl', total=1, first_ion_charge='-1', first_ion_no=1),
-]
 
 def main():
+  input_data = [
+    Element(symbol='C', total=45, ring=25, open_chain=20),
+    Element(symbol='H', total=30),
+    Element(symbol='N', total=9, ring=4, open_chain=5),
+  ]
+
   result = calc_diamag_contr(input_data)
   print(f' X(D) = {result} cm^3/mol')
-  assert round(result, 2) == -224.14
+  
+  mydict = {
+  'some_key': 'some value',
+  'another_key': 0.1,
+  'yet_another_key': ['yet', 'another', 'value'],
+  }
+  x = mydict.get('i_dont_exist', 'default value')
+  y = mydict.get('some_key', 'default value')
+  print(f'x is: "{x}", y is: "{y}"')
 
-
-#sum_dia_contr = calc_diamag_contr(input_data=input_data)
-#print(f'X(D) = {sum_dia_contr} cm^3/mol')
 
 if __name__ == '__main__': # entry point, first execution step
     main()

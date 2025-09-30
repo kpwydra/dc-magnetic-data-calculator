@@ -527,8 +527,8 @@ def calc_diamag_contr(input_data: list):
 
   for element in input_data:
     
-    # searching for elements of input in dictionary
-    if element.symbol in diamag_const:  
+    if element.symbol in diamag_const:
+        # retrieve const data
         covalent_data = diamag_const[element.symbol]["covalent"]
         ionic_data = diamag_const[element.symbol]["ionic"]["charge"]
         ox_state_data = diamag_const[element.symbol]["covalent"]["ox_state"]
@@ -538,88 +538,21 @@ def calc_diamag_contr(input_data: list):
           sum_dia_contr += covalent_data["ring"] * element.ring
 
         # for given element it takes chain constant and multiplies it with related atom No of the element
-        if element.chain is not None and covalent_data["open_chain"] is not None:
-          sum_dia_contr += covalent_data["open_chain"] * element.chain
+        if element.open_chain is not None and covalent_data["open_chain"] is not None:
+          sum_dia_contr += covalent_data["open_chain"] * element.open_chain
         
-        # if oxidation state was provided for given element: 1. Checks if the oxidation state is the same as in dictionary,
-        # 2. Takes appropriate constant, 3. Perform multiplication with atom No of this oxidation state
-        if element.first_ox_state in ox_state_data and element.first_ox_state_at_no is not None:
-          sum_dia_contr += ox_state_data[element.first_ox_state] * element.first_ox_state_at_no
+        # calculate diamag contrib for given oxidation state data
+        for symbol, atoms in element.ox_states.items():
+          if symbol in ox_state_data.keys():
+            sum_dia_contr += ox_state_data[symbol] * atoms
         
-        # I gave the possibility for the user to chose two different oxidation states if the molecules is more complicated.
-        if element.second_ox_state in ox_state_data and element.second_ox_state_at_no is not None:
-          sum_dia_contr += ox_state_data[element.second_ox_state] * element.second_ox_state_at_no
-
-        # Analogous calculations as for oxidation states but here with ion 
-        if element.first_ion_charge in ionic_data and element.first_ion_no is not None:
-          sum_dia_contr += ionic_data[element.first_ion_charge] * element.first_ion_no
-
-        # I also gave the possibility for the user to chose more then one ion type if molecule is more complex.
-        if element.second_ion_charge in ionic_data and element.second_ion_no is not None:
-          sum_dia_contr += ionic_data[element.second_ion_charge] * element.second_ion_no
+        # calculate diamag contrib for given ionic data
+        for symbol, atoms in element.ions.items():
+          if symbol in ionic_data.keys():
+            sum_dia_contr += ionic_data[symbol] * atoms
           
   return sum_dia_contr
           
-
-
-
-# I tried to use the nested for loops to get the data from dictionary and use them for 
-# calculations with class objects. I rejected the idea because the code started 
-# to be too overwhelming.
-
-# sum_dia_contr = 0
-# for element in input:
-#   for atom, bond_type in diamag_const.items():
-#       for const in bond_type:
-#         if element.ring > 0:
-#           sum_dia_contr += diamag_const.get('ring', {}) * element.ring
-#   print(sum_dia_contr)
-
-
-
-
-
-
-
-# def get_diamag_contr_for_element(element: dict):
-#   """ TODO: Search diamag_const table to return proper diamag
-#     for given input object """
-  
-
-#   el_const = diamag_const[element['C']]
-#   print(el_const)
-
-
-
-  
-  
-  #el_const_character = el_const[element['character']]
-  #el_const_charge = el_const_character[element['charge']]
-  
-  #is_open_chain: bool = element['open_chain_atom_no'] > 0
-  #is_ring: bool = element['ring_atom_no'] > 0
-  #if is_ring:
-  #  ...
-  #if is_open_chain:
-  #  ...
-  
-  #return ...
-
-# def calc_diamag_contr(input_data: dict):
-#   """ TODO: include open_chain / ring logic, not just 'total_atom_no' """
-#   sum_dia_contr = 0
-#   for element in input_data:
-#     sum_dia_contr += get_diamag_contr_for_element(element=element) * element['total_atom_no']
-  
-#   return sum_dia_contr
-
-
-
-
-
-
-
-
 
 def calc_atoms_no(formula: str):
     """
