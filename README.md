@@ -10,7 +10,12 @@
 - **Staging (git add):** selecting which files/changes will go into the next commit.  
 
 ---
-
+# Create Python Virtual Environment (only once at project start)
+> [!IMPORTANT]
+> Must know, allows to isolate projects' dependencies
+```
+python -m venv .venv
+```
 # Git Instructions
 # How to push local changes to repository?
 ## 1. add files to commit
