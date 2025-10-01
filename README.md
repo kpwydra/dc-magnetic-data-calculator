@@ -17,6 +17,8 @@
 python -m venv .venv
 ```
 ## Install requirements
+> [!IMPORTANT]
+> Make sure that `which python` command returns the venv path, restart the terminal to load venv
 ```
 pip install -r requirements.txt
 pip install -r requirements-dev.txt
