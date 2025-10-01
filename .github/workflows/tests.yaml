@@ -11,6 +11,8 @@ concurrency:
 jobs:
   pytest:
     runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: "${{ github.workspace }}:${{ github.workspace }}/tests"
     steps:
       - uses: actions/checkout@v4
 
