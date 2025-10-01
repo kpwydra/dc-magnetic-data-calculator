@@ -16,6 +16,11 @@
 ```
 python -m venv .venv
 ```
+## Install requirements
+```
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
+```
 # Git Instructions
 # How to push local changes to repository?
 ## 1. add files to commit
