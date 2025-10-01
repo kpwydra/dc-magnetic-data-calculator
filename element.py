@@ -1,26 +1,20 @@
 class Element:
-    def __init__(self, 
-                 symbol: str, 
-                 total_at_no: int, 
-                 ring_at_no: int=None, 
-                 chain_at_no: int=None,
-                 first_ox_state: str=None,
-                 first_ox_state_at_no: int=None, 
-                 second_ox_state: str=None,
-                 second_ox_state_at_no: int=None, 
-                 first_ion_charge: str=None,
-                 first_ion_no: int=None,
-                 second_ion_charge: str=None,
-                 second_ion_no: int=None):
+    def __init__(
+        self,
+        symbol: str,
+        total: int = None,
+        ring: int = None,
+        open_chain: int = None,
+        ions: dict = None,
+        ox_states: dict = None,
+    ):
+        """Examples:
+        - Element("C", total=7, ring=3, open_chain=4, ox_states={"(IV)": 7})
+        - Element(symbol='As', total=3, ox_states={'(III)': 3})
+        """
         self.symbol = symbol
-        self.total_at_no = total_at_no
-        self.ring_at_no = ring_at_no
-        self.chain_at_no = chain_at_no
-        self.first_ox_state = first_ox_state
-        self.first_ox_state_at_no = first_ox_state_at_no
-        self.second_ox_state = second_ox_state
-        self.second_ox_state_at_no = second_ox_state_at_no
-        self.first_ion_charge = first_ion_charge
-        self.first_ion_no = first_ion_no
-        self.second_ion_charge = second_ion_charge
-        self.second_ion_no = second_ion_no
+        self.total = total
+        self.ring = ring
+        self.open_chain = open_chain
+        self.ions = ions if ions is not None else {}
+        self.ox_states = ox_states if ox_states else {}

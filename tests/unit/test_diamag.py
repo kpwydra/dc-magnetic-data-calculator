@@ -1,54 +1,51 @@
-
 import pytest
 from diamag import calc_diamag_contr
 from element import Element
 
 
 test_case_1 = {
-    'data': [
-      Element(symbol='C', total_at_no=20, ring_at_no=12, chain_at_no=8),
-      Element(symbol='H', total_at_no=25, chain_at_no=25),
-      Element(symbol='N', total_at_no=1, ring_at_no=1),
-      Element(symbol='Cl', total_at_no=1, first_ion_charge='-1', first_ion_no=1),
+    "data": [
+        Element(symbol="C", total=20, ring=12, open_chain=8),
+        Element(symbol="H", total=25, open_chain=25),
+        Element(symbol="N", total=1, ring=1),
+        Element(symbol="Cl", total=1, ions={"-1": 1}),
     ],
-    'expected': -224.14,
-  }
+    "expected": -224.14,
+}
 
-test_case_2 =  {
-    'data': [
-      Element(symbol='C', total_at_no=45, ring_at_no=25, chain_at_no=20),
-      Element(symbol='H', total_at_no=30),
-      Element(symbol='N', total_at_no=9, ring_at_no=4, chain_at_no=5),
+test_case_2 = {
+    "data": [
+        Element(symbol="C", total=45, ring=25, open_chain=20),
+        Element(symbol="H", total=30),
+        Element(symbol="N", total=9, ring=4, open_chain=5),
     ],
-    'expected': -410.19,
-  }
+    "expected": -410.19,
+}
 
-test_case_3 =  {
-    'data': [
-      Element(symbol='C', total_at_no=25, ring_at_no=15, chain_at_no=10),
-      Element(symbol='H', total_at_no=22),
-      Element(symbol='As', total_at_no=3, first_ox_state='(III)', first_ox_state_at_no=3),
-      Element(symbol='Br', total_at_no=2, first_ion_charge='-1', first_ion_no=2),
+test_case_3 = {
+    "data": [
+        Element(symbol="C", total=25, ring=15, open_chain=10),
+        Element(symbol="H", total=22),
+        Element(symbol="As", total=3, ox_states={"(III)": 3}),
+        Element(symbol="Br", total=2, ions={"-1": 2}),
     ],
-    'expected': -349.96,
-  }
+    "expected": -349.96,
+}
+
 
 def test_calc_diamag_contr_OK():
-  """ Simple Test that verifies calc_diamag_contr function correct input / output. """
-  # Test Case 1
-  result = calc_diamag_contr(test_case_1['data'])
-  result = round(result, 2)
-  assert test_case_1['expected'] == result
+    """Simple Test that verifies calc_diamag_contr function correct input / output."""
+    # Test Case 1
+    result = calc_diamag_contr(test_case_1["data"])
+    assert test_case_1["expected"] == round(result, 2)
 
 
-@pytest.mark.skip(reason='These tests need a fix')
+@pytest.mark.skip(reason="These test needs a fix")
 def test_calc_diamag_contr_TODO():
-  # Test Case 2
-  result = calc_diamag_contr(test_case_2['data'])
-  result = round(result, 2)
-  assert test_case_2['expected'] == result  # TODO: wrong value is returned: -322.29
-  
-  # Test Case 3
-  result = calc_diamag_contr(test_case_3['data'])
-  result = round(result, 2)
-  assert test_case_3['expected'] == result  # TODO: wrong value is returned: -285.5
+    # Test Case 2
+    result = calc_diamag_contr(test_case_2["data"])
+    assert test_case_2["expected"] == round(result, 2)  # TODO: wrong value is returned: -322.29
+
+    # Test Case 3
+    result = calc_diamag_contr(test_case_3["data"])
+    assert test_case_3["expected"] == round(result, 2)  # TODO: wrong value is returned: -285.5
