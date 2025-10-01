@@ -42,18 +42,24 @@ test_corner_case_1 = {
 
 
 def test_calc_diamag_contr():
-    """Simple Test that verifies calc_diamag_contr function correct input / output."""
-    # TODO: add for each loop instead of three variables (list of dictionaries)
-    result = calc_diamag_contr(test_case_1["data"])
-    assert test_case_1["expected"] == round(result, 2)
+    """Simple Tests that verifies calc_diamag_contr function correct input / output."""
+    test_cases = [
+        test_case_1,
+        test_case_2,
+        test_case_3
+    ]
 
-    result = calc_diamag_contr(test_case_2["data"])
-    assert test_case_2["expected"] == round(result, 2)
-
-    result = calc_diamag_contr(test_case_3["data"])
-    assert test_case_3["expected"] == round(result, 2)
+    for case in test_cases:
+        result = calc_diamag_contr(case["data"])
+        assert case["expected"] == round(result, 2)
 
 
-def test_calc_diamag_contr_corners():
-    result = calc_diamag_contr(test_corner_case_1["data"])
-    assert test_corner_case_1["expected"] == round(result, 2)
+def test_calc_diamag_contr_corners_cases():
+    """Tests verifying corner cases."""
+    test_cases = [
+        test_corner_case_1,
+    ]
+    
+    for case in test_cases:
+        result = calc_diamag_contr(case["data"])
+        assert case["expected"] == round(result, 2)
