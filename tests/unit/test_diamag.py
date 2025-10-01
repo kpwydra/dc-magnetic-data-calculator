@@ -1,5 +1,5 @@
 from diamag import calc_diamag_contr
-from tests.unit.input_data import CALC_DIAMAG_CONTR_TEST_CASES
+from tests.unit.test_data import CALC_DIAMAG_CONTR_TEST_CASES
 
 
 def test_calc_diamag_contr():
