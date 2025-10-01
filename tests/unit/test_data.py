@@ -2,6 +2,7 @@ from element import Element
 
 CALC_DIAMAG_CONTR_TEST_CASES = [
     {
+        "formula": "C20H25NCl",
         "data": [
             Element("C", 20, ring=12, open_chain=8),
             Element("H", 25, open_chain=25),
@@ -11,6 +12,7 @@ CALC_DIAMAG_CONTR_TEST_CASES = [
         "expected": -224.14,
     },
     {
+        "formula": "C45H30N9",
         "data": [
             Element("C", 45, ring=25, open_chain=20),
             Element("H", 30, open_chain=30),
@@ -19,6 +21,7 @@ CALC_DIAMAG_CONTR_TEST_CASES = [
         "expected": -410.19,
     },
     {
+        "formula": "C25H22As(III)3Br2",
         "data": [
             Element("C", 25, ring=15, open_chain=10),
             Element("H", 22, open_chain=22),
@@ -28,6 +31,7 @@ CALC_DIAMAG_CONTR_TEST_CASES = [
         "expected": -349.96,
     },
     {
+        "formula": "B10As(III)5",
         "data": [
             Element("B", 10, open_chain=8, ions={"+3": 2}),
             Element("As", 5, ox_states={"(III)": 2}, ions={"+3": 3}),
