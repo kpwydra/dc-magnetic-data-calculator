@@ -1,6 +1,6 @@
 from element import Element
 
-CALC_DIAMAG_CONTR_TEST_CASES = [
+MOLECULES_DATA = [
     {
         "formula": "C20H25NCl",
         "elements": [
