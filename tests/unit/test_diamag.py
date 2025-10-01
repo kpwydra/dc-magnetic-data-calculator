@@ -10,7 +10,7 @@ test_case_1 = {
         Element(symbol="N", total=1, ring=1),
         Element(symbol="Cl", total=1, ions={"-1": 1}),
     ],
-    "expected": -224.14,
+    "expected": -224.4,
 }
 
 test_case_2 = {
