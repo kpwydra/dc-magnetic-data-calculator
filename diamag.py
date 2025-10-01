@@ -1,8 +1,9 @@
 """
-    unit: 10^(-6) cm^3/mol
-    This dictionary represents the diamagnetic constants for elements in
-    different bonding/oxidation_state/ionic_charge scenarios. Here's a breakdown of the values:
+unit: 10^(-6) cm^3/mol
+This dictionary represents the diamagnetic constants for elements in
+different bonding/oxidation_state/ionic_charge scenarios. Here's a breakdown of the values:
 """
+# TODO: Move to separate file.
 diamag_const_atoms = {
     "C": {
         "covalent": {
@@ -547,14 +548,14 @@ def calc_diamag_contr(input_data: list):
                 sum_dia_contr += covalent_data["open_chain"] * element.open_chain
 
             # calculate diamag contrib for given oxidation state data
-            for symbol, atoms in element.ox_states.items():
-                if symbol in ox_state_data.keys():
-                    sum_dia_contr += ox_state_data[symbol] * atoms
+            for state, atoms in element.ox_states.items():
+                if state in ox_state_data.keys(): # TODO: use .get() instead, make it oneliner
+                    sum_dia_contr += ox_state_data[state] * atoms
 
             # calculate diamag contrib for given ionic data
-            for symbol, atoms in element.ions.items():
-                if symbol in ionic_data.keys():
-                    sum_dia_contr += ionic_data[symbol] * atoms
+            for charge, atoms in element.ions.items():
+                if charge in ionic_data.keys(): # TODO: use .get() instead, make it oneliner
+                    sum_dia_contr += ionic_data[charge] * atoms
 
     return sum_dia_contr
 
