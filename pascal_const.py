@@ -4,7 +4,7 @@ Reference (DOI): 10.1021/ed085p532
 This dictionary represents the diamagnetic constants for elements in
 different bonding/oxidation_state/ionic_charge scenarios. Here's a breakdown of the values:
 """
-diamag_const_atoms = {
+PASCAL_CONST = {
     "C": {
         "covalent": {
             "ring": -6.24,

@@ -1,15 +1,15 @@
-from pascal_const import diamag_const_atoms
+from pascal_const import PASCAL_CONST
 
 def calc_diamag_contr(input_data: list):
     sum_dia_contr = 0
 
     for element in input_data:
 
-        if element.symbol in diamag_const_atoms:
+        if element.symbol in PASCAL_CONST:
             # retrieve const data
-            covalent_data = diamag_const_atoms[element.symbol]["covalent"]
-            ionic_data = diamag_const_atoms[element.symbol]["ionic"]["charge"]
-            ox_state_data = diamag_const_atoms[element.symbol]["covalent"]["ox_state"]
+            covalent_data = PASCAL_CONST[element.symbol]["covalent"]
+            ionic_data = PASCAL_CONST[element.symbol]["ionic"]["charge"]
+            ox_state_data = PASCAL_CONST[element.symbol]["covalent"]["ox_state"]
 
             # for given element it takes ring constant and multiplies it with related atom No of the element
             if element.ring is not None and covalent_data["ring"] is not None:
