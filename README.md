@@ -165,3 +165,9 @@ value: "some value"
 value: "0.1"
 value: "['yet', 'another', 'value']"
 ```
+
+# Configure Environment
+> Create `.env` file with content below. On Windows, use `;` separator, on Linux use `:`
+```
+PYTHONPATH=./;./src;./tests
+```
