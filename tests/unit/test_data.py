@@ -1,9 +1,4 @@
-import os
-
-print(f'path: {os.getenv("PYTHONPATH")}')
-
 from element import Element
-from molecule_builder import Element, MoleculeBuilder
 
 MOLECULES_DATA = [
     {
