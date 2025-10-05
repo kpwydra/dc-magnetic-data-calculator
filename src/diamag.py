@@ -5,7 +5,6 @@ def calc_diamag_contr(input_data: list):
     sum_dia_contr = 0
 
     for element in input_data:
-
         if element.symbol in PASCAL_CONST:
             # retrieve const data
             covalent_data = PASCAL_CONST[element.symbol]["covalent"]

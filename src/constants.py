@@ -1,18 +1,10 @@
-from pathlib import Path
-
-ROOT_DIR: Path = next(
-    p for p in Path(__file__).resolve().parents if (p / "requirements.txt").exists()
-)
-
-IMAGES_DIR: Path = ROOT_DIR.joinpath("images")
-IMAGES_DIR.mkdir(parents=True, exist_ok=True)
-
 """
 unit: 10^(-6) cm^3/mol
 Reference (DOI): 10.1021/ed085p532
 This dictionary represents the diamagnetic constants for elements in
 different bonding/oxidation_state/ionic_charge scenarios. Here's a breakdown of the values:
 """
+
 PASCAL_CONST = {
     "C": {
         "covalent": {
