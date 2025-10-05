@@ -1,23 +1,25 @@
 from dataclasses import dataclass
 
+from canvas import Renderer
+
 
 @dataclass
 class Point:
-    x: int
-    y: int
+    # x: int
+    # y: int
+    ...
 
 
 @dataclass
 class Node(Point):
-    radius: float
-    color: str
 
-    def __repr__(self):
-        # TODO: is it a good idea to let a node object print directly on canvas?
-        return super().__repr__()
+    # radius: int = None
+    # color: str = None
+    ...
 
 
 @dataclass
 class Edge:
-    p1: Point
-    p2: Point
+    # p1: Point = None
+    # p2: Point = None
+    ...

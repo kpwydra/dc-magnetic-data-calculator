@@ -2,7 +2,7 @@
 __pycache__/
 *.py[codz]
 *$py.class
-
+images/
 # C extensions
 *.so
 
@@ -200,7 +200,8 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
-.vscode/
+.vscode/*
+!.vscode/launch.json
 
 # Marimo
 marimo/_static/

@@ -1,5 +1,9 @@
+import os
+
+print(f'path: {os.getenv("PYTHONPATH")}')
+
 from element import Element
-from src.molecule_builder import A, MolBuilder
+from molecule_builder import Element, MoleculeBuilder
 
 MOLECULES_DATA = [
     {
@@ -40,27 +44,3 @@ MOLECULES_DATA = [
         "diamag": -125.20,
     },
 ]
-
-
-mol = (
-    MolBuilder()
-    .bind_nodes(A("N"), A("O"), "=")
-    .bind_nodes(A("N"), A("O"), "=")
-    .bind_nodes(A("N"), A("O"), "=")
-    .build()
-)
-
-
-mol = (
-    MolBuilder()
-    .bind_nodes({1: "N"}, {2: "O"}, "=")
-    .bind_nodes({1: "N"}, {1: "O"}, "-")
-    .build()
-)
-
-mol = (
-    MolBuilder()
-    .bind_nodes(["C"], [""], "=", "1-many")
-    .bind_nodes({3: "C"}, {4: "C"}, "-")
-    .build()
-)

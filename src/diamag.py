@@ -1,4 +1,5 @@
-from pascal_const import PASCAL_CONST
+from constants import PASCAL_CONST
+
 
 def calc_diamag_contr(input_data: list):
     sum_dia_contr = 0
@@ -24,11 +25,11 @@ def calc_diamag_contr(input_data: list):
 
             # calculate diamag contrib for given oxidation state data
             for state, atoms in element.ox_states.items():
-                    sum_dia_contr += ox_state_data.get(state, 0) * atoms
+                sum_dia_contr += ox_state_data.get(state, 0) * atoms
 
             # calculate diamag contrib for given ionic data
             for charge, atoms in element.ions.items():
-                    sum_dia_contr += ionic_data.get(charge, 0) * atoms
+                sum_dia_contr += ionic_data.get(charge, 0) * atoms
 
     return sum_dia_contr
 
