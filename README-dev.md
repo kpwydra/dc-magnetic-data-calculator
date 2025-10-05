@@ -87,15 +87,43 @@ $$
 $$
 
 ### 3.3 **Example III** - `Chalconatronite` <a id="example-iii"></a>
-> Chalconatronite is a carbonate mineral with the chemical formula Na<sub>2</sub>Cu(CO<sub>3</sub>)<sub>2</sub>•3(H<sub>2</sub>O). This is an ionic compound, which means that some of the atoms are not covalently bonded. Have a look at the structural formula of the mineral:
+> Chalconatronite is a carbonate mineral with the chemical formula Na<sub>2</sub>Cu(CO<sub>3</sub>)<sub>2</sub>•3H<sub>2</sub>O. This is an ionic compound, which means that some of the atoms are not covalently bonded. Have a look at the structural formula of the mineral:
 
 &nbsp;
 <p align="center">
   <img src="https://github.com/user-attachments/assets/217259a8-a64f-4132-9d08-12af35ba8eea" alt="mineral" width="300">
 </p>
+
+<p align="center">
+  <b>Figure 3</b> Structural formula of chalconatronite.
+</p>
 &nbsp;
 
-The mineral is composed of two types of cations (species with a positive charge), Cu<sup>2+</sup> and Na<sup>+</sup>, and one type of anion, the carbonate CO<sub>3</sub><sup>2−</sup>. Due to their opposite charges, cations and anions attract each other and are organized into a three-dimensional crystal lattice. Within this lattice, there are additional water molecules. To calculate 
+The mineral is composed of two types of cations (species with a positive charge), Cu<sup>2+</sup> and Na<sup>+</sup>, and one type of anion, the carbonate CO<sub>3</sub><sup>2−</sup>. Due to their opposite charges, cations and anions attract each other and are organized into a three-dimensional crystal lattice. Within this lattice, there are additional water molecules. To calculate the $\chi_D$ for chalconatronite, we have to account for the diamagnetic contribution of all species present in the chemical formula of the compound:
+
+$$
+\chi_D = 2\chi_{D(Na^+)} + \chi_{D(Cu^{2+})} + 2\chi_{D(CO_3^{2-})} + 3\chi_{D(H_2O)}
+$$
+
+Since Na<sup>+</sup> and Cu<sup>2+</sup> are ions, we should use Pascal's constants from Table 6 in $^{(1)}$. Those are $\chi_{D(Na^+)} = -6.8 \times 10^{-6} \ cm^3 \ mol^{-1}$ and $\chi_{D(Cu^{2+})} = -11 \times 10^{-6} \ cm^3 \ mol^{-1}$, respecetively. We preceed to the carbonate anion, which is a polyatomic charged species. Fortunately, Pascal's constants for common anions were catalogued in Table 3 in $^{(1)}$. The respective constant equals $\chi_{D(CO_3^{2-})} = -28.0 \times 10^{-6} \ cm^3 \ mol^{-1}$. Our last species is water. The H<sub>2</sub>O molecule is a common ligand (species that can bind to a metal ion), and its Pascal constant, which is listed in Table 4 in $^{(1)}$, is equal to $\chi_{D(H_2O)} = -13 \times 10^{-6} \ cm^3 \ mol^{-1}$. Finally, we have all data to calculate diamagnetic contribution for the mineral:
+
+$$
+\chi_D = [2 \times (-6.8) + (-11) + 2 \times (-28.0) + 3 \times (-13)] \times 10^{-6} \ cm^3 \ mol^{-1} = -119.6 \times 10^{-6} \ cm^3 \ mol^{-1}
+$$
+
+
+### 3.3 **Example IIV** - `Coordination compound`
+> The coordination compound under consideration has the chemical formula of [Fe<sup>III</sup>(bipy)(phen)(py)(CH<sub>3</sub>OH)]\(PhAs<sup>V</sup>O<sub>3</sub>\)(ClO<sub>4</sub>) and its structural formula is presentend in Figure 4. The compound is composed of complex cation in which the central Fe<sup>3+</sup> binds four different organic molecules (ligands). These molecules are: methanol (CH<sub>3</sub>OH), pyridine (py), 1,10-phenanthroline (phen) and 2,2'-bipirydine (bipy). Since these molecules are neutral, the overall charge of the complex cation is the same as in Fe<sup>3+</sup>. To compensate this positive charge (+3), there are two different anions, phenylarsenate(V) (PhAs<sup>V</sup>O<sub>3</sub><sup>2-</sup>) and perchlorate (ClO<sub>4</sub><sup>-</sup>), having charge of -2 and -1, respectively.
+
+&nbsp;
+<p align="center">
+ <img src="https://github.com/user-attachments/assets/19212caf-b4bf-415b-a46b-a71eb135c473" alt="most complicated molecule" width="500">
+</p>
+
+<p align="center">
+  <b>Figure 3</b> Structural formula of complex [Fe<sup>III</sup>(bipy)(phen)(py)(CH<sub>3</sub>OH)](PhAs<sup>V</sup>O<sub>3</sub>)(ClO<sub>4</sub>).
+</p>
+
 
 ## 4 Literature references <a id="literature-references"></a>
 > The procedure presented in this document is based on the following articles:
