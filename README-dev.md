@@ -71,7 +71,7 @@ Accordingly to Table 2 in the article $^{(1)}$, C–H and C–C single bonds are
 To calculate $\sum_i \chi_{Di}$ sum from Eq. (2), we need to consider Pascal's constant for carbon atoms within the ring fragment of the molecule, which is $\chi_{C(ring)} = -6.24 \times 10^{-6} \ cm^3 \ mol^{-1}$ (value taken from Table 1 in $^{(1)}$). The sum is equal to:
 
 $$
-\sum_i \chi_{Di} = 6 \chi_{C(ring)} + 5 \chi_{H} + \chi_{Cl} = [6 \times (-6.24) + 5 \times (-2.93) + (-20.1)] \times 10^{-6} \ cm^3 \ mol^{-1} = -72.19 \times 10^{-6} \ cm^3 \ mol^{-1}
+\sum_i \chi_{Di} = 6 \chi_{D(C(ring))} + 5 \chi_{D(H)} + \chi_{D(Cl)} = [6 \times (-6.24) + 5 \times (-2.93) + (-20.1)] \times 10^{-6} \ cm^3 \ mol^{-1} = -72.19 \times 10^{-6} \ cm^3 \ mol^{-1}
 $$
 
 For chlorobenzene, the sum $\sum_i \lambda_i$ in Eq. (2) is not equal to zero. There are two Pascal's constants that we have to consider: $\lambda_{benzene}$ and $\lambda_{Ar-Cl}$. The first takes into account the presence of the benzene ring within the structure. The second Pascal's constant considers the Ar-Cl bond. Here, "Ar" corresponds to any aromatic fragment (in this particular case benzene fragment). It means that Ar-Cl is a specific case of the C-Cl bond, where the carbon atom corresponds to the aromatic fragment. The resulting sum is:
@@ -124,6 +124,37 @@ $$
   <b>Figure 3</b> Structural formula of complex [Fe<sup>III</sup>(bipy)(phen)(py)(CH<sub>3</sub>OH)](PhAs<sup>V</sup>O<sub>3</sub>)(ClO<sub>4</sub>).
 </p>
 
+The overall diamagnetic susceptibility of our coordination compound is equal to the sum of the diamagnetic contributions from the complex cation [Fe<sup>III</sup>(bipy)(phen)(py)(CH<sub>3</sub>OH)]<sup>3+</sup> and the two anions PhAs<sup>V</sup>O<sub>3</sub><sup>2-</sup> and ClO<sub>4</sub><sup>-</sup>, as follows:
+
+$$
+\chi_D = \chi_{D\([ \mathrm{Fe^{III}(bipy)(phen)(py)(CH_3OH)]^{3+}} \)} + \chi_{D(\mathrm{PhAs^{V}O_3^{2-}}\)} + \chi_{D(\mathrm{ClO_4^{-}}\)}
+$$
+
+Although the structure of the complex cation looks scary, calculating the diamagnetic contribution for this species is fairly straightforward. This is because Table 4 in $^{(1)}$ provides Pascal's constants for all the ligands present in the complex cation [Fe<sup>III</sup>(bipy)(phen)(py)(CH<sub>3</sub>OH)]<sup>3+</sup>. The only remaining value is the Pascal's constant for the Fe<sup>3+</sup> cation, which we take from Table 6 in the reference.
+
+$$
+\chi_{D\([ \mathrm{Fe^{III}(bipy)(phen)(py)(CH_3OH)]^{3+}} \)} = \chi_{D\(Fe^{3+})} + \chi_{D\(bipy)} + \chi_{D\(phen)} + \chi_{D\(py)} + \chi_{D\(CH_3OH)}
+$$
+
+$$
+\chi_{D\([ \mathrm{Fe^{III}(bipy)(phen)(py)(CH_3OH)]^{3+}} \)} =
+$$
+
+We now proceed to the two anions of our coordination compound. In the case of perchlorate anion, the diamagnetic contribution is given in Table 3 in $^{(1)}$ and is equal to $\chi_{D(ClO_4^{-})} = -32.0 \times 10^{-6} \ cm^3 \ mol^{-1}$. For the second anion, phenylarsenate(V) (PhAs<sup>V</sup>O<sub>3</sub><sup>2-</sup>), the situation is more complicated as magnetic contribution for this species is not listed in Tables 3 and 4 in the reference, so we need to calculate it stepwise. The calculations are similar as for Example II (see chapter 3.2):
+
+$$
+\chi_{\mathrm{PhAs^{V}O_3^{2-}}\} = \sum_i \chi_{Di} + \sum_i \lambda_i \quad
+$$
+
+We calculate first sum using Pascal's constants of all elements present, remembering to choose appropriate value (Table 1 in $^{(1)}$). Note that all carbon atoms form ring, while arsenic atom exhibits oxidation state of V. It should also be noted that our procedure does not account for the overall negative charge of the anion, leading to an overestimation of the final value.
+
+$$
+\sum_i \chi_{Di} = 6 \chi_{D(C(ring))} + 5 \chi_{D(H)} + \chi_{D(As^{V})} + 3 \chi_{D(O)}
+$$
+
+$$
+\sum_i \chi_{Di} =
+$$
 
 ## 4 Literature references <a id="literature-references"></a>
 > The procedure presented in this document is based on the following articles:
