@@ -9,6 +9,7 @@
   "author": "Karol Wydra, Miron Oskroba, Adrian Kulik",
   "license": "Apache-2.0 license",
   "devDependencies": {
-    "electron": "^38.2.2"
+    "electron": "^38.2.2",
+    "electron-reload": "^2.0.0-alpha.1"
   }
 }

@@ -1,5 +1,12 @@
 const { app, BrowserWindow } = require("electron/main");
 
+const path = require("path");
+
+require("electron-reload")(__dirname, {
+  electron: path.join(__dirname, "node_modules", ".bin", "electron"),
+  hardResetMethod: "exit",
+});
+
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
