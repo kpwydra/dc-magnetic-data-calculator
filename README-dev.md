@@ -26,13 +26,13 @@ $$
 \frac{\partial M}{\partial H} = {\chi_{mol}}
 $$
 
-The `molar magnetic susceptibility`, &chi;<sub>mol</sub>, is a quantitative measure of a sample’s response to an applied magnetic field. In the limit of a weak external magnetic field, &chi;<sub>mol</sub> becomes independent of *H*, leading to the relation:
+The `molar magnetic susceptibility`, &chi;<sub>mol</sub>, is a quantitative measure of a sample’s response to an applied magnetic field [<a href="#ref1">1</a>]. In the limit of a weak external magnetic field, &chi;<sub>mol</sub> becomes independent of *H*, leading to the relation:
 
 $$
 M = {\chi_{mol}} H
 $$
 
-Materials that are repelled by an applied magnetic field are called diamagnetic, whereas those that are attracted by the field are called paramagnetic. For diamagnets  &chi;<sub>mol</sub> < 0, while for paramagnets  &chi;<sub>mol</sub> > 0. When material becomes diamagnetic and when paramagnetic? It depends on its electonic structure. Diamagnetism arises from the interaction of paired [↑↓] electrons with an external magnetic field. Therefore, it is a fundamental property inherent to all matter! In addition to paired electrons, some chemical compounds contain unpaired [↑ ] electrons, which are the source of paramagnetism. The molar magnetic susceptibility is a sum of diamagnetic and paramagnetic susceptibilities:
+Materials that are repelled by an applied magnetic field are called diamagnetic, whereas those that are attracted by the field are called paramagnetic. For diamagnets  &chi;<sub>mol</sub> < 0, while for paramagnets  &chi;<sub>mol</sub> > 0. When material becomes diamagnetic and when paramagnetic? It depends on its electonic structure. Diamagnetism arises from the interaction of paired [↑↓] electrons with an external magnetic field [<a href="#ref1">2</a>]. Therefore, it is a fundamental property inherent to all matter! In addition to paired electrons, some chemical compounds contain unpaired [↑ ] electrons, which are the source of paramagnetism. The molar magnetic susceptibility is a sum of diamagnetic and paramagnetic susceptibilities:
 
 $$
 {\chi_{mol}} = \chi_P + \chi_D
@@ -52,7 +52,7 @@ $$
 \chi_D = \sum_i \chi_{Di} + \sum_i \lambda_i \quad
 $$
 
-&chi;<sub>Di</sub> and &lambda;<sub>i</sub> are so called `Pascal's constants`. These can be found in many scientific books and articles. It should be noted that considerable confusion exists regarding Pascal’s constants, arising from the conflicting values reported in different sources. The article by G. A. Bain *et al.* offers a valuable clarification of this issue, and our software is based on their work [<a href="#ref1">1</a>].
+&chi;<sub>Di</sub> and &lambda;<sub>i</sub> are so called `Pascal's constants`. These can be found in many scientific books and articles. It should be noted that considerable confusion exists regarding Pascal’s constants, arising from the conflicting values reported in different sources. The article by G. A. Bain *et al.* offers a valuable clarification of this issue, and our software is based on their work [<a href="#ref1">3</a>].
 .
 
 It is important to note that, for most paramagnetic substances, χ<sub>P</sub> ≫ χ<sub>D</sub>. The χ<sub>D</sub> contribution is small for molecules with low molecular weights. However, this is not always the case. For example, in metalloproteins with molar masses of around 60 000 g/mol, the diamagnetic contribution becomes significant and must be determined with high precision using different methods to obtain an accurate paramagnetic susceptibility. Consequently, the simple addition of Pascal’s constants is no longer valid in such cases. *We note here that the procedure implemented in our software should be used with caution.*
@@ -216,4 +216,8 @@ $$
 $$
 
 ## 4 Literature references <a id="literature-references"></a>
-> <a id="ref1"></a>[1] G. A. Bain, J. F. Berry, J. Chem. Educ., 2008, 85, 532-536. DOI: 10.1021/ed085p532
+> <a id="ref1"></a>[1] O. Khan, *Molecular Magnetism*, VCH, 1993.
+>
+> <a id="ref1"></a>[2] R. L. Carlin, *Magnetochemistry*, Springer-Verlag, 1986.
+> 
+>  <a id="ref1"></a>[3] G. A. Bain, J. F. Berry, J. Chem. Educ., 2008, 85, 532-536. DOI: 10.1021/ed085p532
