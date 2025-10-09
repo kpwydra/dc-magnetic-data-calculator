@@ -10,7 +10,7 @@
 
 ## Table of Contents
 1. [Document Goals](#document-goals)
-2. [Formulas](#formulas)
+2. [Introduction](#introduction) 
 3. [Examples](#examples)
     1. [Example I](#example-i)
     1. [Example II](#example-ii)
@@ -18,12 +18,46 @@
 4. [Literature references](#literature-references)
 
 
-## 2 Formulas <a id="formulas"></a>
+## 2 Introduction <a id="introduction"></a>
 
-### Formula (2) <a id="formula-2"></a>
+When a sample containing 1 mol of a molecular species is placed in a homogeneous magnetic field *H*, it exhibits a molar magnetisation *M* that is related to *H* by:
+
+$$
+\frac{\partial M}{\partial H} = {\chi_{mol}}
+$$
+
+The molar magnetic susceptibility, &chi;<sub>mol</sub>, is a quantitative measure of a sample’s response to an applied magnetic field. In the limit of a weak external magnetic field, &chi;<sub>mol</sub> becomes independent of *H*, leading to the relation:
+
+$$
+M = {\chi_{mol}} H
+$$
+
+Materials that are repelled by an applied magnetic field are called diamagnetic, whereas those that are attracted by the field are called paramagnetic. For diamagnets  &chi;<sub>mol</sub> < 0, while for paramagnets  &chi;<sub>mol</sub> > 0. When material becomes diamagnetic and when paramagnetic? It depends on its electonic structure. Diamagnetism arises from the interaction of paired [↑↓] electrons with an external magnetic field. Therefore, it is a fundamental property inherent to all matter! In addition to paired electrons, some chemical compounds contain unpaired [↑ ] electrons, which are the source of paramagnetism. The molar magnetic susceptibility is a sum of diamagnetic and paramagnetic susceptibilities:
+
+$$
+{\chi_{mol}} = \chi_P + \chi_D
+$$
+
+When the contribution of &chi;<sub>D</sub> is larger than &chi;<sub>P</sub>, the material is diamagnetic - it is repelled by the magnetic field. In the opposite scenario (&chi;<sub>P</sub> > &chi;<sub>D</sub>) the material is paramagnetic and it is attracted by the field. Diamagnetic susceptibility is independent of temperature *T* and strength of the applied magnetic field *H*. In contrast, paramagnetic susceptibility depends on temperature and may also vary with the applied magnetic field. These dependencies are rather complex, and become even more complicated when within the material magnetic centers are able to interact with each other, giving rise to phenomena such as ferromagnetism and antiferromagnetism. 
+
+In investigating the magnetic properties of a compound, the focus is placed on its paramagnetic susceptibility. It is extracted by correcting the molar magnetic susceceptibility by the diamagnetic contribution.
+
+$$
+\chi_P = {\chi_{mol}} - \chi_D
+$$
+
+The diamagnetic susceptibility is mostly an additive quantity. The diamagnetic contribution for given compound may therefore be estimated by summing atomic susceptibilities (&chi;<sub>Di</sub>) and constructive corrections (&lambda;<sub>i</sub>). The letter take into account the fact that compounds with multiple bonds exhibit lower diamagnetic susceptibility than saturated compounds with only single bonds.
+
 $$
 \chi_D = \sum_i \chi_{Di} + \sum_i \lambda_i \quad
 $$
+
+&chi;<sub>Di</sub> and &lambda;<sub>i</sub> are so called Pascal's constants. These can be found in many scientific books and articles. It should be noted that considerable confusion exists regarding Pascal’s constants, arising from the conflicting values reported in different sources. The article by G. A. Bain *et al.* offers a valuable clarification of this issue, and our software is based on their work.
+
+It is important to note that for most of the paramagnetic substances &chi;<sub>P</sub> >> &chi;<sub>D</sub> . This implies for compounds having low molecular weights. This is not always the case. For instance, metalloproteins may have the molar mass of 60 000 g/mol, &chi;<sub>D</sub> becomes more important.
+
+
+
 
 
 ## 3 Examples <a id="examples"></a>
