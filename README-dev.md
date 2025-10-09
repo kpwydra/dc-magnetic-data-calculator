@@ -26,7 +26,7 @@ $$
 \frac{\partial M}{\partial H} = {\chi_{mol}}
 $$
 
-The molar magnetic susceptibility, &chi;<sub>mol</sub>, is a quantitative measure of a sample’s response to an applied magnetic field. In the limit of a weak external magnetic field, &chi;<sub>mol</sub> becomes independent of *H*, leading to the relation:
+The `molar magnetic susceptibility`, &chi;<sub>mol</sub>, is a quantitative measure of a sample’s response to an applied magnetic field. In the limit of a weak external magnetic field, &chi;<sub>mol</sub> becomes independent of *H*, leading to the relation:
 
 $$
 M = {\chi_{mol}} H
@@ -38,7 +38,7 @@ $$
 {\chi_{mol}} = \chi_P + \chi_D
 $$
 
-When the contribution of &chi;<sub>D</sub> is larger than &chi;<sub>P</sub>, the material is diamagnetic - it is repelled by the magnetic field. In the opposite scenario (&chi;<sub>P</sub> > &chi;<sub>D</sub>) the material is paramagnetic and it is attracted by the field. Diamagnetic susceptibility is independent of temperature *T* and strength of the applied magnetic field *H*. In contrast, paramagnetic susceptibility depends on temperature and may also vary with the applied magnetic field. These dependencies are rather complex, and become even more complicated when within the material magnetic centers are able to interact with each other, giving rise to phenomena such as ferromagnetism and antiferromagnetism. 
+When the contribution of `diamagnetic susceptibility` &chi;<sub>D</sub> is larger than `paramagnetic susceptibility` &chi;<sub>P</sub>, the material is diamagnetic - it is repelled by the magnetic field. In the opposite scenario (&chi;<sub>P</sub> > &chi;<sub>D</sub>) the material is paramagnetic and it is attracted by the field. Diamagnetic susceptibility is independent of temperature *T* and strength of the applied magnetic field *H*. In contrast, paramagnetic susceptibility depends on temperature and may also vary with the applied magnetic field. These dependencies are rather complex, and become even more complicated when within the material magnetic centers are able to interact with each other, giving rise to phenomena such as ferromagnetism and antiferromagnetism. 
 
 In investigating the magnetic properties of a compound, the focus is placed on its paramagnetic susceptibility. It is extracted by correcting the molar magnetic susceceptibility by the diamagnetic contribution.
 
@@ -52,9 +52,12 @@ $$
 \chi_D = \sum_i \chi_{Di} + \sum_i \lambda_i \quad
 $$
 
-&chi;<sub>Di</sub> and &lambda;<sub>i</sub> are so called Pascal's constants. These can be found in many scientific books and articles. It should be noted that considerable confusion exists regarding Pascal’s constants, arising from the conflicting values reported in different sources. The article by G. A. Bain *et al.* offers a valuable clarification of this issue, and our software is based on their work.
+&chi;<sub>Di</sub> and &lambda;<sub>i</sub> are so called `Pascal's constants`. These can be found in many scientific books and articles. It should be noted that considerable confusion exists regarding Pascal’s constants, arising from the conflicting values reported in different sources. The article by G. A. Bain *et al.* offers a valuable clarification of this issue, and our software is based on their work [<a href="#ref1">1</a>].
+.
 
-It is important to note that for most of the paramagnetic substances &chi;<sub>P</sub> >> &chi;<sub>D</sub> . This implies for compounds having low molecular weights. This is not always the case. For instance, metalloproteins may have the molar mass of 60 000 g/mol, &chi;<sub>D</sub> becomes more important.
+It is important to note that, for most paramagnetic substances, χ<sub>P</sub> ≫ χ<sub>D</sub>. The χ<sub>D</sub> contribution is small for molecules with low molecular weights. However, this is not always the case. For example, in metalloproteins with molar masses of around 60 000 g/mol, the diamagnetic contribution becomes significant and must be determined with high precision using different methods to obtain an accurate paramagnetic susceptibility. Consequently, the simple addition of Pascal’s constants is no longer valid in such cases. *We note here that the procedure implemented in our software should be used with caution.*
+
+
 
 
 
@@ -213,5 +216,4 @@ $$
 $$
 
 ## 4 Literature references <a id="literature-references"></a>
-> The procedure presented in this document is based on the following articles:
- - [(1)](http://linktodocument.com) G. A. Bain, J. F. Berry, J. Chem. Educ., 2008, 85, 532-536. DOI: 10.1021/ed085p532
+> <a id="ref1"></a>[1] G. A. Bain, J. F. Berry, J. Chem. Educ., 2008, 85, 532-536. DOI: 10.1021/ed085p532
