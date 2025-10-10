@@ -11,11 +11,12 @@
 ## Table of Contents
 1. [Document Goals](#document-goals)
 2. [Introduction](#introduction) 
-3. [Examples](#examples)
+3. [Diamagnetic contribution](#diamagnetic-contribution)
     1. [Example I](#example-i)
     1. [Example II](#example-ii)
     1. [Example III](#example-iii)
-4. [Literature references](#literature-references)
+4. [Processing of magnetic data](#processing-of-magnetic-data)
+5. [Literature references](#literature-references)
 
 
 ## 2 Introduction <a id="introduction"></a>
@@ -41,7 +42,7 @@ $$
  <span id="eq2"> (2)</span>
 </p>
 
-Materials that are repelled by an applied magnetic field are called diamagnetic, whereas those that are attracted by the field are called paramagnetic. For diamagnets  &chi;<sub>mol</sub> < 0, while for paramagnets  &chi;<sub>mol</sub> > 0. When material becomes diamagnetic and when paramagnetic? It depends on its electonic structure. Diamagnetism arises from the interaction of paired [↑↓] electrons with an external magnetic field [<a href="#ref1">2</a>]. Therefore, it is a fundamental property inherent to all matter! In addition to paired electrons, some chemical compounds contain unpaired [↑ ] electrons, which are the source of paramagnetism. The molar magnetic susceptibility is a sum of diamagnetic and paramagnetic susceptibilities:
+Materials that are repelled by an applied magnetic field are called diamagnetic, whereas those that are attracted by the field are called paramagnetic. For diamagnets  &chi;<sub>mol</sub> < 0, while for paramagnets  &chi;<sub>mol</sub> > 0. When material becomes diamagnetic and when paramagnetic? It depends on its electronic structure. Diamagnetism arises from the interaction of paired [↑↓] electrons with an external magnetic field [<a href="#ref1">2</a>]. Therefore, it is a fundamental property inherent to all matter! In addition to paired electrons, some chemical compounds contain unpaired [↑ ] electrons, which are the source of paramagnetism. The molar magnetic susceptibility is a sum of diamagnetic and paramagnetic susceptibilities:
 
 $$
 {\chi_{mol}} = \chi_P + \chi_D
@@ -53,7 +54,7 @@ $$
 
 When the contribution of `diamagnetic susceptibility` &chi;<sub>D</sub> is larger than `paramagnetic susceptibility` &chi;<sub>P</sub>, the material is diamagnetic - it is repelled by the magnetic field. In the opposite scenario (&chi;<sub>P</sub> > &chi;<sub>D</sub>) the material is paramagnetic and it is attracted by the field. Diamagnetic susceptibility is independent of temperature *T* and strength of the applied magnetic field *H*. In contrast, paramagnetic susceptibility depends on temperature and may also vary with the applied magnetic field. These dependencies are rather complex, and become even more complicated when within the material magnetic centers are able to interact with each other, giving rise to phenomena such as ferromagnetism and antiferromagnetism. 
 
-In investigating the magnetic properties of a compound, the focus is placed on its paramagnetic susceptibility. It is extracted by correcting the molar magnetic susceceptibility by the diamagnetic contribution.
+In investigating the magnetic properties of a compound, the focus is placed on its paramagnetic susceptibility. It is extracted by correcting the molar magnetic susceptibility by the diamagnetic contribution.
 
 $$
 \chi_P = {\chi_{mol}} - \chi_D
@@ -63,7 +64,7 @@ $$
  <span id="eq4"> (4)</span>
 </p>
 
-The diamagnetic susceptibility is mostly an additive quantity. The diamagnetic contribution for given compound may therefore be estimated by summing atomic susceptibilities (&chi;<sub>Di</sub>) and constructive corrections (&lambda;<sub>i</sub>). The letter take into account the fact that compounds with multiple bonds exhibit weaker diamagnetic susceptibility than saturated compounds with only single bonds.
+The diamagnetic susceptibility is mostly an additive quantity. The diamagnetic contribution for given compound may therefore be estimated by summing atomic susceptibilities (&chi;<sub>Di</sub>) and constructive corrections (&lambda;<sub>i</sub>). The latter takes into account the fact that compounds with multiple bonds exhibit weaker diamagnetic susceptibility than saturated compounds with only single bonds.
 
 $$
 \chi_D = \sum_i \chi_{Di} + \sum_i \lambda_i \quad
@@ -122,11 +123,9 @@ It is important to note that, for most paramagnetic substances, χ<sub>P</sub> �
 > 1 N \mu_B = 5585 \mathrm{erg \ G^{−1} \ mol^{-1}} = 5585 \ \mathrm{emu \ G \ mol^{-1}} \ (or \ \mathrm{cm^3 \ G \ mol^{-1}})
 > $$
 
+&nbsp;
 
-
-
-
-## 3 Examples <a id="examples"></a>
+## 3 Diamagnetic contribution <a id="diamagnetic-contribution"></a>
 ### 3.1 **Example I** - `2-methylpropan-2-ol` <a id="example-i"></a>
 > Our first example of a compound for which we will determine the diamagnetic contribution is `2-methylpropan-2-ol`, an alcohol. To calculate the diamagnetic contribution, we use [Eq. (2)](#formula-2). 
 
@@ -277,6 +276,27 @@ $$
 $$
 \chi_D = [(-313.4) + (-32.0) + (-110.29)] \times 10^{-6} \ cm^3 \ mol^{-1} = -455.69 \times 10^{-6} \ cm^3 \ mol^{-1}
 $$
+
+&nbsp;
+
+## 4. Processing of magnetic data <a id="processing-of-magnetic-data"></a>
+
+> [!IMPORTANT]
+> Molar magnetic susceptibility &chi;<sub>mol</sub> is not a quantity that we directly obtain from magnetic measurements and it must be determined. In general, there are two types of measurements commonly performed to investigate the magnetic properties of a sample:
+> 
+> 1) **Temperature-dependent magnetization measurement**
+>    - The magnetization is acquired over a temperature range, typically 2–300 K. During the measurement, a constant external magnetic field is applied.
+>    - The processed data will be expressed in the form of &chi;<sub>P</sub> = *f*(T) and &chi;<sub>P</sub>T = *f*(T) plots.
+>
+> 2) **Field-dependent magnetization measurement**
+>    - The magnetization data are collected over a range of magnetic field strengths. The measurements are performed at a constant, very low temperature, typically 2–8 K.
+>    - After processing, the data are shown in the form of an M = *f*(H) plot.
+>   
+These two types of measurements are known as `direct current (DC) magnetic measurements`. In this method, the magnetometer applies a steady magnetic field, records the sample’s magnetization (M) response, and repeats the procedure under different temperature or field conditions. 
+
+Magnetization measurements can also be performed using an alternating current (AC) magnetic field. In the `AC magnetic measurements`, the applied field oscillates in time, inducing a time-dependent magnetization that provides information about the dynamic magnetic behavior of the material.
+
+
 
 ## 4 Literature references <a id="literature-references"></a>
 > <a id="ref1"></a>[1] O. Khan, *Molecular Magnetism*, VCH, 1993.
