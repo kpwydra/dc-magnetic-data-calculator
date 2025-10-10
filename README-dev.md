@@ -46,7 +46,7 @@ $$
 \chi_P = {\chi_{mol}} - \chi_D
 $$
 
-The diamagnetic susceptibility is mostly an additive quantity. The diamagnetic contribution for given compound may therefore be estimated by summing atomic susceptibilities (&chi;<sub>Di</sub>) and constructive corrections (&lambda;<sub>i</sub>). The letter take into account the fact that compounds with multiple bonds exhibit lower diamagnetic susceptibility than saturated compounds with only single bonds.
+The diamagnetic susceptibility is mostly an additive quantity. The diamagnetic contribution for given compound may therefore be estimated by summing atomic susceptibilities (&chi;<sub>Di</sub>) and constructive corrections (&lambda;<sub>i</sub>). The letter take into account the fact that compounds with multiple bonds exhibit weaker diamagnetic susceptibility than saturated compounds with only single bonds.
 
 $$
 \chi_D = \sum_i \chi_{Di} + \sum_i \lambda_i \quad
@@ -57,6 +57,10 @@ $$
 
 It is important to note that, for most paramagnetic substances, χ<sub>P</sub> ≫ χ<sub>D</sub>. The χ<sub>D</sub> contribution is small for molecules with low molecular weights. However, this is not always the case. For example, in metalloproteins with molar masses of around 60 000 g/mol, the diamagnetic contribution becomes significant and must be determined with high precision using different methods to obtain an accurate paramagnetic susceptibility. Consequently, the simple addition of Pascal’s constants is no longer valid in such cases. *We note here that the procedure implemented in our software should be used with caution.*
 
+
+---
+> [!NOTE]
+> The issue of units in molecular magnetism can often lead to confusion and should be clarified before performing any calculations. First of all, magnetic data are ordinarily expressed in the `cgs-emu` system of units rather than in the standard SI units.
 
 
 
