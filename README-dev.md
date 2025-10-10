@@ -16,7 +16,8 @@
     1. [Example II](#example-ii)
     1. [Example III](#example-iii)
 4. [Processing of magnetic data](#processing-of-magnetic-data)
-5. [Literature references](#literature-references)
+    1. [DC magnetic data](#dc-magnetic-data)
+6. [Literature references](#literature-references)
 
 
 ## 2 Introduction <a id="introduction"></a>
@@ -296,11 +297,67 @@ $$
 >    - The magnetization data are collected over a range of magnetic field strengths. The measurements are performed at a constant, very low temperature, typically 2–8 K.
 >    - After processing, the data are shown in the form of an M = *f*(H) plot.
 >   
-These two types of measurements are known as `direct current (DC) magnetic measurements`. In this method, the magnetometer applies a steady magnetic field, records the sample’s magnetization (M) response, and repeats the procedure under different temperature or field conditions. 
+These two types of measurements are known as `direct current (DC) magnetic measurements`. In this methods, the magnetometer applies a steady magnetic field, records the sample’s magnetization (M) response, and repeats the procedure under different temperature or field conditions. 
 
 Magnetization measurements can also be performed using an alternating current (AC) magnetic field. In the `AC magnetic measurements`, the applied field oscillates in time, inducing a time-dependent magnetization that provides information about the dynamic magnetic behavior of the material.
 
+&nbsp;
+### 4.1 DC magnetic data <a id="dc-magnetic-data"></a>
 
+> ### Temperature-dependent magnetization measurements
+
+The raw data reported by the magnetometer in this case is the `total magnetic moment` (*M*), measured at different temperatures. This total magnetic moment originates from both the sample and the holder in which it is placed. The holder gives rise to an additional background magnetization, *M*<sub>holder</sub>. The `sample’s magnetization` *M*<sub>sample</sub> is obtained by correcting the total moment with the holder contribution: 
+
+$$
+M_{\mathrm{sample}} = M - M_{\mathrm{holder}}
+$$
+
+> ⚠️ correction must be applied for each temperature data point.
+
+&nbsp;
+
+ *M*<sub>sample</sub> is usually expressed in units of emu. For further data processing, the mass of the sample (*m*) is required and should be included in the magnetometer’s report. 
+> ⚠️ Note that the sample's mass is usually given in mg and must be converted to g prior to use.
+
+Now we can calculate `mass magnetization` *M*<sub>g</sub>:
+
+$$
+M_{\mathrm{g}} = \frac{M_{\mathrm{sample}}}{m}
+$$
+
+Some sources introduce `volume magnetization` (*M*<sub>V</sub>) which is obtained by dividing the total magnetic moment of the sample by its volume (V), expressed in cm<sup>3</sup>.
+
+$$
+M_{\mathrm{V}} = \frac{M_{\mathrm{sample}}}{V}
+$$
+
+Since the density (*&rho;*) of the sample equals *&rho;* = m/V (unit: g cm<sup>-3</sup>), it can be used to convert between volume and mass magnetization:
+
+$$
+M_{\mathrm{g}} = \frac{M_{\mathrm{V}}}{\rho}
+$$
+
+Next step is to calculate the molar magnetization *M*<sub>mol</sub>. To do this we use the molar mass *M*<sub>mass</sub> of the studied compound (unit: g/mol):
+
+$$
+M_{\mathrm{mol}} = M_{\mathrm{g}} \times {M_{\mathrm{mass}}} 
+$$
+
+Given that the amount of the sample *n* = <sup>*m*</sup>&frasl;<sub>*M*<sub>mass</sub></sub> (unit for *n* is mol), we also have:
+
+
+$$
+M_{\mathrm{mol}} = \frac{M_{\mathrm{sample}}}{n} 
+$$
+
+> [!IMPORTANT]
+> Once *M*<sub>mol</sub> is determined, we can use [Eq. (2)](#eq2) to calculate molar magnetic susceptibility *&chi;*<sub>mol</sub>. Then we can calculate the diamagnetic contribution for the studied compound with one of the procedures discussed in Chapter 3. Finally, [Eq. (4)](#eq4) is applied to obtain paramagnetic susceptibility *&chi;*<sub>P</sub>, which is the key quantity for investigating magnetic behavior of the compounds. Specifically, the dependencies &chi;<sub>P</sub> = *f*(T) and &chi;<sub>P</sub>T = *f*(T) are the focus of the analysis.
+ 
+Numerous software packages have been developed to calculate the magnetic properties of paramagnetic compounds, such as PHI []. In these programs, the experimental &chi;<sub>P</sub> = *f*(T) and &chi;<sub>P</sub>T = *f*(T) dependencies are used as input for subsequent simulations.
+
+&nbsp;
+
+> ### Field-dependent magnetization measurements
 
 ## 4 Literature references <a id="literature-references"></a>
 > <a id="ref1"></a>[1] O. Khan, *Molecular Magnetism*, VCH, 1993.
@@ -308,3 +365,5 @@ Magnetization measurements can also be performed using an alternating current (A
 > <a id="ref1"></a>[2] R. L. Carlin, *Magnetochemistry*, Springer-Verlag, 1986.
 > 
 >  <a id="ref1"></a>[3] G. A. Bain, J. F. Berry, J. Chem. Educ., 2008, 85, 532-536. DOI: 10.1021/ed085p532
+>
+> N. F. Chilton, R. P. Anderson, L. D. Turner, A. Soncini and K. S. Murray J. Comput. Chem. 34, 1164-1175 (2013)
