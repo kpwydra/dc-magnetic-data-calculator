@@ -23,13 +23,13 @@
 When a sample containing 1 mol of a molecular species is placed in a homogeneous magnetic field *H*, it exhibits a molar magnetisation *M* that is related to *H* by:
 
 $$
-\frac{\partial M}{\partial H} = \chi_{\mathrm{mol}}
+\frac{\partial M}{\partial H} = \chi_{\mathrm{mol}} \tag{1}
 $$
 
 The `molar magnetic susceptibility`, &chi;<sub>mol</sub>, is a quantitative measure of a sample’s response to an applied magnetic field [<a href="#ref1">1</a>]. In the limit of a weak external magnetic field, &chi;<sub>mol</sub> becomes independent of *H*, leading to the relation:
 
 $$
-M = \chi_{\mathrm{mol}} H \tag{1}
+M = \chi_{\mathrm{mol}} H
 $$
 
 Materials that are repelled by an applied magnetic field are called diamagnetic, whereas those that are attracted by the field are called paramagnetic. For diamagnets  &chi;<sub>mol</sub> < 0, while for paramagnets  &chi;<sub>mol</sub> > 0. When material becomes diamagnetic and when paramagnetic? It depends on its electonic structure. Diamagnetism arises from the interaction of paired [↑↓] electrons with an external magnetic field [<a href="#ref1">2</a>]. Therefore, it is a fundamental property inherent to all matter! In addition to paired electrons, some chemical compounds contain unpaired [↑ ] electrons, which are the source of paramagnetism. The molar magnetic susceptibility is a sum of diamagnetic and paramagnetic susceptibilities:
