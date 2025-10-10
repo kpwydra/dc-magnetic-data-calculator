@@ -64,7 +64,7 @@ $$
  <span id="eq4"> (4)</span>
 </p>
 
-The diamagnetic susceptibility is mostly an additive quantity. The diamagnetic contribution for given compound may therefore be estimated by summing atomic susceptibilities (&chi;<sub>Di</sub>) and constructive corrections (&lambda;<sub>i</sub>). The latter takes into account the fact that compounds with multiple bonds exhibit weaker diamagnetic susceptibility than saturated compounds with only single bonds.
+The diamagnetic susceptibility is mostly an additive quantity. The diamagnetic contribution for given compound may therefore be estimated by summing atomic susceptibilities (&chi;<sub>Di</sub>) and constitutive corrections (&lambda;<sub>i</sub>). The latter takes into account the fact that compounds with multiple bonds exhibit weaker diamagnetic susceptibility than saturated compounds with only single bonds.
 
 $$
 \chi_D = \sum_i \chi_{Di} + \sum_i \lambda_i \quad
@@ -127,7 +127,7 @@ It is important to note that, for most paramagnetic substances, χ<sub>P</sub> �
 
 ## 3 Diamagnetic contribution <a id="diamagnetic-contribution"></a>
 ### 3.1 **Example I** - `2-methylpropan-2-ol` <a id="example-i"></a>
-> Our first example of a compound for which we will determine the diamagnetic contribution is `2-methylpropan-2-ol`, an alcohol. To calculate the diamagnetic contribution, we use [Eq. (2)](#formula-2). 
+> Our first example of a compound for which we will determine the diamagnetic contribution is `2-methylpropan-2-ol`, an alcohol. To calculate the diamagnetic contribution, we use [Eq. (5)](#eq5). 
 
 &nbsp;
 <p align="center">
@@ -144,13 +144,13 @@ $$
 \sum_i \chi_{Di} = 4 \chi_{C} + 10 \chi_{H} + \chi_{O}
 $$
 
-Taking data from Table 1 from the reference $^{(1)}$, we have:
+Taking Pascal's constants from Table 1 from the reference [<a href="#ref1">3</a>], we have:
 
 $$
-\sum_i \chi_{Di} = [4 \times (-6.00) + 10 \times (-2.93) + (-4.6)] \times 10^{-6} \ cm^3 \ mol^{-1} = -57.9 \times 10^{-6} \ cm^3 \ mol^{-1}
+\sum_i \chi_{Di} = [4 \times (-6.00) + 10 \times (-2.93) + (-4.6)] \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}} = -57.9 \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}}
 $$
 
-Accordingly to Table 2 in the article $^{(1)}$, C–H and C–C single bonds are set to have a value of $\lambda_i$ equal 0.0 $cm^3 \, mol^{-1}$. Since there is no information regarding O–H and C–O bonds, they were also assumed to have $\lambda_i$ equal to 0.0 $cm^3 \, mol^{-1}$. As a result, the sum $\sum_i \lambda_i = 0$ and $\chi_D = \sum_i \chi_{Di} = -57.9 \times 10^{-6} \ cm^3 \ mol^{-1}$.
+Accordingly to Table 2 in [<a href="#ref1">3</a>], C–H and C–C single bonds are set to have a value of constitutive correction $\lambda_i$ equal 0.0 cm<sup>3</sup> mol<sup>-1</sup>. Since there is no information regarding O–H and C–O bonds, they were also assumed to have $\lambda_i$ equal to 0.0 cm<sup>3</sup> mol<sup>-1</sup>. As a result, the sum $\sum_i \lambda_i = 0$ and $\chi_D = \sum_i \chi_{Di} = -57.9 \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}}$.
 
 
 &nbsp;
@@ -167,26 +167,26 @@ Accordingly to Table 2 in the article $^{(1)}$, C–H and C–C single bonds are
 </p>
 &nbsp;
 
-To calculate $\sum_i \chi_{Di}$ sum from Eq. (2), we need to consider Pascal's constant for carbon atoms within the ring fragment of the molecule, which is $\chi_{C(ring)} = -6.24 \times 10^{-6} \ cm^3 \ mol^{-1}$ (value taken from Table 1 in $^{(1)}$). The sum is equal to:
+To calculate $\sum_i \chi_{Di}$ sum from [Eq. (5)](#eq5), we need to consider Pascal's constant for carbon atoms within the ring fragment of the molecule, which is $\chi_{C(ring)} = -6.24 \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}}$ (value taken from Table 1 in [<a href="#ref1">3</a>]). The sum is equal to:
 
 $$
-\sum_i \chi_{Di} = 6 \chi_{D(C(ring))} + 5 \chi_{D(H)} + \chi_{D(Cl)} = [6 \times (-6.24) + 5 \times (-2.93) + (-20.1)] \times 10^{-6} \ cm^3 \ mol^{-1} = -72.19 \times 10^{-6} \ cm^3 \ mol^{-1}
+\sum_i \chi_{Di} = 6 \chi_{D(C(ring))} + 5 \chi_{D(H)} + \chi_{D(Cl)} = [6 \times (-6.24) + 5 \times (-2.93) + (-20.1)] \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}} = -72.19 \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}}
 $$
 
-For chlorobenzene, the sum $\sum_i \lambda_i$ in Eq. (2) is not equal to zero. There are two Pascal's constants that we have to consider: $\lambda_{benzene}$ and $\lambda_{Ar-Cl}$. The first takes into account the presence of the benzene ring within the structure. The second Pascal's constant considers the Ar-Cl bond. Here, "Ar" corresponds to any aromatic fragment (in this particular case benzene fragment). It means that Ar-Cl is a specific case of the C-Cl bond, where the carbon atom corresponds to the aromatic fragment. The resulting sum is:
+For chlorobenzene, the sum $\sum_i \lambda_i$ in [Eq. (5)](#eq5) is not equal to zero. There are two Pascal's constants that we have to consider: $\lambda_{benzene}$ and $\lambda_{Ar-Cl}$. The first takes into account the presence of the benzene ring within the structure. The second Pascal's constant considers the Ar-Cl bond. Here, "Ar" corresponds to any aromatic fragment (in this particular case benzene fragment). It means that Ar-Cl is a specific case of the C-Cl bond, where the carbon atom corresponds to the aromatic fragment. The resulting sum is:
 
 $$
-\sum_i \lambda_i = \lambda_{benzene} + \lambda_{Ar-Cl} = [(–1.4) + (–2.5)] \times 10^{-6} \ cm^3 \ mol^{-1} = -3.9 \times 10^{-6} \ cm^3 \ mol^{-1}
+\sum_i \lambda_i = \lambda_{benzene} + \lambda_{Ar-Cl} = [(–1.4) + (–2.5)] \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}} = -3.9 \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}}
 $$
 
 Finally, the diamagnetic contribution for the compound is:
 
 $$
-\chi_D = \sum_i \chi_{Di} + \sum_i \lambda_i  = [(-72.19) + (-3.9)] \times 10^{-6} \ cm^3 \ mol^{-1} = -76.09 \times 10^{-6} \ cm^3 \ mol^{-1}
+\chi_D = \sum_i \chi_{Di} + \sum_i \lambda_i  = [(-72.19) + (-3.9)] \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}} = -76.09 \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}}
 $$
 
 ### 3.3 **Example III** - `Chalconatronite` <a id="example-iii"></a>
-> Chalconatronite is a carbonate mineral with the chemical formula Na<sub>2</sub>Cu(CO<sub>3</sub>)<sub>2</sub>•3H<sub>2</sub>O. This is an ionic compound, which means that some of the atoms are not covalently bonded. Have a look at the structural formula of the mineral:
+> Chalconatronite is a carbonate mineral with the chemical formula Na<sub>2</sub>Cu(CO<sub>3</sub>)<sub>2</sub>•3H<sub>2</sub>O. This is an ionic compound, which means that some of the atoms are not covalently bonded. Have a look at the structural formula of the mineral (Figure 3):
 
 &nbsp;
 <p align="center">
@@ -198,13 +198,13 @@ $$
 </p>
 &nbsp;
 
-The mineral is composed of two types of cations (species with a positive charge), Cu<sup>2+</sup> and Na<sup>+</sup>, and one type of anion, the carbonate CO<sub>3</sub><sup>2−</sup>. Due to their opposite charges, cations and anions attract each other and are organized into a three-dimensional crystal lattice. Within this lattice, there are additional water molecules. To calculate the $\chi_D$ for chalconatronite, we have to account for the diamagnetic contribution of all species present in the chemical formula of the compound:
+The mineral is composed of two types of cations (species with a positive charge), Cu<sup>2+</sup> and Na<sup>+</sup>, and one type of anion, the carbonate CO<sub>3</sub><sup>2−</sup>. Due to their opposite charges, cations and anions attract each other and are organized into a three-dimensional crystal lattice. Within this lattice, there are additional water molecules. To calculate the $\chi_D$ for chalconatronite, we have to account for the diamagnetic contribution of all species present in the chemical formula of the compound, i.e. we use [Eq. (6)](#eq6) :
 
 $$
 \chi_D = 2\chi_{D(Na^+)} + \chi_{D(Cu^{2+})} + 2\chi_{D(CO_3^{2-})} + 3\chi_{D(H_2O)}
 $$
 
-Since Na<sup>+</sup> and Cu<sup>2+</sup> are ions, we should use Pascal's constants from Table 6 in $^{(1)}$. Those are $\chi_{D(Na^+)} = -6.8 \times 10^{-6} \ cm^3 \ mol^{-1}$ and $\chi_{D(Cu^{2+})} = -11 \times 10^{-6} \ cm^3 \ mol^{-1}$, respecetively. We preceed to the carbonate anion, which is a polyatomic charged species. Fortunately, Pascal's constants for common anions were catalogued in Table 3 in $^{(1)}$. The respective constant equals $\chi_{D(CO_3^{2-})} = -28.0 \times 10^{-6} \ cm^3 \ mol^{-1}$. Our last species is water. The H<sub>2</sub>O molecule is a common ligand (species that can bind to a metal ion), and its Pascal constant, which is listed in Table 4 in $^{(1)}$, is equal to $\chi_{D(H_2O)} = -13 \times 10^{-6} \ cm^3 \ mol^{-1}$. Finally, we have all data to calculate diamagnetic contribution for the mineral:
+Since Na<sup>+</sup> and Cu<sup>2+</sup> are ions, we should use Pascal's constants from Table 6 in [<a href="#ref1">3</a>]. Those are $\chi_{D(Na^+)} = -6.8 \times 10^{-6} \ cm^3 \ mol^{-1}$ and $\chi_{D(Cu^{2+})} = -11 \times 10^{-6} \ cm^3 \ mol^{-1}$, respecetively. We preceed to the carbonate anion, which is a polyatomic charged species. Fortunately, Pascal's constants for common anions were catalogued in Table 3 in [<a href="#ref1">3</a>]. The respective constant equals $\chi_{D(CO_3^{2-})} = -28.0 \times 10^{-6} \ cm^3 \ mol^{-1}$. Our last species is water. The H<sub>2</sub>O molecule is a common ligand (species that can bind to a metal ion), and its Pascal constant, which is listed in Table 4 in [<a href="#ref1">3</a>], is equal to $\chi_{D(H_2O)} = -13 \times 10^{-6} \ cm^3 \ mol^{-1}$. Finally, we have all data to calculate diamagnetic contribution for the mineral:
 
 $$
 \chi_D = [2 \times (-6.8) + (-11) + 2 \times (-28.0) + 3 \times (-13)] \times 10^{-6} \ cm^3 \ mol^{-1} = -119.6 \times 10^{-6} \ cm^3 \ mol^{-1}
@@ -220,8 +220,10 @@ $$
 </p>
 
 <p align="center">
-  <b>Figure 3</b> Structural formula of complex [Fe<sup>III</sup>(bipy)(phen)(py)(CH<sub>3</sub>OH)](PhAs<sup>V</sup>O<sub>3</sub>)(ClO<sub>4</sub>).
+  <b>Figure 4</b> Structural formula of complex [Fe<sup>III</sup>(bipy)(phen)(py)(CH<sub>3</sub>OH)](PhAs<sup>V</sup>O<sub>3</sub>)(ClO<sub>4</sub>).
 </p>
+
+&nbsp;
 
 The overall diamagnetic susceptibility of our coordination compound is equal to the sum of the diamagnetic contributions from the complex cation [Fe<sup>III</sup>(bipy)(phen)(py)(CH<sub>3</sub>OH)]<sup>3+</sup> and the two anions PhAs<sup>V</sup>O<sub>3</sub><sup>2-</sup> and ClO<sub>4</sub><sup>-</sup>, as follows:
 
@@ -229,42 +231,42 @@ $$
 \chi_D = \chi_{D\([ \mathrm{Fe^{III}(bipy)(phen)(py)(CH_3OH)]^{3+}} \)} + \chi_{D(\mathrm{PhAs^{V}O_3^{2-}}\)} + \chi_{D(\mathrm{ClO_4^{-}}\)}
 $$
 
-Although the structure of the complex cation looks scary, calculating the diamagnetic contribution for this species is fairly straightforward. This is because Table 4 in $^{(1)}$ provides Pascal's constants for all the ligands present in the complex cation [Fe<sup>III</sup>(bipy)(phen)(py)(CH<sub>3</sub>OH)]<sup>3+</sup> except mehtanol. The Pascal's constant for methanol is found in Table 5. The only remaining value is the Pascal's constant for the Fe<sup>3+</sup> cation, which we take from Table 6 in the reference. Based on given data, we have:
+Although the structure of the complex cation looks scary, calculating the diamagnetic contribution for this species is fairly straightforward. This is because Table 4 in [<a href="#ref1">3</a>] provides Pascal's constants for all the ligands present in the complex cation [Fe<sup>III</sup>(bipy)(phen)(py)(CH<sub>3</sub>OH)]<sup>3+</sup> except mehtanol. The Pascal's constant for methanol is found in Table 5 [<a href="#ref1">3</a>]. The only remaining value is the Pascal's constant for the Fe<sup>3+</sup> cation, which we take from Table 6 [<a href="#ref1">3</a>]. Based on given data, we have:
 
 $$
 \chi_{D\([ \mathrm{Fe^{III}(bipy)(phen)(py)(CH_3OH)]^{3+}} \)} = \chi_{D\(Fe^{3+})} + \chi_{D\(bipy)} + \chi_{D\(phen)} + \chi_{D\(py)} + \chi_{D\(CH_3OH)}
 $$
 
 $$
-\chi_{D\([ \mathrm{Fe^{III}(bipy)(phen)(py)(CH_3OH)]^{3+}} \)} = [(-10) + (-105) + (-128) + (-49) + (-21.4)] \times 10^{-6} \ cm^3 \ mol^{-1} = -313.4 \times 10^{-6} \ cm^3 \ mol^{-1}
+\chi_{D\([ \mathrm{Fe^{III}(bipy)(phen)(py)(CH_3OH)]^{3+}} \)} = [(-10) + (-105) + (-128) + (-49) + (-21.4)] \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}} = -313.4 \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}}
 $$
 
-We now proceed to the two anions of our coordination compound. In the case of perchlorate anion, the diamagnetic contribution is given in Table 3 in $^{(1)}$ and is equal to $\chi_{D(ClO_4^{-})} = -32.0 \times 10^{-6} \ cm^3 \ mol^{-1}$. For the second anion, phenylarsenate(V) (PhAs<sup>V</sup>O<sub>3</sub><sup>2-</sup>), the situation is more complicated as magnetic contribution for this species is not listed in Tables 3 and 4 in the reference, so we need to calculate it stepwise. The calculations are similar as for Example II (see chapter 3.2):
+We now proceed to the two anions of our coordination compound. In the case of perchlorate anion, the diamagnetic contribution is given in Table 3 in [<a href="#ref1">3</a>] and is equal to $\chi_{D(ClO_4^{-})} = -32.0 \times 10^{-6} \ cm^3 \ mol^{-1}$. For the second anion, phenylarsenate(V) (PhAs<sup>V</sup>O<sub>3</sub><sup>2-</sup>), the situation is more complicated as magnetic contribution for this species is not listed in Tables 3 and 4 in the reference, so we need to calculate it stepwise. The calculations are similar as for Example II (see chapter 3.2):
 
 $$
 \chi_{D(\mathrm{PhAs^{V}O_3^{2-}}\)} = \sum_i \chi_{Di} + \sum_i \lambda_i \quad
 $$
 
-We calculate first sum using Pascal's constants of all elements present, remembering to choose appropriate value (Table 1 in $^{(1)}$). Note that all carbon atoms form ring, while arsenic atom exhibits oxidation state of V. It should also be noted that our procedure does not account for the overall negative charge of the anion, leading to an overestimation of the final value.
+We calculate first sum using Pascal's constants of all elements present, remembering to choose appropriate value (Table 1 in [<a href="#ref1">3</a>]). Note that all carbon atoms form ring, while arsenic atom exhibits oxidation state of V. It should also be noted that our procedure does not account for the overall negative charge of the anion, leading to an overestimation of the final value.
 
 $$
 \sum_i \chi_{Di} = 6 \chi_{D(C(ring))} + 5 \chi_{D(H)} + \chi_{D(As^{V})} + 3 \chi_{D(O)}
 $$
 
 $$
-\sum_i \chi_{Di} = [6 \times (-6.24) + 5 \times (-2.93) + (-43.0) + 3 \times (-4.6)] \times 10^{-6} \ cm^3 \ mol^{-1} = -108.89 \times 10^{-6} \ cm^3 \ mol^{-1}
+\sum_i \chi_{Di} = [6 \times (-6.24) + 5 \times (-2.93) + (-43.0) + 3 \times (-4.6)] \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}} = -108.89 \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}}
 $$
 
 To calculate the sum $\sum_i \lambda_i \quad$, the only Pascal's constant that we have to account is this related to benzene ring. In fact, the Table 2 in the article does not list any Pascal’s constants corresponding to bonds involving arsenic, so those values were assume to be equal to $0 \ cm^3 \ mol^{-1}$. We have:
 
-$S
-\sum_i \lambda_i \quad = \lambda_{benzene} = -1.4 \times 10^{-6} \ cm^3 \ mol^{-1}
-S$
+$$
+\sum_i \lambda_i \quad = \lambda_{benzene} = -1.4 \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}}
+$$
 
 And the overall diamagnetic contribution for the anion is:
 
 $$
-\chi_{D(\mathrm{PhAs^{V}O_3^{2-}}\)} = [(-108.89) + (-1.4)] \times 10^{-6} \ cm^3 \ mol^{-1} = -110.29 \times 10^{-6} \ cm^3 \ mol^{-1}
+\chi_{D(\mathrm{PhAs^{V}O_3^{2-}}\)} = [(-108.89) + (-1.4)] \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}} = -110.29 \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}}
 $$
 
 Finally, the diamagnetic contribution of our coordination compound can be calculated as follows:
@@ -274,7 +276,7 @@ $$
 $$
 
 $$
-\chi_D = [(-313.4) + (-32.0) + (-110.29)] \times 10^{-6} \ cm^3 \ mol^{-1} = -455.69 \times 10^{-6} \ cm^3 \ mol^{-1}
+\chi_D = [(-313.4) + (-32.0) + (-110.29)] \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}} = -455.69 \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}}
 $$
 
 &nbsp;
