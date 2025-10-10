@@ -86,6 +86,8 @@ $$
  <span id="eq6"> (6)</span>
 </p>
 
+In the following chapters we will show the procedure for calculating diamagnetic contribution for three examples of chemical compounds.
+
 It is important to note that, for most paramagnetic substances, χ<sub>P</sub> ≫ χ<sub>D</sub>. The χ<sub>D</sub> contribution is small for molecules with low molecular weights. However, this is not always the case. For example, in metalloproteins with molar masses of around 60 000 g/mol, the diamagnetic contribution becomes significant and must be determined with high precision using different methods to obtain an accurate paramagnetic susceptibility. Consequently, the simple addition of Pascal’s constants is no longer valid in such cases. *We note here that the procedure implemented in our software should be used with caution.*
 
 
