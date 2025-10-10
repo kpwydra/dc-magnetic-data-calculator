@@ -43,7 +43,7 @@ $$
  <span id="eq2"> (2)</span>
 </p>
 
-Materials that are repelled by an applied magnetic field are called diamagnetic, whereas those that are attracted by the field are called paramagnetic. For diamagnets  &chi;<sub>mol</sub> < 0, while for paramagnets  &chi;<sub>mol</sub> > 0. When material becomes diamagnetic and when paramagnetic? It depends on its electronic structure. Diamagnetism arises from the interaction of paired [↑↓] electrons with an external magnetic field [<a href="#ref1">2</a>]. Therefore, it is a fundamental property inherent to all matter! In addition to paired electrons, some chemical compounds contain unpaired [↑ ] electrons, which are the source of paramagnetism. The molar magnetic susceptibility is a sum of diamagnetic and paramagnetic susceptibilities:
+Materials that are repelled by an applied magnetic field are called diamagnetic, whereas those that are attracted by the field are called paramagnetic. For diamagnets  &chi;<sub>mol</sub> < 0, while for paramagnets  &chi;<sub>mol</sub> > 0. *When material becomes diamagnetic and when paramagnetic?* It depends on its electronic structure. Diamagnetism arises from the interaction of paired [↑↓] electrons with an external magnetic field [<a href="#ref1">2</a>]. Therefore, it is a fundamental property inherent to all matter! In addition to paired electrons, some chemical compounds contain unpaired &nbsp; [↑ ] electrons, which are the source of paramagnetism. The molar magnetic susceptibility is a sum of diamagnetic and paramagnetic susceptibilities:
 
 $$
 {\chi_{mol}} = \chi_P + \chi_D
@@ -87,14 +87,14 @@ $$
  <span id="eq6"> (6)</span>
 </p>
 
-In the following chapters we will show the procedure for calculating diamagnetic contribution for three examples of chemical compounds.
+> In the following chapters we will show the procedure for calculating diamagnetic contribution for three examples of chemical compounds.
 
-It is important to note that, for most paramagnetic substances, χ<sub>P</sub> ≫ χ<sub>D</sub>. The χ<sub>D</sub> contribution is small for molecules with low molecular weights. However, this is not always the case. For example, in metalloproteins with molar masses of around 60 000 g/mol, the diamagnetic contribution becomes significant and must be determined with high precision using different methods to obtain an accurate paramagnetic susceptibility. Consequently, the simple addition of Pascal’s constants is no longer valid in such cases. *We note here that the procedure implemented in our software should be used with caution.*
+It is important to note that, for most paramagnetic substances, χ<sub>P</sub> ≫ χ<sub>D</sub>. The χ<sub>D</sub> contribution is small for molecules with low molecular weights. However, this is not always the case. For example, in metalloproteins with molar masses of around 60 000 g/mol, the diamagnetic contribution becomes significant and must be determined with high precision using different methods to obtain an accurate paramagnetic susceptibility [<a href="#ref1">1</a>]. Consequently, the simple addition of Pascal’s constants is no longer valid in such cases. *We note here that the procedure implemented in our software should be used with caution.*
 
 
 ---
 > [!NOTE]
-> The issue of units in molecular magnetism can often lead to confusion and should be clarified before performing any calculations. First of all, magnetic data are ordinarily expressed in the `cgs-emu` system of units rather than in the standard SI units. For magnetic field *H* the SI unit is amper per meter (A/m), while for magnetic induction *B* the SI unit is tesla (T), expressed with SI base units as:
+> The issue of units in molecular magnetism can often lead to confusion and should be clarified before performing any calculations. First of all, magnetic data are ordinarily expressed in the `cgs-emu` system of units rather than in the standard SI units [<a href="#ref1">1</a>], [<a href="#ref1">2</a>]. For magnetic field *H* the SI unit is amper per meter (A/m), while for magnetic induction *B* the SI unit is tesla (T), expressed with SI base units as:
 > 
 > $$
 > \mathrm{T = \frac{kg}{A \cdot s^{2}}}
@@ -360,10 +360,12 @@ Numerous software packages have been developed to calculate the magnetic propert
 > ### Field-dependent magnetization measurements
 
 ## 4 Literature references <a id="literature-references"></a>
-> <a id="ref1"></a>[1] O. Khan, *Molecular Magnetism*, VCH, 1993.
+> <a id="ref1"></a>[1] O. Kahn, *Molecular Magnetism*, VCH, 1993.
 >
 > <a id="ref1"></a>[2] R. L. Carlin, *Magnetochemistry*, Springer-Verlag, 1986.
 > 
 >  <a id="ref1"></a>[3] G. A. Bain, J. F. Berry, J. Chem. Educ., 2008, 85, 532-536. DOI: 10.1021/ed085p532
+>
+>  <a id="ref1"></a>[4] Wikipedia; articles: [vacuum permeability]([https://en.wikipedia.org/wiki/Vacuum_permeability)
 >
 > N. F. Chilton, R. P. Anderson, L. D. Turner, A. Soncini and K. S. Murray J. Comput. Chem. 34, 1164-1175 (2013)
