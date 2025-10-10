@@ -20,23 +20,36 @@
 
 ## 2 Introduction <a id="introduction"></a>
 
-When a sample containing 1 mol of a molecular species is placed in a homogeneous magnetic field *H*, it exhibits a molar magnetisation *M* that is related to *H* by:
+When a sample containing 1 mol of a molecular species is placed in a homogeneous magnetic field *H*, it exhibits a `molar magnetisation` *M*<sub>mol</sub> that is related to *H* by:
 
 $$
-\frac{\partial M}{\partial H} = \chi_{\mathrm{mol}} \tag{1}
+\frac{\partial {M_{mol}}}{\partial H} = \chi_{\mathrm{mol}}
 $$
 
-The `molar magnetic susceptibility`, &chi;<sub>mol</sub>, is a quantitative measure of a sample’s response to an applied magnetic field [<a href="#ref1">1</a>]. In the limit of a weak external magnetic field, &chi;<sub>mol</sub> becomes independent of *H*, leading to the relation:
+<p align="right">
+ <span id="eq1"> (1)</span>
+</p>
+
+
+The `molar magnetic susceptibility` &chi;<sub>mol</sub> is a quantitative measure of a sample’s response to an applied magnetic field [<a href="#ref1">1</a>]. In the limit of a weak external magnetic field, &chi;<sub>mol</sub> becomes independent of *H*, leading to the relation:
 
 $$
-M = \chi_{\mathrm{mol}} H
+{M_{mol}} = \chi_{\mathrm{mol}} H
 $$
+
+<p align="right">
+ <span id="eq2"> (2)</span>
+</p>
 
 Materials that are repelled by an applied magnetic field are called diamagnetic, whereas those that are attracted by the field are called paramagnetic. For diamagnets  &chi;<sub>mol</sub> < 0, while for paramagnets  &chi;<sub>mol</sub> > 0. When material becomes diamagnetic and when paramagnetic? It depends on its electonic structure. Diamagnetism arises from the interaction of paired [↑↓] electrons with an external magnetic field [<a href="#ref1">2</a>]. Therefore, it is a fundamental property inherent to all matter! In addition to paired electrons, some chemical compounds contain unpaired [↑ ] electrons, which are the source of paramagnetism. The molar magnetic susceptibility is a sum of diamagnetic and paramagnetic susceptibilities:
 
 $$
 {\chi_{mol}} = \chi_P + \chi_D
 $$
+
+<p align="right">
+ <span id="eq3"> (3)</span>
+</p>
 
 When the contribution of `diamagnetic susceptibility` &chi;<sub>D</sub> is larger than `paramagnetic susceptibility` &chi;<sub>P</sub>, the material is diamagnetic - it is repelled by the magnetic field. In the opposite scenario (&chi;<sub>P</sub> > &chi;<sub>D</sub>) the material is paramagnetic and it is attracted by the field. Diamagnetic susceptibility is independent of temperature *T* and strength of the applied magnetic field *H*. In contrast, paramagnetic susceptibility depends on temperature and may also vary with the applied magnetic field. These dependencies are rather complex, and become even more complicated when within the material magnetic centers are able to interact with each other, giving rise to phenomena such as ferromagnetism and antiferromagnetism. 
 
@@ -46,14 +59,31 @@ $$
 \chi_P = {\chi_{mol}} - \chi_D
 $$
 
+<p align="right">
+ <span id="eq4"> (4)</span>
+</p>
+
 The diamagnetic susceptibility is mostly an additive quantity. The diamagnetic contribution for given compound may therefore be estimated by summing atomic susceptibilities (&chi;<sub>Di</sub>) and constructive corrections (&lambda;<sub>i</sub>). The letter take into account the fact that compounds with multiple bonds exhibit weaker diamagnetic susceptibility than saturated compounds with only single bonds.
 
 $$
 \chi_D = \sum_i \chi_{Di} + \sum_i \lambda_i \quad
 $$
 
+<p align="right">
+ <span id="eq5"> (5)</span>
+</p>
+
 &chi;<sub>Di</sub> and &lambda;<sub>i</sub> are so called `Pascal's constants`. These can be found in many scientific books and articles. It should be noted that considerable confusion exists regarding Pascal’s constants, arising from the conflicting values reported in different sources. The article by G. A. Bain *et al.* offers a valuable clarification of this issue, and our software is based on their work [<a href="#ref1">3</a>].
-.
+
+In the reference [<a href="#ref1">3</a>], another method for calculating the diamagnetic contribution is presented. This involves summing the diamagnetic contributions of all species present in the compound. "Species" here refers to, e.g., counterions, ligands and solvent molecules (*vide infra*). The values for common species are tabulated in the article.
+
+$$
+\chi_D = \sum_i \chi_{D(species,i)}
+$$
+
+<p align="right">
+ <span id="eq6"> (6)</span>
+</p>
 
 It is important to note that, for most paramagnetic substances, χ<sub>P</sub> ≫ χ<sub>D</sub>. The χ<sub>D</sub> contribution is small for molecules with low molecular weights. However, this is not always the case. For example, in metalloproteins with molar masses of around 60 000 g/mol, the diamagnetic contribution becomes significant and must be determined with high precision using different methods to obtain an accurate paramagnetic susceptibility. Consequently, the simple addition of Pascal’s constants is no longer valid in such cases. *We note here that the procedure implemented in our software should be used with caution.*
 
@@ -72,13 +102,25 @@ It is important to note that, for most paramagnetic substances, χ<sub>P</sub> �
 > B = \mu_0 H
 >$$
 > 
-> where &mu;<sub>0</sub> is vacuum permeability, in SI units equal to 1.25663706127(20)×10<sup>−6</sup> N⋅A<sup>−2</sup>. In the cgs-emu system unit, however, it is a dimensionless quantity equal to &mu;<sub>0</sub> = 1. For this reason, the magnetic field strength in molecular magnetism is often expressed in gauss. The formal unit of magnetic field strength in the cgs–emu system is the oersted (Oe), corresponding to 1&nbsp;Oe = 1000/4π&nbsp;A m<sup>-1</sup>. To summarize, in the cgs–emu system, the conversion between the magnetic field units tesla (T), gauss (G), and oersted (Oe) is given by:
+> where &mu;<sub>0</sub> is vacuum permeability, in SI units equal to 1.25663706127(20)×10<sup>−6</sup> N⋅A<sup>−2</sup>. In the cgs-emu system unit, however, it is a dimensionless quantity equal to &mu;<sub>0</sub> = 1. For this reason, the magnetic field strength in molecular magnetism is often expressed in gauss. The formal unit of magnetic field strength in the cgs–emu system is the oersted (Oe), corresponding to 1&nbsp;Oe = 1000/4π&nbsp;A m<sup>-1</sup>.
+>
+> To summarize, in the cgs–emu system, the conversion between the magnetic field units tesla (T), gauss (G), and oersted (Oe) is given by:
 >
 > $$
 > 1 T = 10^4 Oe = 10^4 G
 > $$
 >
-> Following the cgs-emu convention, the unit of molar magnetic susceptibility is cm<sup>3</sup> mol<sup>-1</sup> or emu mol<sup>-1</sup>, where dimension of emu is therefore cm<sup>3</sup>
+> Following the cgs-emu convention, the unit of molar magnetic susceptibility &chi;<sub>mol</sub> is cm<sup>3</sup> mol<sup>-1</sup> or emu mol<sup>-1</sup>, where dimension of emu is therefore cm<sup>3</sup>. Of course, the diamagnetic and paramagnetic susceptibilities, χ<sub>D</sub> and χ<sub>P</sub>, are expressed in the same units. From [Eq. (2)](#eq2) we can derive the unit of molar magnetization *M*, which is cm<sup>3</sup> G mol<sup>-1</sup>. Another common way to express M in the scientific literature is in terms of the *N&mu;*<sub>B</sub> unit, which basically is a multipication of two physical constants, Bohr magneton (*&mu;*<sub>B</sub>) and Avogadro's number (*N*):
+>
+> $$
+> 1 N \mu_B = 6.02214076 \times 10^{23} \ \mathrm{mol^{−1}} \times 9.2740100783(28) \times 10^{−21} \ \mathrm{erg \ G^{−1}} = 5585 \mathrm{erg \ G^{−1} \ mol^{-1}}
+> $$
+>
+> The "erg" is a cgs-emu unit of energy. By using conversion 1 erg/G = 1 emu = 1 cm<sup>3</sup>, we obtain:
+>
+> $$
+> 1 N \mu_B = 5585 \mathrm{erg \ G^{−1} \ mol^{-1}} = 5585 \ \mathrm{emu \ G \ mol^{-1}} \ (or \ \mathrm{cm^3 \ G \ mol^{-1}})
+> $$
 
 
 
