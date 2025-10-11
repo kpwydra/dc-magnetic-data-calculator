@@ -1,4 +1,82 @@
-# dc-magnetic-data-calculator
+<details>
+  <summary>Project Development Roadmap</summary>
+
+---
+# Project Development Roadmap
+<details>
+  <summary>🚀 Phase 1 — χD Calculator (Q1 2025)</summary>
+ 
+
+ **Goal:** Convert structural data (SDF file) into diamagnetic susceptibility.
+ 
+
+**Tasks:**
+- [x] Create Pascal's constants dictionary
+- [x] Write basic introduction and usage examples   
+- [ ] Connect RDKit library with the dictionary  
+- [ ] Implement testing and error handling  
+- [ ] Develop user-friendly frontend interface  
+
+---
+</details>
+
+<details>
+  <summary>🔬 Phase 2 — DC Magnetic Data Tool (Q2 2026)</summary>
+
+
+**Goal:** Develop a module for processing and visualizing DC magnetic data.
+
+
+**Tasks:**
+- [ ] Create standard input format for magnetic data  
+- [ ] Develop core data-processing functions  
+- [ ] Implement testing and error handling  
+- [ ] Build frontend and visualization components
+
+---
+</details>
+
+ <details>
+  <summary>📦🔬Phase 3 — AC Magnetic Data Tool (Q3 2026)</summary>
+
+
+**Goal:** Develop a module for analyzing and visualizing AC magnetic susceptibility data.
+
+**Tasks:**
+- [ ] Create standard input format for magnetic data
+- [ ] Develop core data-processing functions
+- [ ] Implement testing and error handling
+- [ ] Build frontend and visualization components
+
+---
+</details>
+
+
+<details>
+  <summary>💻 Phase 4 — Desktop Application & Local Software (Q4 2026)</summary>
+
+
+**Goal:** Develop a cross-platform desktop application that integrates χD, DC, and AC magnetic data tools, providing a user-friendly interface for data input, processing, visualization, and export.
+
+
+**Tasks:**
+- [ ] Connect χD, DC, and AC modules.  
+- [ ] Implement GUI for seamless workflow (data input → processing → results visualization)  
+- [ ] Add robust testing, error handling, and validation for desktop use  
+- [ ] Prepare installers for Windows, macOS, and Linux  
+- [ ] Write comprehensive user documentation and usage examples  
+- [ ] Optional: Add export features (CSV, PDF, plots) and advanced visualization tools  
+
+---
+</details>
+
+---
+</details>
+
+
+<details>
+  <summary>Git instructions</summary>
+
 
 # Git Instructions
 
@@ -165,3 +243,5 @@ value: "some value"
 value: "0.1"
 value: "['yet', 'another', 'value']"
 ```
+
+</details>
