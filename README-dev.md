@@ -75,8 +75,8 @@
   <summary>Magnetic Data Calculations — A Hands-On Introduction</summary>
 
 ## 1 Document Goals <a id="document-goals"></a>
- - This document serves as an introduction to diamagnetic contribution calculations
- - Here, we explain **step-by-step**, the theoretical foundations of this problem. Using few simple examples, we show how we do our calculations.
+ - This document provides a basic introduction to molecular magnetism, outlining the physical quantities and their units, types of magnetic measurements, and computational procedures relevant to the use of the software.
+ - Chapter 2 presents the theoretical foundations of the topic. Chapter 3 demonstrates step-by-step calculations of the diamagnetic contribution using several example chemical compounds. Chapter 4 focuses on the processing and analysis of DC and AC magnetic data.
 
 <!-- ## Document Structure -->
 <!-- Not sure if this section is really necessary. From my perspective it introduces noise. We still can have this information, in each section instead. I would rather keep the header simple and stick to Document Goals -->
