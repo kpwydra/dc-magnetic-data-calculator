@@ -11,11 +11,11 @@
  
 
 **Tasks:**
-- [x] Create Pascal's constants dictionary
-- [x] Write basic introduction and usage examples   
-- [ ] Connect RDKit library with the dictionary  
-- [ ] Implement testing and error handling  
-- [ ] Develop user-friendly frontend interface  
+  -  Create Pascal's constants dictionary
+  -  Write basic introduction and usage examples   
+  -  Connect RDKit library with the dictionary  
+  -  Implement testing and error handling  
+  -  Develop user-friendly frontend interface  
 
 ---
 </details>
@@ -28,10 +28,10 @@
 
 
 **Tasks:**
-- [ ] Create standard input format for magnetic data  
-- [ ] Develop core data-processing functions  
-- [ ] Implement testing and error handling  
-- [ ] Build frontend and visualization components
+  -  Create standard input format for magnetic data  
+  -  Develop core data-processing functions  
+  -  Implement testing and error handling  
+  -  Build frontend and visualization components
 
 ---
 </details>
@@ -43,10 +43,10 @@
 **Goal:** Develop a module for analyzing and visualizing AC magnetic susceptibility data.
 
 **Tasks:**
-- [ ] Create standard input format for magnetic data
-- [ ] Develop core data-processing functions
-- [ ] Implement testing and error handling
-- [ ] Build frontend and visualization components
+  -  Create standard input format for magnetic data
+  -  Develop core data-processing functions
+  -  Implement testing and error handling
+  -  Build frontend and visualization components
 
 ---
 </details>
