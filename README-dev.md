@@ -15,6 +15,7 @@
     1. [Example I](#example-i)
     1. [Example II](#example-ii)
     1. [Example III](#example-iii)
+    1. [Example IV](#example-iv)
 4. [Processing of magnetic data](#processing-of-magnetic-data)
     1. [DC magnetic data](#dc-magnetic-data)
 6. [Literature references](#literature-references)
@@ -106,7 +107,7 @@ It is important to note that, for most paramagnetic substances, χ<sub>P</sub> �
 > B = \mu_0 H
 >$$
 > 
-> where &mu;<sub>0</sub> is vacuum permeability, in SI units equal to 1.25663706127(20)×10<sup>−6</sup> N⋅A<sup>−2</sup>. In the cgs-emu system unit, however, it is a dimensionless quantity equal to &mu;<sub>0</sub> = 1. For this reason, the magnetic field strength in molecular magnetism is often expressed in gauss. The formal unit of magnetic field strength in the cgs–emu system is the oersted (Oe), corresponding to 1&nbsp;Oe = 1000/4π&nbsp;A m<sup>-1</sup>.
+> where &mu;<sub>0</sub> is vacuum permeability, in SI units equal to 1.25663706127(20)×10<sup>−6</sup> N⋅A<sup>−2</sup> [<a href="#ref1">4</a>]. In the cgs-emu system unit, however, it is a dimensionless quantity equal to &mu;<sub>0</sub> = 1. For this reason, the magnetic field strength in molecular magnetism is often expressed in gauss. The formal unit of magnetic field strength in the cgs–emu system is the oersted (Oe), corresponding to 1&nbsp;Oe = 1000/4π&nbsp;A m<sup>-1</sup>.
 >
 > To summarize, in the cgs–emu system, the conversion between the magnetic field units tesla (T), gauss (G), and oersted (Oe) is given by:
 >
@@ -114,13 +115,13 @@ It is important to note that, for most paramagnetic substances, χ<sub>P</sub> �
 > 1 T = 10^4 Oe = 10^4 G
 > $$
 >
-> Following the cgs-emu convention, the unit of molar magnetic susceptibility &chi;<sub>mol</sub> is cm<sup>3</sup> mol<sup>-1</sup> or emu mol<sup>-1</sup>, where dimension of emu is therefore cm<sup>3</sup>. Of course, the diamagnetic and paramagnetic susceptibilities, χ<sub>D</sub> and χ<sub>P</sub>, are expressed in the same units. From [Eq. (2)](#eq2) we can derive the unit of molar magnetization *M*, which is cm<sup>3</sup> G mol<sup>-1</sup>. Another common way to express M in the scientific literature is in terms of the *N&mu;*<sub>B</sub> unit, which basically is a multipication of two physical constants, Bohr magneton (*&mu;*<sub>B</sub>) and Avogadro's number (*N*):
+> Following the cgs-emu convention, the unit of molar magnetic susceptibility &chi;<sub>mol</sub> is cm<sup>3</sup> mol<sup>-1</sup> or emu mol<sup>-1</sup>, where dimension of emu is therefore cm<sup>3</sup>. Of course, the diamagnetic and paramagnetic susceptibilities, χ<sub>D</sub> and χ<sub>P</sub>, are expressed in the same units. From [Eq. (2)](#eq2) we can derive the unit of molar magnetization *M*, which is cm<sup>3</sup> G mol<sup>-1</sup>. Another common way to express M in the scientific literature is in terms of the *N&mu;*<sub>B</sub> unit, which basically is a multipication of two physical constants, Bohr magneton (*&mu;*<sub>B</sub>) and Avogadro's number (*N*) [<a href="#ref1">4</a>]:
 >
 > $$
 > 1 N \mu_B = 6.02214076 \times 10^{23} \ \mathrm{mol^{−1}} \times 9.2740100783(28) \times 10^{−21} \ \mathrm{erg \ G^{−1}} = 5585 \mathrm{erg \ G^{−1} \ mol^{-1}}
 > $$
 >
-> The "erg" is a cgs-emu unit of energy. By using conversion 1 erg/G = 1 emu = 1 cm<sup>3</sup>, we obtain:
+> The "erg" is a cgs-emu unit of energy [<a href="#ref1">4</a>]. By using conversion 1 erg/G = 1 emu = 1 cm<sup>3</sup>, we obtain:
 >
 > $$
 > 1 N \mu_B = 5585 \mathrm{erg \ G^{−1} \ mol^{-1}} = 5585 \ \mathrm{emu \ G \ mol^{-1}} \ (or \ \mathrm{cm^3 \ G \ mol^{-1}})
@@ -144,7 +145,7 @@ It is important to note that, for most paramagnetic substances, χ<sub>P</sub> �
 Figure 1 shows that 2-methylpropan-2-ol is a neutral molecule in which all atoms are covalently bonded into a branched chain structure. Therefore, expansion of the first sum in the equation is:
 
 $$
-\sum_i \chi_{Di} = 4 \chi_{C} + 10 \chi_{H} + \chi_{O}
+\sum_i \chi_{Di} = 4 \chi_{D(C)} + 10 \chi_{D(H)} + \chi_{D(O)}
 $$
 
 Taking Pascal's constants from Table 1 from the reference [<a href="#ref1">3</a>], we have:
@@ -210,11 +211,11 @@ $$
 Since Na<sup>+</sup> and Cu<sup>2+</sup> are ions, we should use Pascal's constants from Table 6 in [<a href="#ref1">3</a>]. Those are $\chi_{D(Na^+)} = -6.8 \times 10^{-6} \ cm^3 \ mol^{-1}$ and $\chi_{D(Cu^{2+})} = -11 \times 10^{-6} \ cm^3 \ mol^{-1}$, respecetively. We preceed to the carbonate anion, which is a polyatomic charged species. Fortunately, Pascal's constants for common anions were catalogued in Table 3 in [<a href="#ref1">3</a>]. The respective constant equals $\chi_{D(CO_3^{2-})} = -28.0 \times 10^{-6} \ cm^3 \ mol^{-1}$. Our last species is water. The H<sub>2</sub>O molecule is a common ligand (species that can bind to a metal ion), and its Pascal constant, which is listed in Table 4 in [<a href="#ref1">3</a>], is equal to $\chi_{D(H_2O)} = -13 \times 10^{-6} \ cm^3 \ mol^{-1}$. Finally, we have all data to calculate diamagnetic contribution for the mineral:
 
 $$
-\chi_D = [2 \times (-6.8) + (-11) + 2 \times (-28.0) + 3 \times (-13)] \times 10^{-6} \ cm^3 \ mol^{-1} = -119.6 \times 10^{-6} \ cm^3 \ mol^{-1}
+\chi_D = [2 \times (-6.8) + (-11) + 2 \times (-28.0) + 3 \times (-13)] \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}} = -119.6 \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}}
 $$
 
 
-### 3.3 **Example IIV** - `Coordination compound`
+### 3.3 **Example IV** - `Coordination compound`
 > The coordination compound under consideration has the chemical formula of [Fe<sup>III</sup>(bipy)(phen)(py)(CH<sub>3</sub>OH)]\(PhAs<sup>V</sup>O<sub>3</sub>\)(ClO<sub>4</sub>) and its structural formula is presentend in Figure 4. The compound is composed of complex cation in which the central Fe<sup>3+</sup> binds four different organic molecules (ligands). These molecules are: methanol (CH<sub>3</sub>OH), pyridine (py), 1,10-phenanthroline (phen) and 2,2'-bipirydine (bipy). Since these molecules are neutral, the overall charge of the complex cation is the same as in Fe<sup>3+</sup>. To compensate this positive charge (+3), there are two different anions, phenylarsenate(V) (PhAs<sup>V</sup>O<sub>3</sub><sup>2-</sup>) and perchlorate (ClO<sub>4</sub><sup>-</sup>), having charge of -2 and -1, respectively.
 
 &nbsp;
@@ -260,7 +261,7 @@ $$
 \sum_i \chi_{Di} = [6 \times (-6.24) + 5 \times (-2.93) + (-43.0) + 3 \times (-4.6)] \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}} = -108.89 \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}}
 $$
 
-To calculate the sum $\sum_i \lambda_i \quad$, the only Pascal's constant that we have to account is this related to benzene ring. In fact, the Table 2 in the article does not list any Pascal’s constants corresponding to bonds involving arsenic, so those values were assume to be equal to $0 \ cm^3 \ mol^{-1}$. We have:
+To calculate the sum $\sum_i \lambda_i$, the only Pascal's constant that we have to account is this related to benzene ring. In fact, the Table 2 in the article does not list any Pascal’s constants corresponding to bonds involving arsenic, so those values were assume to be equal to $0 \ \mathrm{cm^3 \ mol^{-1}}$. We have:
 
 $$
 \sum_i \lambda_i \quad = \lambda_{benzene} = -1.4 \times 10^{-6} \ \mathrm{cm^3 \ mol^{-1}}
@@ -287,7 +288,7 @@ $$
 ## 4. Processing of magnetic data <a id="processing-of-magnetic-data"></a>
 
 > [!IMPORTANT]
-> Molar magnetic susceptibility &chi;<sub>mol</sub> is not a quantity that we directly obtain from magnetic measurements and it must be determined. In general, there are two types of measurements commonly performed to investigate the magnetic properties of a sample:
+> Molar magnetic susceptibility &chi;<sub>mol</sub> is not a quantity that we directly obtain from magnetic measurements and it must be determined. In general, there are two types of measurements commonly performed to investigate the magnetic properties of a sample [<a href="#ref1">5</a>]:
 > 
 > 1) **Temperature-dependent magnetization measurement**
 >    - The magnetization is acquired over a temperature range, typically 2–300 K. During the measurement, a constant external magnetic field is applied.
@@ -296,7 +297,10 @@ $$
 > 2) **Field-dependent magnetization measurement**
 >    - The magnetization data are collected over a range of magnetic field strengths. The measurements are performed at a constant, very low temperature, typically 2–8 K.
 >    - After processing, the data are shown in the form of an M = *f*(H) plot.
->   
+>
+
+&nbsp;
+
 These two types of measurements are known as `direct current (DC) magnetic measurements`. In this methods, the magnetometer applies a steady magnetic field, records the sample’s magnetization (M) response, and repeats the procedure under different temperature or field conditions. 
 
 Magnetization measurements can also be performed using an alternating current (AC) magnetic field. In the `AC magnetic measurements`, the applied field oscillates in time, inducing a time-dependent magnetization that provides information about the dynamic magnetic behavior of the material.
@@ -316,7 +320,7 @@ $$
 
 &nbsp;
 
- *M*<sub>sample</sub> is usually expressed in units of emu. For further data processing, the mass of the sample (*m*) is required and should be included in the magnetometer’s report. 
+ *M*<sub>sample</sub> is usually expressed in units of emu (see further discussion). For further data processing, the mass of the sample (*m*) is required and should be included in the magnetometer’s report. 
 > ⚠️ Note that the sample's mass is usually given in mg and must be converted to g prior to use.
 
 Now we can calculate `mass magnetization` *M*<sub>g</sub>:
@@ -325,7 +329,7 @@ $$
 M_{\mathrm{g}} = \frac{M_{\mathrm{sample}}}{m}
 $$
 
-Some sources introduce `volume magnetization` (*M*<sub>V</sub>) which is obtained by dividing the total magnetic moment of the sample by its volume (V), expressed in cm<sup>3</sup>.
+Some sources [<a href="#ref1">2</a>] introduce `volume magnetization` (*M*<sub>V</sub>) which is obtained by dividing the total magnetic moment of the sample by its volume (V), expressed in cm<sup>3</sup>.
 
 $$
 M_{\mathrm{V}} = \frac{M_{\mathrm{sample}}}{V}
@@ -352,9 +356,14 @@ $$
 
 > [!IMPORTANT]
 > Once *M*<sub>mol</sub> is determined, we can use [Eq. (2)](#eq2) to calculate molar magnetic susceptibility *&chi;*<sub>mol</sub>. Then we can calculate the diamagnetic contribution for the studied compound with one of the procedures discussed in Chapter 3. Finally, [Eq. (4)](#eq4) is applied to obtain paramagnetic susceptibility *&chi;*<sub>P</sub>, which is the key quantity for investigating magnetic behavior of the compounds. Specifically, the dependencies &chi;<sub>P</sub> = *f*(T) and &chi;<sub>P</sub>T = *f*(T) are the focus of the analysis.
- 
-Numerous software packages have been developed to calculate the magnetic properties of paramagnetic compounds, such as PHI []. In these programs, the experimental &chi;<sub>P</sub> = *f*(T) and &chi;<sub>P</sub>T = *f*(T) dependencies are used as input for subsequent simulations.
 
+&nbsp;
+
+Numerous software packages have been developed to calculate the magnetic properties of paramagnetic compounds, such as PHI [<a href="#ref1">6</a>]. In these programs, the experimental &chi;<sub>P</sub> = *f*(T) and &chi;<sub>P</sub>T = *f*(T) dependencies are used as input for subsequent simulations.
+
+&nbsp;
+> [!NOTE]
+> The use of cgs-emu units of magnetisation quantities is a common source of confusion [<a href="#ref1">7</a>]. Magnetisation of the sample *M*<sub>sample</sub> is expressed in the units of emu, where 1 emu = 1 cm<sup>3</sup>. It is sometimes incorrectly reported in Oe. The SI conversion of 1 Oe is 10<sup>3</sup>/4&pi; A m<sup>−1</sup>, and the quantity that is properly expressed in Oe is not *M*<sub>V</sub> itself but the volume magnetization multiplied by 4&pi;, i.e., 4&pi;*M*<sub>V</sub>. When *M*<sub>V</sub> is divided by magnetic field strength *H* (unit: Oe), the volume magnetic susceptibility *&chi;*<sub>V</sub> is obtained, *M*<sub>V</sub>/*H* = *&chi;*<sub>V</sub>, which is dimensionless and is expressed in the units of emu cm<sup>-3</sup> or sometimes as emu cm<sup>-3</sup> Oe<sup>-1</sup> [<a href="#ref1">8</a>]. Mass magnetisation *M*<sub>g</sub> is expressed in emu g<sup>-1</sup>, but the same unit is used to express magnetic susceptibility *&chi;*<sub>g</sub>, obtained by *M*<sub>g</sub>/*H* = *&chi;*<sub>g</sub>. The latter quantity is sometimes expressed with emu g<sup>-1</sup> Oe<sup>-1</sup>. The unit of the molar magnetisation *M*<sub>mol</sub> is emu Oe mol<sup>-1</sup>, while for molar susceptibility *&chi;*<sub>mol</sub> the unit is emu mol<sup>-1</sup>, although sometimes it is reported as emu mol<sup>-1</sup> Oe<sup>-1</sup>.
 &nbsp;
 
 > ### Field-dependent magnetization measurements
@@ -364,8 +373,14 @@ Numerous software packages have been developed to calculate the magnetic propert
 >
 > <a id="ref1"></a>[2] R. L. Carlin, *Magnetochemistry*, Springer-Verlag, 1986.
 > 
->  <a id="ref1"></a>[3] G. A. Bain, J. F. Berry, J. Chem. Educ., 2008, 85, 532-536. DOI: 10.1021/ed085p532
+>  <a id="ref1"></a>[3] G. A. Bain, J. F. Berry, J. Chem. Educ., 2008, 85, 532-536. DOI: https://doi.org/10.1021/ed085p532
 >
->  <a id="ref1"></a>[4] Wikipedia; articles: [vacuum permeability]([https://en.wikipedia.org/wiki/Vacuum_permeability)
+>  <a id="ref1"></a>[4] Wikipedia (articles: [vacuum permeability](https://en.wikipedia.org/wiki/Vacuum_permeability), [Bohr magneton](https://en.wikipedia.org/wiki/Bohr_magneton), [cgs-emu unit system](https://en.wikipedia.org/wiki/Centimetre%E2%80%93gram%E2%80%93second_system_of_units#EMU_notation), [Avogadro constant](https://en.wikipedia.org/wiki/Avogadro_constant), [Tesla unit](https://en.wikipedia.org/wiki/Tesla_(unit)), [Gauss unit](https://en.wikipedia.org/wiki/Gauss_(unit)), [erg unit](https://en.wikipedia.org/wiki/Erg))
 >
-> N. F. Chilton, R. P. Anderson, L. D. Turner, A. Soncini and K. S. Murray J. Comput. Chem. 34, 1164-1175 (2013)
+> <a id="ref1"></a>[5] S. Mugiraneza, A. M. Hallas, Commun. Phys., 2022, 5, 95. DOI: https://doi.org/10.1038/s42005-022-00853-y
+> 
+> <a id="ref1"></a>[6] N. F. Chilton, R. P. Anderson, L. D. Turner, A. Soncini and K. S. Murray, *J. Comput. Chem.*, 2013, 34, 1164-1175. [PHI](https://www.nfchilton.com/phi.html)
+>
+> <a id="ref1"></a>[7] R. B. Goldfarb, *IEEE Magn Lett.*, 2018, 9, DOI: https://doi.org/10.1109/LMAG.2018.2868654
+> 
+> <a id="ref1"></a>[8] [magnetisation units](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://users.ox.ac.uk/~sjb/magnetism/units.pdf&ved=2ahUKEwiBt6DM85qQAxXwBBAIHZoEOE4QFnoECBgQAQ&usg=AOvVaw3Bn4ljFiHMbVIDNGro2GVU)
