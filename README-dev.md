@@ -1,4 +1,78 @@
-# Diamagnetic Calculations Explained
+<details>
+  <summary>Project Development Roadmap</summary>
+
+---
+<details>
+  <summary>🚀 Phase 1 — χD Calculator (Q1 2025)</summary>
+ 
+
+ **Goal:** Convert structural data (SDF file) into diamagnetic susceptibility.
+ 
+
+**Tasks:**
+- [x] Create Pascal's constants dictionary
+- [x] Write basic introduction and usage examples   
+- [ ] Connect RDKit library with the dictionary  
+- [ ] Implement testing and error handling  
+- [ ] Develop user-friendly frontend interface  
+
+---
+</details>
+
+<details>
+  <summary>🔬 Phase 2 — DC Magnetic Data Tool (Q2 2026)</summary>
+
+
+**Goal:** Develop a module for processing and visualizing DC magnetic data.
+
+
+**Tasks:**
+- [ ] Create standard input format for magnetic data  
+- [ ] Develop core data-processing functions  
+- [ ] Implement testing and error handling  
+- [ ] Build frontend and visualization components
+
+---
+</details>
+
+ <details>
+  <summary>📦🔬Phase 3 — AC Magnetic Data Tool (Q3 2026)</summary>
+
+
+**Goal:** Develop a module for analyzing and visualizing AC magnetic susceptibility data.
+
+**Tasks:**
+- [ ] Create standard input format for magnetic data
+- [ ] Develop core data-processing functions
+- [ ] Implement testing and error handling
+- [ ] Build frontend and visualization components
+
+---
+</details>
+
+
+<details>
+  <summary>💻 Phase 4 — Desktop Application & Local Software (Q4 2026)</summary>
+
+
+**Goal:** Develop a cross-platform desktop application that integrates χD, DC, and AC magnetic data tools, providing a user-friendly interface for data input, processing, visualization, and export.
+
+
+**Tasks:**
+- [ ] Connect χD, DC, and AC modules.  
+- [ ] Implement GUI for seamless workflow (data input → processing → results visualization)  
+- [ ] Add robust testing, error handling, and validation for desktop use  
+- [ ] Prepare installers for Windows, macOS, and Linux  
+- [ ] Write comprehensive user documentation and usage examples  
+- [ ] Optional: Add export features (CSV, PDF, plots) and advanced visualization tools  
+
+---
+</details>
+
+</details>
+
+<details>
+  <summary>Magnetic Data Calculations — A Hands-On Introduction</summary>
 
 ## 1 Document Goals <a id="document-goals"></a>
  - This document serves as an introduction to diamagnetic contribution calculations
@@ -112,7 +186,7 @@ It is important to note that, for most paramagnetic substances, χ<sub>P</sub> �
 > To summarize, in the cgs–emu system, the conversion between the magnetic field units tesla (T), gauss (G), and oersted (Oe) is given by:
 >
 > $$
-> 1 T = 10^4 \mathrm{Oe} \equiv 10^4 \mathrm{G}
+> 1 \mathrm{T} = 10^4 \mathrm{Oe} \equiv 10^4 \mathrm{G}
 > $$
 >
 > Following the cgs–emu convention, the unit of molar magnetic susceptibility &chi;<sub>mol</sub> is cm<sup>3</sup> mol<sup>-1</sup> (often written as emu mol<sup>-1</sup>, where dimension of emu is equivalent to cm<sup>3</sup> in this context). Of course, the diamagnetic and paramagnetic susceptibilities, χ<sub>D</sub> and χ<sub>P</sub>, are expressed in the same units. 
@@ -300,7 +374,7 @@ $$
 >
 > 2) **Field-dependent magnetization measurement**
 >    - The magnetization data are collected over a range of magnetic field strengths. The measurements are performed at a constant, very low temperature, typically 2–8 K.
->    - After processing, the data are shown in the form of an M = *f*(H) plot.
+>    - After processing, the data are shown in the form of an *M*<sub>mol</sub> = *f*(H) plot.
 >
 
 &nbsp;
@@ -404,3 +478,5 @@ Numerous software packages have been developed to calculate the magnetic propert
 > <a id="ref1"></a>[7] R. B. Goldfarb, *IEEE Magn Lett.*, 2018, 9, DOI: https://doi.org/10.1109/LMAG.2018.2868654
 > 
 > <a id="ref1"></a>[8] [magnetisation units](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://users.ox.ac.uk/~sjb/magnetism/units.pdf&ved=2ahUKEwiBt6DM85qQAxXwBBAIHZoEOE4QFnoECBgQAQ&usg=AOvVaw3Bn4ljFiHMbVIDNGro2GVU)
+
+</details>
