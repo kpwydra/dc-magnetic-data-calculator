@@ -112,19 +112,23 @@ It is important to note that, for most paramagnetic substances, χ<sub>P</sub> �
 > To summarize, in the cgs–emu system, the conversion between the magnetic field units tesla (T), gauss (G), and oersted (Oe) is given by:
 >
 > $$
-> 1 T = 10^4 \mathrm{Oe} = 10^4 \mathrm{G}
+> 1 T = 10^4 \mathrm{Oe} \equiv 10^4 \mathrm{G}
 > $$
 >
-> Following the cgs-emu convention, the unit of molar magnetic susceptibility &chi;<sub>mol</sub> is cm<sup>3</sup> mol<sup>-1</sup> or emu mol<sup>-1</sup>, where dimension of emu is therefore cm<sup>3</sup>. Of course, the diamagnetic and paramagnetic susceptibilities, χ<sub>D</sub> and χ<sub>P</sub>, are expressed in the same units. From [Eq. (2)](#eq2) we can derive the unit of molar magnetization *M*, which is cm<sup>3</sup> G mol<sup>-1</sup>. Another common way to express M in the scientific literature is in terms of the *N&mu;*<sub>B</sub> unit, which basically is a multipication of two physical constants, Bohr magneton (*&mu;*<sub>B</sub>) and Avogadro's number (*N*) [<a href="#ref1">4</a>]:
+> Following the cgs–emu convention, the unit of molar magnetic susceptibility &chi;<sub>mol</sub> is cm<sup>3</sup> mol<sup>-1</sup> (often written as emu mol<sup>-1</sup>, where dimension of emu is equivalent to cm<sup>3</sup> in this context). Of course, the diamagnetic and paramagnetic susceptibilities, χ<sub>D</sub> and χ<sub>P</sub>, are expressed in the same units. 
+> 
+> `⚠️ The term emu (electromagnetic unit) is often the source of major confusion in the cgs–emu system. It is not a physical unit itself, but merely an indicator that a quantity is being expressed in electromagnetic cgs units. Depending on context, emu may correspond to the real physical unit erg·G⁻¹ (for magnetic moment) or as an equivalence of cm³ (for magnetic susceptibility). See Chapter 4 for a detailed discussion.`
+>
+> From [Eq. (2)](#eq2) we can derive the unit of molar magnetization *M*, which is cm<sup>3</sup> G mol<sup>-1</sup>. Another common way to express *M* in the scientific literature is in terms of the *N&mu;*<sub>B</sub> unit, which basically is a multipication of two physical constants, Bohr magneton (*&mu;*<sub>B</sub>) and Avogadro number (*N*) [<a href="#ref1">4</a>]:
 >
 > $$
 > 1 N \mu_B = 6.02214076 \times 10^{23} \ \mathrm{mol^{−1}} \times 9.2740100783(28) \times 10^{−21} \ \mathrm{erg \ G^{−1}} = 5585 \mathrm{erg \ G^{−1} \ mol^{-1}}
 > $$
 >
-> The "erg" is a cgs-emu unit of energy [<a href="#ref1">4</a>]. By using conversion 1 erg/G = 1 emu = 1 cm<sup>3</sup>, we obtain:
+> The "erg" is a cgs-emu unit of energy [<a href="#ref1">4</a>]. Because the conversion 1 emu = 1 erg G<sup>-1</sup> = 1 G cm<sup>3</sup> is valid, we can write:
 >
 > $$
-> 1 N \mu_B = 5585 \mathrm{erg \ G^{−1} \ mol^{-1}} = 5585 \ \mathrm{emu \ G \ mol^{-1}} \ (or \ \mathrm{cm^3 \ G \ mol^{-1}})
+> 1 N \mu_B = 5585 \mathrm{erg \ G^{−1} \ mol^{-1}} = 5585 \ \mathrm{cm^3 \ G \ mol^{-1}}
 > $$
 
 &nbsp;
@@ -320,7 +324,7 @@ $$
 
 &nbsp;
 
- *M*<sub>sample</sub> is usually expressed in units of emu (see further discussion). For further data processing, the mass of the sample (*m*) is required and should be included in the magnetometer’s report. 
+ *M*<sub>sample</sub> is usually expressed in units of emu = erg/G (see further discussion). For further data processing, the mass of the sample (*m*) is required and should be included in the magnetometer’s report. 
 > ⚠️ Note that the sample's mass is usually given in mg and must be converted to g prior to use.
 
 Now we can calculate `mass magnetization` *M*<sub>g</sub>:
@@ -363,7 +367,23 @@ Numerous software packages have been developed to calculate the magnetic propert
 
 &nbsp;
 > [!NOTE]
-> The use of cgs-emu units of magnetisation quantities is a common source of confusion [<a href="#ref1">7</a>]. Magnetisation of the sample *M*<sub>sample</sub> is expressed in the units of emu, where 1 emu = 1 cm<sup>3</sup>. The unit of volume magnetisation *M*<sub>V</sub> is emu cm<sup>-3</sup>. It is sometimes incorrectly reported in Oe. The SI conversion of 1 Oe is 10<sup>3</sup>/4&pi; A m<sup>−1</sup>, and the quantity that is properly expressed in Oe is not *M*<sub>V</sub> itself but the volume magnetization multiplied by 4&pi;, i.e., 4&pi;*M*<sub>V</sub>. When *M*<sub>V</sub> is divided by magnetic field strength *H* (unit: Oe), the volume magnetic susceptibility *&chi;*<sub>V</sub> is obtained, *M*<sub>V</sub>/*H* = *&chi;*<sub>V</sub>, which is dimensionless and is expressed in the units of emu cm<sup>-3</sup> or sometimes as emu cm<sup>-3</sup> Oe<sup>-1</sup> [<a href="#ref1">8</a>]. Mass magnetisation *M*<sub>g</sub> is expressed in emu g<sup>-1</sup>, but the same unit is used to express magnetic susceptibility *&chi;*<sub>g</sub>, obtained by *M*<sub>g</sub>/*H* = *&chi;*<sub>g</sub>. The latter quantity is sometimes expressed with emu g<sup>-1</sup> Oe<sup>-1</sup>. The unit of the molar magnetisation *M*<sub>mol</sub> is emu Oe mol<sup>-1</sup>, while for molar susceptibility *&chi;*<sub>mol</sub> the unit is emu mol<sup>-1</sup>, although sometimes it is reported as emu mol<sup>-1</sup> Oe<sup>-1</sup>.
+> 
+> As we mentioned earlier, the use of cgs-emu units of magnetisation quantities is a common source of confusion [<a href="#ref1">7</a>]. Magnetisation of the sample *M*<sub>sample</sub> is expressed in the units of emu, where 1 emu = 1 erg G<sup>-1</sup>.
+>
+> **We remind that:**
+>  `⚠️ The term emu (electromagnetic unit) is often the source of major confusion in the cgs–emu system. It is not a physical unit itself, but merely an indicator that a quantity is being expressed in electromagnetic cgs units. Depending on context, emu may correspond to the real physical unit erg·G⁻¹ (for magnetic moment) or as an equivalence of cm³ (for magnetic susceptibility).`
+> 
+> The unit of volume magnetisation *M*<sub>V</sub> is erg G<sup>-1</sup> cm<sup>-3</sup>. It is sometimes incorrectly reported in G. The SI conversion of 1 G is 10<sup>3</sup>/4&pi; A m<sup>−1</sup>, and the quantity that is properly expressed in G is not *M*<sub>V</sub> itself but the volume magnetization multiplied by 4&pi;, i.e., 4&pi;*M*<sub>V</sub>.
+>
+> When *M*<sub>V</sub> is divided by magnetic field strength *H* (unit: G), the volume magnetic susceptibility *&chi;*<sub>V</sub> is obtained (*M*<sub>V</sub>/*H* = *&chi;*<sub>V</sub>). *&chi;*<sub>V</sub> is a unitless quantity, but some physicists express this quantity with the units of emu cm<sup>-3</sup> [<a href="#ref1">8</a>]. Here, 1 emu is equivalent to cm<sup>-3</sup> which legitimate this conversion, as 1 emu cm<sup>-3</sup> = 1.
+>
+> Mass magnetisation *M*<sub>g</sub> is expressed in emu g<sup>-1</sup>, and at first glance the same notation seems to apply to the mass magnetic susceptibility (*&chi;*<sub>g</sub>), defined by *M*<sub>g</sub>/*H* = *&chi;*<sub>g</sub>. In reality, the term emu g<sup>-1</sup> has different meanings in the two contexts.
+>   - For *M*<sub>g</sub>, 1 emu g<sup>-1</sup> = 1 erg G<sup>-1</sup> g<sup>-1</sup>, 
+>   - For *&chi;*<sub>g</sub>, 1 emu/g is equivalent to 1 cm<sup>3</sup> g<sup>-1</sup>.
+>
+> Similar situation holds for the term emu mol<sup>-1</sup> used to desribe units of the molar magnetisation *M*<sub>mol</sub> and molar susceptibility *&chi;*<sub>mol</sub>.
+>   - For *M*<sub>mol</sub>, 1 emu mol<sup>-1</sup> = 1 erg G<sup>-1</sup> mol<sup>-1</sup>. Because the conversion 1 emu = 1 erg G<sup>-1</sup> = 1 G cm<sup>3</sup> is valid, *M*<sub>mol</sub> can also be expressed with the unit of cm<sup>3</sup> G mol<sup>-1</sup>.
+>   - For *&chi;*<sub>mol</sub>, 1 emu mol<sup>-1</sup> corresponds to 1 cm<sup>3</sup> mol<sup>-1</sup>.
 &nbsp;
 
 > ### Field-dependent magnetization measurements
