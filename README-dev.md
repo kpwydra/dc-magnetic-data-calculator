@@ -112,7 +112,7 @@ It is important to note that, for most paramagnetic substances, χ<sub>P</sub> �
 > To summarize, in the cgs–emu system, the conversion between the magnetic field units tesla (T), gauss (G), and oersted (Oe) is given by:
 >
 > $$
-> 1 T = 10^4 Oe = 10^4 G
+> 1 T = 10^4 \mathrm{Oe} = 10^4 \mathrm{G}
 > $$
 >
 > Following the cgs-emu convention, the unit of molar magnetic susceptibility &chi;<sub>mol</sub> is cm<sup>3</sup> mol<sup>-1</sup> or emu mol<sup>-1</sup>, where dimension of emu is therefore cm<sup>3</sup>. Of course, the diamagnetic and paramagnetic susceptibilities, χ<sub>D</sub> and χ<sub>P</sub>, are expressed in the same units. From [Eq. (2)](#eq2) we can derive the unit of molar magnetization *M*, which is cm<sup>3</sup> G mol<sup>-1</sup>. Another common way to express M in the scientific literature is in terms of the *N&mu;*<sub>B</sub> unit, which basically is a multipication of two physical constants, Bohr magneton (*&mu;*<sub>B</sub>) and Avogadro's number (*N*) [<a href="#ref1">4</a>]:
@@ -215,7 +215,7 @@ $$
 $$
 
 
-### 3.3 **Example IV** - `Coordination compound`
+### 3.4 **Example IV** - `Coordination compound` <a id="example-iv"></a>
 > The coordination compound under consideration has the chemical formula of [Fe<sup>III</sup>(bipy)(phen)(py)(CH<sub>3</sub>OH)]\(PhAs<sup>V</sup>O<sub>3</sub>\)(ClO<sub>4</sub>) and its structural formula is presentend in Figure 4. The compound is composed of complex cation in which the central Fe<sup>3+</sup> binds four different organic molecules (ligands). These molecules are: methanol (CH<sub>3</sub>OH), pyridine (py), 1,10-phenanthroline (phen) and 2,2'-bipirydine (bipy). Since these molecules are neutral, the overall charge of the complex cation is the same as in Fe<sup>3+</sup>. To compensate this positive charge (+3), there are two different anions, phenylarsenate(V) (PhAs<sup>V</sup>O<sub>3</sub><sup>2-</sup>) and perchlorate (ClO<sub>4</sub><sup>-</sup>), having charge of -2 and -1, respectively.
 
 &nbsp;
@@ -363,7 +363,7 @@ Numerous software packages have been developed to calculate the magnetic propert
 
 &nbsp;
 > [!NOTE]
-> The use of cgs-emu units of magnetisation quantities is a common source of confusion [<a href="#ref1">7</a>]. Magnetisation of the sample *M*<sub>sample</sub> is expressed in the units of emu, where 1 emu = 1 cm<sup>3</sup>. It is sometimes incorrectly reported in Oe. The SI conversion of 1 Oe is 10<sup>3</sup>/4&pi; A m<sup>−1</sup>, and the quantity that is properly expressed in Oe is not *M*<sub>V</sub> itself but the volume magnetization multiplied by 4&pi;, i.e., 4&pi;*M*<sub>V</sub>. When *M*<sub>V</sub> is divided by magnetic field strength *H* (unit: Oe), the volume magnetic susceptibility *&chi;*<sub>V</sub> is obtained, *M*<sub>V</sub>/*H* = *&chi;*<sub>V</sub>, which is dimensionless and is expressed in the units of emu cm<sup>-3</sup> or sometimes as emu cm<sup>-3</sup> Oe<sup>-1</sup> [<a href="#ref1">8</a>]. Mass magnetisation *M*<sub>g</sub> is expressed in emu g<sup>-1</sup>, but the same unit is used to express magnetic susceptibility *&chi;*<sub>g</sub>, obtained by *M*<sub>g</sub>/*H* = *&chi;*<sub>g</sub>. The latter quantity is sometimes expressed with emu g<sup>-1</sup> Oe<sup>-1</sup>. The unit of the molar magnetisation *M*<sub>mol</sub> is emu Oe mol<sup>-1</sup>, while for molar susceptibility *&chi;*<sub>mol</sub> the unit is emu mol<sup>-1</sup>, although sometimes it is reported as emu mol<sup>-1</sup> Oe<sup>-1</sup>.
+> The use of cgs-emu units of magnetisation quantities is a common source of confusion [<a href="#ref1">7</a>]. Magnetisation of the sample *M*<sub>sample</sub> is expressed in the units of emu, where 1 emu = 1 cm<sup>3</sup>. The unit of volume magnetisation *M*<sub>V</sub> is emu cm<sup>-3</sup>. It is sometimes incorrectly reported in Oe. The SI conversion of 1 Oe is 10<sup>3</sup>/4&pi; A m<sup>−1</sup>, and the quantity that is properly expressed in Oe is not *M*<sub>V</sub> itself but the volume magnetization multiplied by 4&pi;, i.e., 4&pi;*M*<sub>V</sub>. When *M*<sub>V</sub> is divided by magnetic field strength *H* (unit: Oe), the volume magnetic susceptibility *&chi;*<sub>V</sub> is obtained, *M*<sub>V</sub>/*H* = *&chi;*<sub>V</sub>, which is dimensionless and is expressed in the units of emu cm<sup>-3</sup> or sometimes as emu cm<sup>-3</sup> Oe<sup>-1</sup> [<a href="#ref1">8</a>]. Mass magnetisation *M*<sub>g</sub> is expressed in emu g<sup>-1</sup>, but the same unit is used to express magnetic susceptibility *&chi;*<sub>g</sub>, obtained by *M*<sub>g</sub>/*H* = *&chi;*<sub>g</sub>. The latter quantity is sometimes expressed with emu g<sup>-1</sup> Oe<sup>-1</sup>. The unit of the molar magnetisation *M*<sub>mol</sub> is emu Oe mol<sup>-1</sup>, while for molar susceptibility *&chi;*<sub>mol</sub> the unit is emu mol<sup>-1</sup>, although sometimes it is reported as emu mol<sup>-1</sup> Oe<sup>-1</sup>.
 &nbsp;
 
 > ### Field-dependent magnetization measurements
