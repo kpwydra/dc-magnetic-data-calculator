@@ -1,17 +1,21 @@
-from flask import jsonify, request
+from fastapi import APIRouter, Request, HTTPException
 
 def register_routes(app):
-    @app.route("/")
-    def home():
-        return jsonify({"message": "Flask backend is running!"})
+    router = APIRouter()
 
-    @app.route("/divideByTwo", methods=["POST"])
-    def divideByTwo():
+    @router.get("/")
+    async def home():
+        return {"message": "FastAPI backend is running!"}
+
+    @router.post("/divideByTwo")
+    async def divide_by_two(request: Request):
         try:
-            number = request.args.get("number")
+            number = request.query_params.get("number")
             if not number:
-                return jsonify({"error": "Missing number argument"}), 400
+                raise HTTPException(status_code=400, detail="Missing number argument")
             result = float(number) / 2
-            return jsonify({"result": str(result)})
-        except Exception as ex:
-            return jsonify({"error": str(e)}), 500
+            return {"result": str(result)}
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    app.include_router(router)
