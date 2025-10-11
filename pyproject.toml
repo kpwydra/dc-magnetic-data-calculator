@@ -1,0 +1,43 @@
+# 📦 This file defines everything included when the package is built and shipped to end users.
+
+[project]
+# 📝 Project metadata: defines what is shipped to PyPI — name, version, description, authors, and runtime requirements.
+name = "mag-bridge"
+version = "0.1.0"
+description = "Bridge module for magnetic data analysis and molecule computation."
+readme = "README.md"
+license = { text = "MIT" } # MIT license allows reuse and modification for any purpose
+authors = [
+    { name = "Karol Wydra" },
+    { name = "Miron Oskroba" },
+    { name = "Adrian Kulik" },
+]
+requires-python = ">=3.13"
+
+# 🔧 Runtime dependencies: installed automatically with your package; include only what’s imported at runtime.
+dependencies = ["rdkit==2025.3.6", "pandas==2.3.3"]
+
+[build-system]
+# ⚙️ Build system configuration: tells pip how to build this package before uploading to PyPI.
+requires = ["setuptools>=80.9.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff.format]
+# 🧹 Ruff formatter settings: controls code style and consistency for this project.
+line-ending = "lf"     # Use LF (Linux) line endings
+quote-style = "single" # Use single quotes for strings
+indent-style = "space" # Indent using spaces
+indent-width = 4       # Set indentation width to 4 spaces
+
+[tool.pytest.ini_options]
+# 🧪 Pytest configuration: defines how tests are discovered and how output is displayed.
+minversion = "8.4.3"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-ra -q --tb=long --color=yes"
+# -q          : quiet mode → short one-liners for OK tests
+# -ra         : show summary of skipped/xfailed tests at end
+# --tb=long   : show full traceback for failed tests
+# --color=yes : force colored terminal output
