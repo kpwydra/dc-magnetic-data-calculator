@@ -2,7 +2,7 @@
 
 # UI Settings
 MSG_MAX_WIDTH=60
-PROG_BAR_SIZE=15
+PROG_BAR_SIZE=20
 PADDING=2
 MAIN_CHAR_RIGHT="="
 MAIN_CHAR_LEFT="="
@@ -14,6 +14,8 @@ ADD_TOP_NEWLINE=0
 FILL_CHAR="_"
 
 ERR_CHAR="."
+WARN_CHAR="@"
+WARN_COLOR="--orange"
 INFO_CHAR="@"
 INFO_COLOR="--blue"
 
@@ -26,6 +28,7 @@ function log() {
 	local PRINT_CNT=${PRINT_CNT}
 	local MSG=""
 	local IS_ERR_MSG=0
+	local IS_WARN_MSG=0
 	local IS_INFO_MSG=0
 	local IS_VERBOSE_MSG=0
 	# echo "$FLAG"
@@ -33,13 +36,17 @@ function log() {
 	while [[ $# -gt 0 ]]; do
 		case "$1" in
 		--top-newline) ADD_TOP_NEWLINE=1 ;;
-		-bottom-newline) ADD_BOTTOM_NEWLINE=1 ;;
+		--bottom-newline) ADD_BOTTOM_NEWLINE=1 ;;
 		--counter) PRINT_CNT=1 ;;
-		--msg) shift MSG="$1" ;;
+		--msg)
+			shift 1
+			MSG="$1"
+			;;
 		--verbose) IS_VERBOSE_MSG=1 ;;
-		--error) IS_ERR_MSG=1 ;;
+		--error) export IS_ERR_MSG=1 ;;
+		--warn | --warning) export IS_WARN_MSG=1 ;;
 		--info) export IS_INFO_MSG=1 ;;
-		--*) policeman "$FLAG" ;;
+		--*) policeman "$1" ;;
 		*)
 			if [[ -z ${MSG-} ]]; then
 				MSG="$1"
@@ -148,17 +155,26 @@ function print_fill() {
 	if [[ $IS_INFO_MSG -eq 1 ]]; then
 		CHAR=$INFO_CHAR
 	fi
+	if [[ $IS_WARN_MSG -eq 1 ]]; then
+		CHAR=$WARN_CHAR
+	fi
 
 	[[ $IS_ERR_MSG -eq 1 ]] && CHAR=$ERR_CHAR
 
 	for ((i = 0; i < AMOUNT; i++)); do
 		sleep "${SLEEP}"
+
+		if [[ $IS_WARN_MSG -eq 1 ]]; then
+			printf "%s" "${CHAR}" | color "$WARN_COLOR"
+			continue
+		fi
+
 		if [[ $IS_INFO_MSG -eq 1 ]]; then
 			printf "%s" "${CHAR}" | color "$INFO_COLOR"
 			continue
 		fi
-		OFFSET=0
 
+		OFFSET=0
 		if [[ $RAINBOW -eq 1 ]]; then
 			if ((i < ${#COLORS[@]})); then
 				printf "%s" "${CHAR}" | color "${COLORS["$((i + OFFSET))"]}"
@@ -179,8 +195,8 @@ function print_fill() {
 
 }
 
-COLORS=("--green" "--blue" "--indigo" "--violet" "--cyan" "--red" "--orange" "--yellow" "--orange")
-ALLCOLORS=('\033[0;31m' '\033[0;38;5;214m' '\033[0;33m' '\033[0;32m' '\033[0;34m' '\033[0;38;5;57m' '\033[0;35m' '\033[0;36m' '\033[1;37m' '\033[90m')
+COLORS=("--forest" "--green" "--blue" "--indigo" "--violet" "--cyan" "--red" "--orange" "--yellow")
+ALLCOLORS=('\033[38;5;22m' '\033[0;31m' '\033[0;38;5;214m' '\033[0;33m' '\033[0;32m' '\033[0;34m' '\033[0;38;5;57m' '\033[0;35m' '\033[0;36m' '\033[1;37m' '\033[90m')
 function color() {
 	local NO_COLOR='\033[0m'
 	local ERR_COLOR='\033[0;31m'
@@ -192,6 +208,7 @@ function color() {
 		--red) COLOR='\033[0;31m' ;;
 		--orange) COLOR='\033[0;38;5;214m' ;;
 		--yellow) COLOR='\033[0;33m' ;;
+		--forest) COLOR='\033[38;5;22m' ;;
 		--green) COLOR='\033[0;32m' ;;
 		--blue) COLOR='\033[0;34m' ;;
 		--indigo) COLOR='\033[0;38;5;57m' ;;
