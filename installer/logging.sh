@@ -2,7 +2,7 @@
 
 # UI Settings
 MSG_MAX_WIDTH=60
-PROG_BAR_SIZE=10
+PROG_BAR_SIZE=15
 PADDING=2
 MAIN_CHAR_RIGHT="="
 MAIN_CHAR_LEFT="="
@@ -14,11 +14,12 @@ ADD_TOP_NEWLINE=0
 FILL_CHAR="_"
 
 ERR_CHAR="."
-INFO_CHAR="="
-INFO_COLOR="--green"
+INFO_CHAR="@"
+INFO_COLOR="--blue"
 
 # Functions
 function log() {
+	local FLAG="$1"
 	COUNTER=$(read_counter)
 	local ADD_TOP_NEWLINE=${ADD_TOP_NEWLINE}
 	local ADD_BOTTOM_NEWLINE=${ADD_BOTTOM_NEWLINE}
@@ -27,6 +28,7 @@ function log() {
 	local IS_ERR_MSG=0
 	local IS_INFO_MSG=0
 	local IS_VERBOSE_MSG=0
+	# echo "$FLAG"
 
 	while [[ $# -gt 0 ]]; do
 		case "$1" in
@@ -37,7 +39,7 @@ function log() {
 		--verbose) IS_VERBOSE_MSG=1 ;;
 		--error) IS_ERR_MSG=1 ;;
 		--info) export IS_INFO_MSG=1 ;;
-		--*) policeman "$1" ;;
+		--*) policeman "$FLAG" ;;
 		*)
 			if [[ -z ${MSG-} ]]; then
 				MSG="$1"
@@ -155,17 +157,18 @@ function print_fill() {
 			printf "%s" "${CHAR}" | color "$INFO_COLOR"
 			continue
 		fi
+		OFFSET=0
 
 		if [[ $RAINBOW -eq 1 ]]; then
 			if ((i < ${#COLORS[@]})); then
-				printf "%s" "${CHAR}" | color "${COLORS[$i]}"
+				printf "%s" "${CHAR}" | color "${COLORS["$((i + OFFSET))"]}"
 			else
 				printf "%s" "${CHAR}" | color --random
 			fi
 		elif [[ $REVERSED_RAINBOW -eq 1 ]]; then
 			rev_idx=$((AMOUNT - i - 1))
 			if ((rev_idx < ${#COLORS[@]})); then
-				printf "%s" "${CHAR}" | color "${COLORS[$rev_idx]}"
+				printf "%s" "${CHAR}" | color "${COLORS["$((rev_idx + OFFSET))"]}"
 			else
 				printf "%s" "${CHAR}" | color --cyan
 			fi
@@ -176,7 +179,7 @@ function print_fill() {
 
 }
 
-COLORS=("--red" "--orange" "--yellow" "--orange" "--green" "--blue" "--indigo" "--violet" "--cyan")
+COLORS=("--green" "--blue" "--indigo" "--violet" "--cyan" "--red" "--orange" "--yellow" "--orange")
 ALLCOLORS=('\033[0;31m' '\033[0;38;5;214m' '\033[0;33m' '\033[0;32m' '\033[0;34m' '\033[0;38;5;57m' '\033[0;35m' '\033[0;36m' '\033[1;37m' '\033[90m')
 function color() {
 	local NO_COLOR='\033[0m'
@@ -277,9 +280,9 @@ function policeman() {
 	local FLAG="$1"
 
 	echo "🚫 InvalidFlagException:" >&2
-	echo "\tIn file: '$0'" >&2
-	echo "\tUnrecognized flag: '$FLAG'" >&2
-	echo "\tStack trace:" >&2
+	echo "In file: '$0'" >&2
+	echo "Unrecognized flag: '$FLAG'" >&2
+	echo "Stack trace:" >&2
 
 	# Start at 1 to skip this function itself
 	for ((i = 1; i < ${#FUNCNAME[@]}; i++)); do

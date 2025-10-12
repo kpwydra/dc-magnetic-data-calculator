@@ -7,7 +7,7 @@ SHELL := bash
 .PHONY: _init help rainbow install dev test hints lint format typecheck build clean reset dotenv
 .SHELLFLAGS: -e
 
-# Structure Tree
+# Variables & Folder Tree
 export ROOT_DIR 	:= $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 export COUNTER_FILE := ${ROOT_DIR}/installer/tmp/msg_count.state
 export INIT_FILE 	:= ${ROOT_DIR}/installer/tmp/init.state
@@ -16,14 +16,18 @@ SRC_DIR 			:= ${ROOT_DIR}/src
 SDF_DIR 			:= ${ROOT_DIR}/data/sdf
 VENV    			:= .venv
 DOTENV 				:= ${ROOT_DIR}/.env
+VERBOSE_CHAR 		:= |_
+export VERBOSE 		:= 0
 
 # Scripts
 IMPORT_UTILS		:= . ${ROOT_DIR}/installer/logging.sh; . ${ROOT_DIR}/installer/runtime.sh
-ACTIVATE_VENV		:= . $(VENV)/bin/activate
-
-# Variables
-PYTHON	:= $(shell command -v python3 2>/dev/null || command -v python || command -v py)
-export VERBOSE := 1
+ACTIVATE_VENV		:= . $(VENV)/bin/activate && echo $(PYTHON) | grep ".vcenv"
+PYTHON				:= $(shell command -v python3 2>/dev/null || command -v python || command -v py)
+PIP 				:= $(shell command -v pip3 2>/dev/null || command -v pip || command -v py)
+PYTHON_SHORT		:= $(shell echo $(PYTHON)	| sed -E 's|.*(\.venv/.*)|\1|')
+PIP_SHORT			:= $(shell echo $(PIP) 		| sed -E 's|.*(\.venv/.*)|\1|')
+PIP_VERSION 		:= $(shell $(PIP) --version 2>&1)
+PYTHON_VERSION 		:= $(shell $(PYTHON) --version 2>&1)
 
 # 🎯 Targets
 # 📘 Help Info, API
@@ -53,19 +57,24 @@ venv:
 	@$(IMPORT_UTILS)
 	log "🐍 Creating Python <color=grey>.venv</>"
 	run_with_spinner $(PYTHON) -m venv $(VENV)
-	log --verbose ">>> Python <color=grey>.venv</> created"
+	log --verbose "$(VERBOSE_CHAR) Python <color=grey>.venv</> created"
 
-pip: 
+	log "✨ Activating Virtual Environment <color=grey>.venv</>"
+	log --verbose "$(VERBOSE_CHAR) Python Virtual Environment activated <color=grey>.venv</> created"
+	log --verbose "$(VERBOSE_CHAR) pip: <color=grey>$(PIP_SHORT)</>"
+	log --info "✅ python: <color=grey>$(PYTHON_SHORT)</>, version: <color=green>$(PYTHON_VERSION)</>"
+
+pip:
 	@$(IMPORT_UTILS)
 	@$(ACTIVATE_VENV)
 
 	log "🚀 Upgrading pip"
 	run_with_spinner pip install --quiet --upgrade pip
-	log --verbose ">>> pip upgraded"
+	log --verbose "$(VERBOSE_CHAR) pip upgraded"
 
 	log "🧩 Installing pip requirements"
 	run_with_spinner pip install --quiet -r requirements.txt -r requirements-dev.txt
-	log --verbose ">>> pip requirements installed"
+	log --verbose "$(VERBOSE_CHAR) pip requirements installed"
 
 dotenv:
 	@$(IMPORT_UTILS)
@@ -75,7 +84,7 @@ dotenv:
 	echo "SRC_DIR=${SRC_DIR}" >> ${DOTENV}
 	echo "TESTS_DIR=${TESTS_DIR}" >> ${DOTENV}
 	echo "SDF_DIR=${SDF_DIR}" >> ${DOTENV}
-	[[ -f "${DOTENV}" ]] && log --verbose ">>> <color=grey>.env</> created" || log --error "❌ <color=grey>.env</> missing!"
+	[[ -f "${DOTENV}" ]] && log --verbose "$(VERBOSE_CHAR) <color=grey>.env</> created" || log --error "❌ <color=grey>.env</> missing!"
 
 reset:
 reset:
