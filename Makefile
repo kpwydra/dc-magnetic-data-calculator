@@ -90,13 +90,11 @@ venv:
 activate:
 	@$(IMPORT_UTILS)
 	log --info "✨ Activating Virtual Environment <color=grey>.venv</>"
-	@exec env -u MAKELEVEL $(SHELL) -l
-# 	log "✨ Environment <color=forest>ready to go!</>"
-
-# 	@exec env -u MAKELEVEL $(SHELL) -l -c 'stty sane; exec $(SHELL) -l'
+	@exec env -u MAKELEVEL MAKEFLAGS="--no-print-directory" $(SHELL) -l
+	log "✨ Environment <color=forest>ready to go!</>"
 
 check-venv:
-	@$(SHELL) -ic '\
+	@bash -ic '\
 		$(IMPORT_UTILS); \
 		PYTHON=$$(command -v python3 2>/dev/null || command -v python || command -v py); \
 		PIP=$$(command -v pip3 2>/dev/null || command -v pip || command -v py); \
