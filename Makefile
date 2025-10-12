@@ -9,7 +9,7 @@ SHELL := $(shell echo $$SHELL)
 .ONESHELL:
 ALL_TARGETS := _init help install test venv hints build clean reset dotenv remove-venv clear-cache activate check-venv
 .PHONY: $(PHONY_TARGETS)
-MAKEFLAGS = --no-print-directory
+MAKEFLAGS += --no-print-directory --silent
 # .SHELLFLAGS := -e -o pipefail -c
 
 # ------------------------------------------
@@ -60,7 +60,8 @@ help:
 	@echo ""
 
 # 2. 🧩 Environment Setup
-install: venv pip dotenv hints
+install: venv pip dotenv
+	$(MAKE) --no-print-directory activate
 
 # 3. 🧩 pip
 pip:
@@ -81,20 +82,21 @@ venv:
 	log "🐍 Creating Python <color=grey>.venv</>"
 	run_with_spinner $(PYTHON) -m venv $(VENV)
 	log --verbose "$(VERBOSE_CHAR) <color=forest>OK</>"
-	$(MAKE) activate
+	$(MAKE) check-venv
+	@if [ "$(MAIN_GOAL)" = "venv" ]; then \
+		$(MAKE) activate; \
+	fi
 
 activate:
 	@$(IMPORT_UTILS)
-	@$(ACTIVATE_VENV)
-	log "🔋 Activating Virtual Environment <color=grey>.venv</>"
-	$(MAKE) check-venv
-	$(MAKE) reload
-
-reload:
+	log --info "✨ Activating Virtual Environment <color=grey>.venv</>"
 	@exec env -u MAKELEVEL $(SHELL) -l
+# 	log "✨ Environment <color=forest>ready to go!</>"
+
+# 	@exec env -u MAKELEVEL $(SHELL) -l -c 'stty sane; exec $(SHELL) -l'
 
 check-venv:
-	@bash -ic '\
+	@$(SHELL) -ic '\
 		$(IMPORT_UTILS); \
 		PYTHON=$$(command -v python3 2>/dev/null || command -v python || command -v py); \
 		PIP=$$(command -v pip3 2>/dev/null || command -v pip || command -v py); \
@@ -106,7 +108,7 @@ check-venv:
 		log --verbose --info "$(VERBOSE_CHAR) python: <color=grey>$${PYTHON_SHORT}</>, version: <color=green>$${PYTHON_VERSION}</>"; \
 		log --verbose "$(VERBOSE_CHAR) <color=forest>OK</>"'
 
-# 5. 🧩 Files
+# 5. 🧩 .env
 dotenv:
 	@$(IMPORT_UTILS)
 	log "📝 Creating <color=grey>.env</> file"
@@ -179,19 +181,18 @@ hints:
 # 	|-- Initializes make runtime workspace
 # ------------------------------------------
 ifeq ($(MAKELEVEL),0)
-MAIN_GOAL := $(firstword $(MAKECMDGOALS))
-export MAIN_GOAL
+export MAIN_GOAL := $(firstword $(MAKECMDGOALS))
 
 ifneq ($(MAKECMDGOALS),_init)
-# debug
+# # debug
 # $(info [init] running setup for $(MAIN_GOAL))
 # $(info MAKELEVEL=$(MAKELEVEL))
 # $(info MAKECMDGOALS=$(MAKECMDGOALS))
 # $(info SHELL=$(SHELL))
 # $(info $(shell $(MAKE) _init))
-# user
 $(shell $(MAKE) _init >/dev/null)
 endif
+
 endif
 
 _init:
