@@ -1,23 +1,26 @@
 #!/bin/bash
 
+# Source dependencies
+[ -f "$MENU_FILE" ] && . "$MENU_FILE"
+
 # UI Settings
-MSG_MAX_WIDTH=60
-PROG_BAR_SIZE=20
+MSG_SPACE="${MSG_SPACE:-$DEFAULT_MSG_SPACE}"
+BARSIZE="${BARSIZE:-$DEFAULT_BARSIZE}"
 PADDING=2
-MAIN_CHAR_RIGHT="="
-MAIN_CHAR_LEFT="="
+COLOR_CHAR_RIGHT="="
+COLOR_CHAR_LEFT="="
+FILL_CHAR="_"
 BORDER_LEFT="|"
 BORDER_RIGHT="|"
 PRINT_CNT=0
 ADD_BOTTOM_NEWLINE=1
 ADD_TOP_NEWLINE=0
-FILL_CHAR="_"
 
-ERR_CHAR="."
-WARN_CHAR="="
-WARN_COLOR="--orange"
-INFO_CHAR="="
-INFO_COLOR="--blue"
+ERR_CHAR="@"
+WARN_CHAR="|"
+WARN_COLOR="--cinnamon"
+INFO_CHAR="|"
+INFO_COLOR="--cyan"
 
 # Functions
 function log() {
@@ -37,6 +40,7 @@ function log() {
 		case "$1" in
 		--top-newline) ADD_TOP_NEWLINE=1 ;;
 		--bottom-newline) ADD_BOTTOM_NEWLINE=1 ;;
+		--no-bottom-newline) ADD_BOTTOM_NEWLINE=0 ;;
 		--counter) PRINT_CNT=1 ;;
 		--msg)
 			shift 1
@@ -62,9 +66,9 @@ function log() {
 	echo "${COUNTER}" >"${COUNTER_FILE}"
 
 	[[ $ADD_TOP_NEWLINE -eq 1 ]] && printf "\n"
-	EMOJIS=$(emoji_count "$MSG")
-	# echo "emojis: $EMOJIS"
-	bar --align-right --padding-right ${PADDING} --emoji-count ${EMOJIS}
+	export EMOJI_CORRECTION=$(emoji_correction "$MSG")
+	# echo "EMOJI_CORRECTION: $EMOJI_CORRECTION"
+	bar --align-right --padding-right ${PADDING} --emoji-correction ${EMOJI_CORRECTION}
 	msg "${MSG}" "${PRINT_CNT}"
 	bar --align-left --padding-left ${PADDING}
 	[[ $ADD_BOTTOM_NEWLINE -eq 1 ]] && printf "\n"
@@ -75,7 +79,7 @@ function bar() {
 	local ALIGN_RIGHT=0
 	local PADDING_LEFT=0
 	local PADDING_RIGHT=0
-	local EMOJIS=0
+	local EMOJI_CORRECTION=0
 	while [[ $# -gt 0 ]]; do
 		FLAG="$1"
 		case "$FLAG" in
@@ -95,19 +99,19 @@ function bar() {
 			PADDING_RIGHT=$2
 			shift 2
 			;;
-		--emoji-count)
-			EMOJIS=$2
+		--emoji-correction)
+			EMOJI_CORRECTION=$2
 			shift 2
 			;;
 		--*) policeman "$FLAG" ;;
 		esac
 	done
 	printf "%*s" "${PADDING_LEFT}" ""
-	SPACES=$((PROG_BAR_SIZE - COUNTER))
+	SPACES=$((BARSIZE - COUNTER))
 	# echo -e "\n$SPACES"
 	if [[ ${ALIGN_LEFT} -eq 1 ]]; then
 		printf "${BORDER_LEFT}"
-		print_fill --char $MAIN_CHAR_LEFT --amount $COUNTER --reversed-rainbow
+		print_fill --char $COLOR_CHAR_LEFT --amount $COUNTER --reversed-rainbow
 		print_fill --char $FILL_CHAR --amount $SPACES
 		printf "${BORDER_RIGHT}"
 		printf "%*s" "${PADDING_RIGHT}" ""
@@ -115,7 +119,7 @@ function bar() {
 	elif [[ ${ALIGN_RIGHT} -eq 1 ]]; then
 		printf "${BORDER_LEFT}"
 		print_fill --char $FILL_CHAR --amount $SPACES
-		print_fill --char $MAIN_CHAR_RIGHT --amount $COUNTER --rainbow
+		print_fill --char $COLOR_CHAR_RIGHT --amount $COUNTER --rainbow
 		printf "${BORDER_RIGHT}"
 		printf "%*s" "${PADDING_RIGHT}" ""
 	fi
@@ -162,6 +166,7 @@ function print_fill() {
 
 	[[ $IS_ERR_MSG -eq 1 ]] && CHAR=$ERR_CHAR
 
+	# echo -e "\namount: $AMOUNT"
 	for ((i = 0; i < AMOUNT; i++)); do
 		sleep "${SLEEP}"
 
@@ -177,18 +182,11 @@ function print_fill() {
 
 		OFFSET=0
 		if [[ $RAINBOW -eq 1 ]]; then
-			if ((i < ${#COLORS[@]})); then
-				printf "%s" "${CHAR}" | color "${COLORS["$((i + OFFSET))"]}"
-			else
-				printf "%s" "${CHAR}" | color --random
-			fi
+			color_index=$(((i + OFFSET) % ${#COLORS[@]}))
+			printf "%s" "${CHAR}" | color "${COLORS[$color_index]}"
 		elif [[ $REVERSED_RAINBOW -eq 1 ]]; then
-			rev_idx=$((AMOUNT - i - 1))
-			if ((rev_idx < ${#COLORS[@]})); then
-				printf "%s" "${CHAR}" | color "${COLORS["$((rev_idx + OFFSET))"]}"
-			else
-				printf "%s" "${CHAR}" | color --cyan
-			fi
+			rev_idx=$(((AMOUNT - i - 1) % ${#COLORS[@]}))
+			printf "%s" "${CHAR}" | color "${COLORS[$((rev_idx + OFFSET))]}"
 		else
 			printf "%s" "${CHAR}" | color --white
 		fi
@@ -196,8 +194,8 @@ function print_fill() {
 
 }
 
-COLORS=("--forest" "--green" "--blue" "--indigo" "--violet" "--cyan" "--red" "--orange" "--yellow")
-ALLCOLORS=('\033[38;5;22m' '\033[0;31m' '\033[0;38;5;214m' '\033[0;33m' '\033[0;32m' '\033[0;34m' '\033[0;38;5;57m' '\033[0;35m' '\033[0;36m' '\033[1;37m' '\033[90m')
+COLORS=("--forest" "--green" "--cyan" "--blue" "--indigo" "--violet" "--red" "--orange" "--olive")
+ALLCOLORS=('\033[38;2;170;75;0m' '\033[38;5;22m' '\033[0;31m' '\033[0;38;5;214m' '\033[0;33m' '\033[0;32m' '\033[0;34m' '\033[0;38;5;57m' '\033[0;35m' '\033[0;36m' '\033[1;37m' '\033[90m')
 function color() {
 	local NO_COLOR='\033[0m'
 	local ERR_COLOR='\033[0;31m'
@@ -207,8 +205,9 @@ function color() {
 	while [[ $# -gt 0 ]]; do
 		case "$1" in
 		--red) COLOR='\033[0;31m' ;;
+		--cinnamon) COLOR='\033[38;5;166m' ;;
 		--orange) COLOR='\033[0;38;5;214m' ;;
-		--yellow) COLOR='\033[0;33m' ;;
+		--olive) COLOR='\033[38;5;142m' ;;
 		--forest) COLOR='\033[38;5;22m' ;;
 		--green) COLOR='\033[0;32m' ;;
 		--blue) COLOR='\033[0;34m' ;;
@@ -286,9 +285,8 @@ function msg() {
 	[[ $PRINT_CNT -eq 1 ]] && printf '%s' "$COUNTER_MSG"
 	printf '%s' "$RENDERED"
 
-	EMOJI_CORRECTION=$((EMOJIS == 0 ? 1 : 0))
-	local SPACES=$((MSG_MAX_WIDTH - MSG_LEN - COUNTER_MSG_LEN + EMOJI_CORRECTION))
-	# echo -e "\nemojis: $EMOJIS, correction: $EMOJI_CORRECTION"
+	local SPACES=$((MSG_SPACE - MSG_LEN - COUNTER_MSG_LEN + EMOJI_CORRECTION))
+	# printf " :: emoji: $EMOJI_CORRECTION"
 	# echo -e "\nSPACES: $SPACES"
 	((SPACES < 0)) && SPACES=0
 	printf '%*s' "$SPACES" ""
@@ -327,9 +325,39 @@ function strip_ansi() {
 	sed -E 's/\x1B\[[0-9;]*[ -/]*[@-~]//g; s/\x1B\][0-9;]*;.*(\x07|\x1B\\)//g'
 }
 
-function emoji_count() {
-	printf '%s' "$1" |
-		sed -E 's/\x1B\[[0-9;]*[A-Za-z]//g' |
-		{ LC_ALL=C grep -aoE $'([\xE2-\xF7][\x80-\xBF]{2,3})' || true; } |
-		wc -l
+function emoji_correction() {
+    local text="$1"
+    # Remove ANSI codes
+    text=$(printf '%s' "$text" | sed -E 's/\x1B\[[0-9;]*[A-Za-z]//g')
+
+    # Extract emoji bytes (if any)
+    local bytes
+    bytes=$(printf '%s' "$text" | LC_ALL=C grep -aoE $'(\xE2[\x80-\xBF][\x80-\xBF]|\xE3[\x80-\xBF][\x80-\xBF]|\xF0[\x90-\xBF][\x80-\xBF][\x80-\xBF])|\xEF\xB8\x8F|\xE2\x80\x8D' | xxd -p | tr -d '\n')
+
+    # No emoji at all
+    [[ -z "$bytes" ]] && { echo 0; return; }
+
+    # Emojis with variation selector
+    [[ "$bytes" == *efb88f* ]] && { echo 1; return; }
+
+    # Dingbats (✨, 🐍, 🔋, 🚀, 🧩, 📝)
+    [[ "$bytes" =~ e29[78]* || "$bytes" == f0* ]] && { echo -1; return; }
+
+    # # Complex joined emojis ()
+    # [[ "$bytes" == *e2808d* ]] && { echo 2; return; }
+
+    # Defaults
+    if [[ "$bytes" == f0* ]]; then
+        echo 3
+    else
+        echo 4
+    fi
 }
+
+
+# function emoji_count() {
+# 	printf '%s' "$1" |
+# 		sed -E 's/\x1B\[[0-9;]*[A-Za-z]//g' |
+# 		{ LC_ALL=C grep -aoE $'([\xE2-\xF7][\x80-\xBF]{2,4}(\xEF\xB8\x8F)?)' || true; } |
+# 		wc -l
+# }

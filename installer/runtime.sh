@@ -17,7 +17,7 @@ function run_with_spinner() {
 
 	# stop spinner cleanly
 	if [ -n "${PF-}" ]; then
-		sleep 0.2
+		sleep 0.25
 		kill "$PF" 2>/dev/null || true
 		wait "$PF" 2>/dev/null || true
 		# clear spinner remnants from terminal
@@ -33,19 +33,20 @@ function hint() {
 	local code="$1"
 	case "$code" in
 	"NO_VENV")
-		log --error "❌ Virtual environment was not found."
+		log --error "⚙️  <color=grey>.venv</> missing - setup required"
 		copy_to_clipboard "make venv"
-		log --info "✨ Run: <color=blue>make venv</> to create one."
+		log --info "✨ <color=olive>Fix</>: <color=green>make venv</>"
+		log --info "${VERBOSE_CHAR} <color=grey>Command copied to your clipboard</>"
 		;;
 	"NO_PYCLEAN")
 		log --error "❌ 'pyclean' not found in current environment."
 		copy_to_clipboard "make pip"
-		log --info "✨ Run: <color=blue>make pip</> (inside your venv)."
+		log --info "✨ Fix: <color=blue>make pip</> (inside your venv)."
 		;;
 	"GENERIC")
 		log --error "⚠️ Unknown error occurred."
 		copy_to_clipboard "make install"
-		log --info "✨ Try: <color=blue>make install</> or <color=grey>make reset</>."
+		log --info "✨ Fix: <color=blue>make install</> or <color=grey>make reset</>."
 		;;
 	esac
 }
