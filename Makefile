@@ -132,7 +132,7 @@ clear-cache:
 # ------------------------------------------
 hints:
 	@$(IMPORT_UTILS)
-	log --warning "Please restart terminal to apply changes"
+	log --warning "✨ Please restart terminal to apply changes"
 	log "$(VERBOSE_CHAR) <color=yellow>VS Code</>: <color=grey>Ctrl + Shift + P -> 'Reload Window'</>"
 	log "$(VERBOSE_CHAR) <color=yellow>PyCharm</>: <color=grey>File -> Invalidate Caches -> Restart</>"
 	log ""

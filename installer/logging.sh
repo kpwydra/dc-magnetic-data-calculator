@@ -14,9 +14,9 @@ ADD_TOP_NEWLINE=0
 FILL_CHAR="_"
 
 ERR_CHAR="."
-WARN_CHAR="@"
+WARN_CHAR="="
 WARN_COLOR="--orange"
-INFO_CHAR="@"
+INFO_CHAR="="
 INFO_COLOR="--blue"
 
 # Functions
@@ -104,6 +104,7 @@ function bar() {
 	done
 	printf "%*s" "${PADDING_LEFT}" ""
 	SPACES=$((PROG_BAR_SIZE - COUNTER))
+	# echo -e "\n$SPACES"
 	if [[ ${ALIGN_LEFT} -eq 1 ]]; then
 		printf "${BORDER_LEFT}"
 		print_fill --char $MAIN_CHAR_LEFT --amount $COUNTER --reversed-rainbow
@@ -271,7 +272,7 @@ function msg() {
 	local MSG=$1
 	local PRINT_CNT=$2
 	local COUNTER_MSG="[${COUNTER}] "
-	local COUNTER_MSG_LEN=${#COUNTER_MSG}
+	local COUNTER_MSG_LEN=$(printf "[%02d] " "$COUNTER" | wc -c)
 
 	# apply markup -> ANSI (using your color())
 	local RENDERED
@@ -283,12 +284,12 @@ function msg() {
 	local MSG_LEN=${#VISIBLE}
 
 	[[ $PRINT_CNT -eq 1 ]] && printf '%s' "$COUNTER_MSG"
-	printf '%b' "$RENDERED"
+	printf '%s' "$RENDERED"
 
-	# EMOJI_CORRECTION=$((EMOJIS == 0 ? 1 : EMOJIS))
 	EMOJI_CORRECTION=$((EMOJIS == 0 ? 1 : 0))
-	# echo -e "\ncorrection: $EMOJI_CORRECTION"
 	local SPACES=$((MSG_MAX_WIDTH - MSG_LEN - COUNTER_MSG_LEN + EMOJI_CORRECTION))
+	# echo -e "\nemojis: $EMOJIS, correction: $EMOJI_CORRECTION"
+	# echo -e "\nSPACES: $SPACES"
 	((SPACES < 0)) && SPACES=0
 	printf '%*s' "$SPACES" ""
 }
@@ -322,7 +323,9 @@ function read_counter() {
 	fi
 }
 
-function strip_ansi() { sed -E 's/\x1B\[[0-9;]*[A-Za-z]//g'; }
+function strip_ansi() {
+	sed -E 's/\x1B\[[0-9;]*[ -/]*[@-~]//g; s/\x1B\][0-9;]*;.*(\x07|\x1B\\)//g'
+}
 
 function emoji_count() {
 	printf '%s' "$1" |
