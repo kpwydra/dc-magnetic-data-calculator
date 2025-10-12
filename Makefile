@@ -90,8 +90,7 @@ venv:
 activate:
 	@$(IMPORT_UTILS)
 	log --info "✨ Activating Virtual Environment <color=grey>.venv</>"
-	@exec env -u MAKELEVEL MAKEFLAGS="--no-print-directory" $(SHELL) -l
-	log "✨ Environment <color=forest>ready to go!</>"
+	@exec env -u MAKELEVEL $(SHELL) -l
 
 check-venv:
 	@bash -ic '\
