@@ -46,7 +46,7 @@ apt install make -y
 ```
 #### **Windows:**
 ```
-winget install GNU.Make
+winget install GnuWin32.Make
 ```
 💡 *reload your terminal (close and reopen, or run `exec $SHELL`)*
 ```bash
