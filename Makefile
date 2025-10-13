@@ -125,7 +125,7 @@ check-venv:
 	PIP_SHORT=$$(echo $$PIP | sed -E "s|.*(\.venv/.*)|\1|")
 	PIP_VERSION=$$($$PIP --version | awk '{print $$2}' 2>&1)
 	PYTHON_VERSION=$$($$PYTHON --version 2>&1)
-	log --verbose "$(VERBOSE_CHAR) pip:    <color=grey>$${PIP_SHORT}</>, version: <color=green>$${PIP_VERSION}</>"
+	log --verbose "$(VERBOSE_CHAR) pip:    <color=grey>$${PIP_SHORT}</>,    version: <color=green>pip $${PIP_VERSION}</>"
 	log --verbose "$(VERBOSE_CHAR) python: <color=grey>$${PYTHON_SHORT}</>, version: <color=green>$${PYTHON_VERSION}</>"
 	log --verbose "$(VERBOSE_CHAR) <color=forest>OK</>"
 
