@@ -7,7 +7,7 @@ images/
 *.so
 
 # Electron node modules
-electron/node_modules
+frontend/node_modules
 
 # Distribution / packaging
 .Python
