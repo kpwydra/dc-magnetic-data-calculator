@@ -53,3 +53,33 @@ winget install GnuWin32.Make
 make --version
 ```
 You should see a version string like `GNU Make 3.81` confirming it’s installed.
+
+# install choco
+# Robust Chocolatey bootstrap (Admin PowerShell)
+```
+$ErrorActionPreference = 'Stop'
+
+# 1) Run permissive for this process + TLS 1.2
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+# 2) Make sure temp is clean and local
+$chocoTmp = Join-Path $env:TEMP 'chocolatey\chocoInstall'
+Remove-Item -Recurse -Force $chocoTmp -ErrorAction SilentlyContinue | Out-Null
+
+# 3) Force Chocolatey to use 7zip instead of WindowsCompression (avoids Remove-Item bug)
+$env:ChocolateyUseWindowsCompression = 'false'
+
+# 4) Optional: ensure default install path is sane
+$env:ChocolateyInstall = "$env:ProgramData\chocolatey"
+
+# 5) Install Chocolatey (official bootstrap)
+iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+# 6) Quick sanity check
+if (Get-Command choco.exe -ErrorAction SilentlyContinue) {
+    Write-Host "[OK] Chocolatey installed at $env:ChocolateyInstall"
+} else {
+    Write-Host "[FAIL] Chocolatey did not install." ; exit 1
+}
+```

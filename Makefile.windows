@@ -1,0 +1,59 @@
+# ============================================================
+# Makefile.windows — Professional PowerShell EXE Builder
+# ============================================================
+# Multiline PowerShell recipes use comment blocks (<# \n #>)
+# instead of '\' for safe continuation across shells.
+# ------------------------------------------------------------
+
+SHELL := powershell.exe
+.SHELLFLAGS := -NoLogo -NoProfile -ExecutionPolicy Bypass -Command
+
+# ------------------------------------------------------------
+# Configurable Variables
+# ------------------------------------------------------------
+SRC_DIR        := installer/windows
+OUT_DIR        := $(SRC_DIR)/build
+
+BUILD_WRAPPER  := $(SRC_DIR)/scripts/build_wrapper.ps1
+
+INSTALL_SRC    := $(SRC_DIR)/install.ps1
+UNINSTALL_SRC  := $(SRC_DIR)/uninstall.ps1
+
+INSTALL_EXE    := $(OUT_DIR)/Install.exe
+UNINSTALL_EXE  := $(OUT_DIR)/Uninstall.exe
+
+TITLE          := Windows PRO Installer Utility
+
+# ------------------------------------------------------------
+# Targets
+# ------------------------------------------------------------
+.PHONY: all build-install build-uninstall clean
+all: build-install build-uninstall
+
+# Build Installer Executable
+# ------------------------------------------------------------
+build-install:
+	@$(SHELL) -ExecutionPolicy Bypass -File "$(BUILD_WRAPPER)" `
+		-OutDir "$(OUT_DIR)" `
+		-Source "$(INSTALL_SRC)" `
+		-Output "$(INSTALL_EXE)" `
+		-Title "$(TITLE)"
+
+# ------------------------------------------------------------
+# Build Uninstaller Executable
+# ------------------------------------------------------------
+build-uninstall:
+	@$(SHELL) -ExecutionPolicy Bypass -File "$(BUILD_WRAPPER)" -OutDir "$(OUT_DIR)" -Source "$(UNINSTALL_SRC)" -Output "$(UNINSTALL_EXE)" -Title "$(TITLE)"
+
+# ------------------------------------------------------------
+# Clean Build Artifacts
+# ------------------------------------------------------------
+clean:
+	$(SHELL) -Command " \
+		if (Test-Path '$(OUT_DIR)')) { \
+			Remove-Item '$(OUT_DIR)' -Recurse -Force; <#\
+			#> Write-Host '🧹 Cleaned $(OUT_DIR)' \
+		} else { \
+			Write-Host 'ℹ️ Nothing to clean.' \
+		} \
+	"
