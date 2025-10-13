@@ -4,13 +4,11 @@
 # ------------------------------------------
 #    ⚙️ # Makefile Special Variables
 # ------------------------------------------
-# Makefile Special Variables
 SHELL := $(shell echo $$SHELL)
 .ONESHELL:
 ALL_TARGETS := _init help install test venv hints build clean reset dotenv remove-venv clear-cache activate check-venv
 .PHONY: $(PHONY_TARGETS)
 MAKEFLAGS += --no-print-directory --silent
-# .SHELLFLAGS := -e -o pipefail -c
 
 # ------------------------------------------
 #    	⚙️ Variables & Folder Tree
@@ -43,7 +41,10 @@ PYTHON_VERSION 		:= $(shell $(PYTHON) --version 2>&1)
 # ------------------------------------------
 #    			🎯 Targets
 # ------------------------------------------
-# 1. 📘 Docs
+
+# ------------------------------------------
+#    			 📘 Docs
+# ------------------------------------------
 help:
 	@echo ""
 	@echo "Mag-Bridge Development Commands:"
@@ -59,11 +60,15 @@ help:
 	@echo "make reset        – Delete venv and rebuild everything"
 	@echo ""
 
-# 2. 🧩 Environment Setup
+# ------------------------------------------
+# 			🧩 Install Environment
+# ------------------------------------------
 install: venv pip dotenv
-	$(MAKE) --no-print-directory activate
+	$(MAKE) activate
 
-# 3. 🧩 pip
+# ------------------------------------------
+# 			🧩 pip install requirements
+# ------------------------------------------
 pip:
 	@$(IMPORT_UTILS)
 	@$(ACTIVATE_VENV)
@@ -76,7 +81,9 @@ pip:
 	run_with_spinner pip install --quiet -r requirements.txt -r requirements-dev.txt
 	log --verbose "$(VERBOSE_CHAR) <color=forest>OK</>"
 
-# 4. 🧩 venv
+# ------------------------------------------
+# 			🧩 venv
+# ------------------------------------------
 venv:
 	@$(IMPORT_UTILS)
 	log "🐍 Creating Python <color=grey>.venv</>"
@@ -86,35 +93,45 @@ venv:
 		$(MAKE) activate; \
 	fi
 
+# ------------------------------------------
+# 			🚀 venv activation
+# ------------------------------------------
 activate:
 	@$(IMPORT_UTILS)
 	log --info "✨ Activating Virtual Environment <color=grey>.venv</>"
 	log --info "♻️  <color=orange>Your terminal will restart soon</>"
 	run_with_spinner sleep 3
-# 	@printf '\033c'; stty sane; sleep 0.5; $(ACTIVATE_VENV) || true; exec env -u MAKELEVEL $(SHELL) -l
+
 	@printf '\033c'; stty sane; sleep 0.1; \
 		$(IMPORT_UTILS); \
-		$(ACTIVATE_VENV) || true; \
-		log --info "😎 Virtual Environment is now <color=forest>activated!</>"; \
-		log --info "💡 <color=yellow>Use <color=blue>make help</> for commands.</>"; \
+		$(ACTIVATE_VENV); \
+		log --fancy "😎 Virtual Environment is now <color=forest>activated!</>"; \
+		log "💡 <color=yellow>Use <color=blue>make help</> to see other features.</>"; \
 		$(MAKE) check-venv; \
+		log "🔥 <color=indigo>Ready to go.</>"; \
 		tput cnorm || true; stty sane -echo icanon isig; \
-		exec env -u MAKELEVEL $(SHELL) -l
+		exec env -u MAKELEVEL $(SHELL) -l -c "$(ACTIVATE_VENV) && exec $(SHELL) -i"
 
+# ------------------------------------------
+# 			✅ venv check
+# ------------------------------------------
 check-venv:
 	@$(IMPORT_UTILS)
 	@$(ACTIVATE_VENV)
+	log --verbose "💡 <color=olive>Python Virtual Environment</> Info"
 	PYTHON=$$(command -v python3 2>/dev/null || command -v python || command -v py)
 	PIP=$$(command -v pip3 2>/dev/null || command -v pip || command -v py)
 	PYTHON_SHORT=$$(echo $$PYTHON | sed -E "s|.*(\.venv/.*)|\1|")
 	PIP_SHORT=$$(echo $$PIP | sed -E "s|.*(\.venv/.*)|\1|")
-	PIP_VERSION=$$($$PIP --version 2>&1)
+	PIP_VERSION=$$($$PIP --version | awk '{print $$2}' 2>&1)
 	PYTHON_VERSION=$$($$PYTHON --version 2>&1)
-	log --verbose --info "$(VERBOSE_CHAR) pip:    <color=grey>$${PIP_SHORT}</>"
-	log --verbose --info "$(VERBOSE_CHAR) python: <color=grey>$${PYTHON_SHORT}</>, version: <color=green>$${PYTHON_VERSION}</>"
-	log --verbose --info "$(VERBOSE_CHAR) <color=forest>OK</>"
+	log --verbose "$(VERBOSE_CHAR) pip:    <color=grey>$${PIP_SHORT}</>, version: <color=green>$${PIP_VERSION}</>"
+	log --verbose "$(VERBOSE_CHAR) python: <color=grey>$${PYTHON_SHORT}</>, version: <color=green>$${PYTHON_VERSION}</>"
+	log --verbose "$(VERBOSE_CHAR) <color=forest>OK</>"
 
-# 5. 🧩 .env
+# ------------------------------------------
+# 			📝 .env creation
+# ------------------------------------------
 dotenv:
 	@$(IMPORT_UTILS)
 	log "📝 Creating <color=grey>.env</> file"
@@ -125,7 +142,9 @@ dotenv:
 	echo "SDF_DIR=${SDF_DIR}" >> ${DOTENV}
 	[[ -f "${DOTENV}" ]] && log --verbose "$(VERBOSE_CHAR) <color=forest>OK</>" || log --error "❌ <color=grey>.env</> missing!"
 
-# 6. Cleanup
+# ------------------------------------------
+# 			♻️ Recreate environment
+# ------------------------------------------
 reset:
 	@$(IMPORT_UTILS)
 	log "♻️  Reset Workspace? This <color=cyan>WILL NOT</> affect your code."
@@ -147,12 +166,18 @@ reset:
 	fi
 	$(MAKE) install
 
+# ------------------------------------------
+# 			🧹 venv removal
+# ------------------------------------------
 remove-venv:
 	@$(IMPORT_UTILS)
 	log "🧹 Removing <color=grey>.venv</>"
 	@rm -fr $(VENV)
 	log --verbose "$(VERBOSE_CHAR) <color=forest>OK</>"
 
+# ------------------------------------------
+# 			🧹 Remove python caches
+# ------------------------------------------
 clear-cache:
 	@$(IMPORT_UTILS)
 	@$(ACTIVATE_VENV)
@@ -171,7 +196,7 @@ clear-cache:
 	log --verbose "$$VERBOSE_CHAR <color=forest>OK</>"
 
 # ------------------------------------------
-#   💡 Helpers
+#   		💡 Hints
 # ------------------------------------------
 hints:
 	@$(IMPORT_UTILS)
@@ -188,7 +213,6 @@ hints:
 # ------------------------------------------
 ifeq ($(MAKELEVEL),0)
 export MAIN_GOAL := $(firstword $(MAKECMDGOALS))
-
 ifneq ($(MAKECMDGOALS),_init)
 # # debug
 # $(info [init] running setup for $(MAIN_GOAL))
@@ -198,15 +222,13 @@ ifneq ($(MAKECMDGOALS),_init)
 # $(info $(shell $(MAKE) _init))
 $(shell $(MAKE) _init >/dev/null)
 endif
-
 endif
 
 _init:
 	@[[ -n "$(TMP_DIR)" ]] && mkdir -p "$(TMP_DIR)"
 	@echo "0" >"$(COUNTER_FILE)"
 	@cat $(COUNTER_FILE)
-
-#	debug
+#	allow output from set_menu_params
 	$(eval $(call set_menu_params,$(MAIN_GOAL)))
 # 	$(call set_menu_params,$(MAIN_GOAL))
 	@{ \
@@ -214,7 +236,9 @@ _init:
 		echo "MSG_SPACE=$(MSG_SPACE)"; \
 	} >"$(MENU_FILE)"
 
-# ---------- macro ----------
+# ------------------------------------------
+#   		🛠️ Macros
+# ------------------------------------------
 export DEFAULT_BARSIZE 		:= 20
 export DEFAULT_MSG_SPACE 	:= 69
 
@@ -224,8 +248,8 @@ $(eval GOAL := $(strip $(1)))
 
 $(if $(filter install,$(GOAL)), \
 	$(if $(filter 1,$(VERBOSE)), \
-		$(eval BARSIZE := 18) $(eval MSG_SPACE := 78), \
-		$(eval BARSIZE := 10) $(eval MSG_SPACE := 69)))
+		$(eval BARSIZE := 17) $(eval MSG_SPACE := 61), \
+		$(eval BARSIZE := 10) $(eval MSG_SPACE := 61)))
 
 $(if $(filter venv,$(GOAL)), \
 	$(if $(filter 1,$(VERBOSE)), \
@@ -256,6 +280,16 @@ $(if $(filter remove-venv,$(GOAL)), \
 	$(if $(filter 1,$(VERBOSE)), \
 		$(eval BARSIZE := 2) $(eval MSG_SPACE := 23), \
 		$(eval BARSIZE := 1) $(eval MSG_SPACE := 23)))
+
+$(if $(filter activate,$(GOAL)), \
+	$(if $(filter 1,$(VERBOSE)), \
+		$(eval BARSIZE := 9) $(eval MSG_SPACE := 62), \
+		$(eval BARSIZE := 5) $(eval MSG_SPACE := 62)))
+
+$(if $(filter check-venv,$(GOAL)), \
+	$(if $(filter 1,$(VERBOSE)), \
+		$(eval BARSIZE := 4) $(eval MSG_SPACE := 62), \
+		$(eval BARSIZE := 5) $(eval MSG_SPACE := 62)))
 
 $(if $(filter-out $(ALL_TARGETS),$(GOAL)), \
 	$(eval BARSIZE := $(DEFAULT_BARSIZE)) \

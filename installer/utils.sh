@@ -21,6 +21,8 @@ WARN_CHAR="|"
 WARN_COLOR="--cinnamon"
 INFO_CHAR="|"
 INFO_COLOR="--cyan"
+FANCY_CHAR="@"
+FANCY_COLOR="--violet"
 
 # Functions
 function log() {
@@ -34,22 +36,24 @@ function log() {
 	local IS_WARN_MSG=0
 	local IS_INFO_MSG=0
 	local IS_VERBOSE_MSG=0
+	local IS_FANCY_MSG=0
 	# echo "$FLAG"
 
 	while [[ $# -gt 0 ]]; do
 		case "$1" in
-		--top-newline) ADD_TOP_NEWLINE=1 ;;
-		--bottom-newline) ADD_BOTTOM_NEWLINE=1 ;;
-		--no-bottom-newline) ADD_BOTTOM_NEWLINE=0 ;;
-		--counter) PRINT_CNT=1 ;;
 		--msg)
 			shift 1
 			MSG="$1"
 			;;
+		--top-newline) ADD_TOP_NEWLINE=1 ;;
+		--bottom-newline) ADD_BOTTOM_NEWLINE=1 ;;
+		--no-bottom-newline) ADD_BOTTOM_NEWLINE=0 ;;
+		--counter) PRINT_CNT=1 ;;
 		--verbose) IS_VERBOSE_MSG=1 ;;
 		--error) export IS_ERR_MSG=1 ;;
 		--warn | --warning) export IS_WARN_MSG=1 ;;
 		--info) export IS_INFO_MSG=1 ;;
+		--fancy) export IS_FANCY_MSG=1 ;;
 		--*) policeman "$1" ;;
 		*)
 			if [[ -z ${MSG-} ]]; then
@@ -163,12 +167,20 @@ function print_fill() {
 	if [[ $IS_WARN_MSG -eq 1 ]]; then
 		CHAR=$WARN_CHAR
 	fi
+	if [[ $IS_FANCY_MSG -eq 1 ]]; then
+		CHAR=$FANCY_CHAR
+	fi
 
 	[[ $IS_ERR_MSG -eq 1 ]] && CHAR=$ERR_CHAR
 
 	# echo -e "\namount: $AMOUNT"
 	for ((i = 0; i < AMOUNT; i++)); do
 		sleep "${SLEEP}"
+
+		if [[ $IS_FANCY_MSG -eq 1 ]]; then
+			printf "%s" "${CHAR}" | color "$FANCY_COLOR"
+			continue
+		fi
 
 		if [[ $IS_WARN_MSG -eq 1 ]]; then
 			printf "%s" "${CHAR}" | color "$WARN_COLOR"
@@ -191,7 +203,6 @@ function print_fill() {
 			printf "%s" "${CHAR}" | color --white
 		fi
 	done
-
 }
 
 COLORS=("--forest" "--green" "--cyan" "--blue" "--indigo" "--violet" "--red" "--orange" "--olive")
@@ -207,7 +218,7 @@ function color() {
 		--red) COLOR='\033[0;31m' ;;
 		--cinnamon) COLOR='\033[38;5;166m' ;;
 		--orange) COLOR='\033[0;38;5;214m' ;;
-		--olive) COLOR='\033[38;5;142m' ;;
+		--olive) COLOR='\033[38;5;100m' ;;
 		--forest) COLOR='\033[38;5;22m' ;;
 		--green) COLOR='\033[0;32m' ;;
 		--blue) COLOR='\033[0;34m' ;;
@@ -308,7 +319,7 @@ function policeman() {
 		echo "    at ${func}() in ${src}:${line}" >&2
 	done
 
-	exit 1
+	exit 997
 }
 
 function read_counter() {
@@ -326,34 +337,42 @@ function strip_ansi() {
 }
 
 function emoji_correction() {
-    local text="$1"
-    # Remove ANSI codes
-    text=$(printf '%s' "$text" | sed -E 's/\x1B\[[0-9;]*[A-Za-z]//g')
+	local text="$1"
+	# Remove ANSI codes
+	text=$(printf '%s' "$text" | sed -E 's/\x1B\[[0-9;]*[A-Za-z]//g')
 
-    # Extract emoji bytes (if any)
-    local bytes
-    bytes=$(printf '%s' "$text" | LC_ALL=C grep -aoE $'(\xE2[\x80-\xBF][\x80-\xBF]|\xE3[\x80-\xBF][\x80-\xBF]|\xF0[\x90-\xBF][\x80-\xBF][\x80-\xBF])|\xEF\xB8\x8F|\xE2\x80\x8D' | xxd -p | tr -d '\n')
+	# Extract emoji bytes (if any)
+	local bytes
+	bytes=$(printf '%s' "$text" | LC_ALL=C grep -aoE $'(\xE2[\x80-\xBF][\x80-\xBF]|\xE3[\x80-\xBF][\x80-\xBF]|\xF0[\x90-\xBF][\x80-\xBF][\x80-\xBF])|\xEF\xB8\x8F|\xE2\x80\x8D' | xxd -p | tr -d '\n')
 
-    # No emoji at all
-    [[ -z "$bytes" ]] && { echo 0; return; }
+	# No emoji at all
+	[[ -z $bytes ]] && {
+		echo 0
+		return
+	}
 
-    # Emojis with variation selector
-    [[ "$bytes" == *efb88f* ]] && { echo 1; return; }
+	# Emojis with variation selector
+	[[ $bytes == *efb88f* ]] && {
+		echo 1
+		return
+	}
 
-    # Dingbats (✨, 🐍, 🔋, 🚀, 🧩, 📝)
-    [[ "$bytes" =~ e29[78]* || "$bytes" == f0* ]] && { echo -1; return; }
+	# Dingbats (✨, 🐍, 🔋, 🚀, 🧩, 📝)
+	[[ $bytes =~ e29[78]* || $bytes == f0* ]] && {
+		echo -1
+		return
+	}
 
-    # # Complex joined emojis ()
-    # [[ "$bytes" == *e2808d* ]] && { echo 2; return; }
+	# # Complex joined emojis ()
+	# [[ "$bytes" == *e2808d* ]] && { echo 2; return; }
 
-    # Defaults
-    if [[ "$bytes" == f0* ]]; then
-        echo 3
-    else
-        echo 4
-    fi
+	# Defaults
+	if [[ $bytes == f0* ]]; then
+		echo 3
+	else
+		echo 4
+	fi
 }
-
 
 # function emoji_count() {
 # 	printf '%s' "$1" |

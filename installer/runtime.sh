@@ -2,30 +2,63 @@
 SPINNER_CMD="print_fill --char '.' --amount 999 --sleep 0.1 --rainbow"
 PIP=$(shell command -v pip3 2>/dev/null || command -v pip || command -v py)
 
+# function run_with_spinner() {
+# 	if [ -t 1 ] && [ -w /dev/tty ]; then
+# 		# open FD 3 to the terminal
+# 		exec 3>/dev/tty
+# 		# start spinner in background, writing to FD3
+# 		eval "$SPINNER_CMD" >&3 &
+# 		PF=$!
+# 	fi
+
+# 	# run the main command in foreground
+# 	"$@"
+# 	ST=$?
+
+# 	# stop spinner cleanly
+# 	if [ -n "${PF-}" ]; then
+# 		sleep 0.25
+# 		kill "$PF" 2>/dev/null || true
+# 		wait "$PF" 2>/dev/null || true
+# 		# clear spinner remnants from terminal
+# 		printf '\r\033[K' >&3
+# 		# close FD3
+# 		exec 3>&-
+# 	fi
+
+# 	return $ST
+# }
+
 function run_with_spinner() {
+	local PF ST
+
 	if [ -t 1 ] && [ -w /dev/tty ]; then
 		# open FD 3 to the terminal
 		exec 3>/dev/tty
-		# start spinner in background, writing to FD3
+		# start spinner in background
 		eval "$SPINNER_CMD" >&3 &
 		PF=$!
+
+		# trap Ctrl-C / termination and cleanup spinner
+		trap 'cleanup_spinner' INT TERM EXIT
 	fi
 
-	# run the main command in foreground
+	# run main command
 	"$@"
 	ST=$?
 
-	# stop spinner cleanly
-	if [ -n "${PF-}" ]; then
-		sleep 0.25
-		kill "$PF" 2>/dev/null || true
-		wait "$PF" 2>/dev/null || true
-		# clear spinner remnants from terminal
-		printf '\r\033[K' >&3
-		# close FD3
-		exec 3>&-
-	fi
+	cleanup_spinner() {
+		if [ -n "${PF-}" ] && kill -0 "$PF" 2>/dev/null; then
+			kill "$PF" 2>/dev/null
+			wait "$PF" 2>/dev/null || true
+			printf "\r\033[K" >&3
+			exec 3>&-
+		fi
+		trap - INT TERM EXIT
+		return $ST
+	}
 
+	cleanup_spinner
 	return $ST
 }
 
