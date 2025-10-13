@@ -118,7 +118,7 @@ activate:
 check-venv:
 	@$(IMPORT_UTILS)
 	@$(ACTIVATE_VENV)
-	log --verbose "💡 <color=olive>Python Virtual Environment</> Info"
+	log --verbose "$(VERBOSE_CHAR) <color=olive>Python Virtual Environment</> info:"
 	PYTHON=$$(command -v python3 2>/dev/null || command -v python || command -v py)
 	PIP=$$(command -v pip3 2>/dev/null || command -v pip || command -v py)
 	PYTHON_SHORT=$$(echo $$PYTHON | sed -E "s|.*(\.venv/.*)|\1|")
