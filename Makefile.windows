@@ -11,49 +11,34 @@ SHELL := powershell.exe
 # ------------------------------------------------------------
 # Configurable Variables
 # ------------------------------------------------------------
-SRC_DIR        := installer/windows
-OUT_DIR        := $(SRC_DIR)/build
-
-BUILD_WRAPPER  := $(SRC_DIR)/scripts/build_wrapper.ps1
-
-INSTALL_SRC    := $(SRC_DIR)/install.ps1
-UNINSTALL_SRC  := $(SRC_DIR)/uninstall.ps1
-
-INSTALL_EXE    := $(OUT_DIR)/Install.exe
-UNINSTALL_EXE  := $(OUT_DIR)/Uninstall.exe
-
-TITLE          := Windows PRO Installer Utility
+SRC_DIR        		:= installer/windows
+BUILD_DIR      		:= $(SRC_DIR)/build
+BUILD_WRAPPER  		:= $(SRC_DIR)/scripts/build_wrapper.ps1
+INSTALL_SRC    		:= $(SRC_DIR)/install.ps1
+UNINSTALL_SRC  		:= $(SRC_DIR)/uninstall.ps1
+INSTALL_EXE    		:= $(BUILD_DIR)/Install.exe
+UNINSTALL_EXE  		:= $(BUILD_DIR)/Uninstall.exe
+TITLE          		:= Windows PRO Installer Utility
 
 # ------------------------------------------------------------
 # Targets
 # ------------------------------------------------------------
-.PHONY: all build-install build-uninstall clean
-all: build-install build-uninstall
+.PHONY: all installer uninstaller clean
+all: installer uninstaller
 
 # Build Installer Executable
 # ------------------------------------------------------------
-build-install:
-	@$(SHELL) -ExecutionPolicy Bypass -File "$(BUILD_WRAPPER)" `
-		-OutDir "$(OUT_DIR)" `
-		-Source "$(INSTALL_SRC)" `
-		-Output "$(INSTALL_EXE)" `
-		-Title "$(TITLE)"
+installer:
+	@$(SHELL) -ExecutionPolicy Bypass -File "$(BUILD_WRAPPER)" -OutDir "$(BUILD_DIR)" -Source "$(INSTALL_SRC)" -Output "$(INSTALL_EXE)" -Title "$(TITLE)"
 
 # ------------------------------------------------------------
 # Build Uninstaller Executable
 # ------------------------------------------------------------
-build-uninstall:
-	@$(SHELL) -ExecutionPolicy Bypass -File "$(BUILD_WRAPPER)" -OutDir "$(OUT_DIR)" -Source "$(UNINSTALL_SRC)" -Output "$(UNINSTALL_EXE)" -Title "$(TITLE)"
+uninstaller:
+	@$(SHELL) -ExecutionPolicy Bypass -File "$(BUILD_WRAPPER)" -OutDir "$(BUILD_DIR)" -Source "$(UNINSTALL_SRC)" -Output "$(UNINSTALL_EXE)" -Title "$(TITLE)"
 
 # ------------------------------------------------------------
 # Clean Build Artifacts
 # ------------------------------------------------------------
 clean:
-	$(SHELL) -Command " \
-		if (Test-Path '$(OUT_DIR)')) { \
-			Remove-Item '$(OUT_DIR)' -Recurse -Force; <#\
-			#> Write-Host '🧹 Cleaned $(OUT_DIR)' \
-		} else { \
-			Write-Host 'ℹ️ Nothing to clean.' \
-		} \
-	"
+	@$(SHELL) -NoProfile -ExecutionPolicy Bypass -Command "if (Test-Path \"$(OUT_DIR)\") { Remove-Item -Recurse -Force \"$(OUT_DIR)\"; Write-Host \"Cleaned $(OUT_DIR)\" } else { Write-Host \"Nothing to clean.\" }"
