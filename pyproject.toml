@@ -27,7 +27,6 @@ build-backend = "setuptools.build_meta"
 line-ending = "lf"     # Use LF (Linux) line endings
 quote-style = "single" # Use single quotes for strings
 indent-style = "space" # Indent using spaces
-indent-width = 4       # Set indentation width to 4 spaces
 
 [tool.pytest.ini_options]
 # 🧪 Pytest configuration: defines how tests are discovered and how output is displayed.
