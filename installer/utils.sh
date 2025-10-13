@@ -32,11 +32,11 @@ function log() {
 	local ADD_BOTTOM_NEWLINE=${ADD_BOTTOM_NEWLINE}
 	local PRINT_CNT=${PRINT_CNT}
 	local MSG=""
-	local IS_ERR_MSG=0
-	local IS_WARN_MSG=0
-	local IS_INFO_MSG=0
-	local IS_VERBOSE_MSG=0
-	local IS_FANCY_MSG=0
+	IS_ERR_MSG=0
+	IS_WARN_MSG=0
+	IS_INFO_MSG=0
+	IS_VERBOSE_MSG=0
+	IS_FANCY_MSG=0
 	# echo "$FLAG"
 
 	while [[ $# -gt 0 ]]; do
