@@ -82,7 +82,6 @@ venv:
 	log "🐍 Creating Python <color=grey>.venv</>"
 	run_with_spinner $(PYTHON) -m venv $(VENV)
 	log --verbose "$(VERBOSE_CHAR) <color=forest>OK</>"
-	$(MAKE) check-venv
 	@if [ "$(MAIN_GOAL)" = "venv" ]; then \
 		$(MAKE) activate; \
 	fi
@@ -90,20 +89,30 @@ venv:
 activate:
 	@$(IMPORT_UTILS)
 	log --info "✨ Activating Virtual Environment <color=grey>.venv</>"
-	@exec env -u MAKELEVEL $(SHELL) -l
+	log --info "♻️  <color=orange>Your terminal will restart soon</>"
+	run_with_spinner sleep 3
+# 	@printf '\033c'; stty sane; sleep 0.5; $(ACTIVATE_VENV) || true; exec env -u MAKELEVEL $(SHELL) -l
+	@printf '\033c'; stty sane; sleep 0.1; \
+		$(IMPORT_UTILS); \
+		$(ACTIVATE_VENV) || true; \
+		log --info "😎 Virtual Environment is now <color=forest>activated!</>"; \
+		log --info "💡 <color=yellow>Use <color=blue>make help</> for commands.</>"; \
+		$(MAKE) check-venv; \
+		tput cnorm || true; stty sane -echo icanon isig; \
+		exec env -u MAKELEVEL $(SHELL) -l
 
 check-venv:
-	@bash -ic '\
-		$(IMPORT_UTILS); \
-		PYTHON=$$(command -v python3 2>/dev/null || command -v python || command -v py); \
-		PIP=$$(command -v pip3 2>/dev/null || command -v pip || command -v py); \
-		PYTHON_SHORT=$$(echo $$PYTHON | sed -E "s|.*(\.venv/.*)|\1|"); \
-		PIP_SHORT=$$(echo $$PIP | sed -E "s|.*(\.venv/.*)|\1|"); \
-		PIP_VERSION=$$($$PIP --version 2>&1); \
-		PYTHON_VERSION=$$($$PYTHON --version 2>&1); \
-		log --verbose "$(VERBOSE_CHAR) pip:    <color=grey>$${PIP_SHORT}</>"; \
-		log --verbose --info "$(VERBOSE_CHAR) python: <color=grey>$${PYTHON_SHORT}</>, version: <color=green>$${PYTHON_VERSION}</>"; \
-		log --verbose "$(VERBOSE_CHAR) <color=forest>OK</>"'
+	@$(IMPORT_UTILS)
+	@$(ACTIVATE_VENV)
+	PYTHON=$$(command -v python3 2>/dev/null || command -v python || command -v py)
+	PIP=$$(command -v pip3 2>/dev/null || command -v pip || command -v py)
+	PYTHON_SHORT=$$(echo $$PYTHON | sed -E "s|.*(\.venv/.*)|\1|")
+	PIP_SHORT=$$(echo $$PIP | sed -E "s|.*(\.venv/.*)|\1|")
+	PIP_VERSION=$$($$PIP --version 2>&1)
+	PYTHON_VERSION=$$($$PYTHON --version 2>&1)
+	log --verbose --info "$(VERBOSE_CHAR) pip:    <color=grey>$${PIP_SHORT}</>"
+	log --verbose --info "$(VERBOSE_CHAR) python: <color=grey>$${PYTHON_SHORT}</>, version: <color=green>$${PYTHON_VERSION}</>"
+	log --verbose --info "$(VERBOSE_CHAR) <color=forest>OK</>"
 
 # 5. 🧩 .env
 dotenv:
@@ -215,7 +224,7 @@ $(eval GOAL := $(strip $(1)))
 
 $(if $(filter install,$(GOAL)), \
 	$(if $(filter 1,$(VERBOSE)), \
-		$(eval BARSIZE := 17) $(eval MSG_SPACE := 78), \
+		$(eval BARSIZE := 18) $(eval MSG_SPACE := 78), \
 		$(eval BARSIZE := 10) $(eval MSG_SPACE := 69)))
 
 $(if $(filter venv,$(GOAL)), \
