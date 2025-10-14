@@ -1,5 +1,5 @@
 
-# 💬 --- Welcome ---------------------------------------------------------------
+# 💬 --- Welcome Form ---------------------------------------------------------------
 # Displays the MagBridge Project welcome screen with project info, logo, and component selection.
 # Automatically falls back to console mode if no GUI is available.
 # Example:
@@ -87,6 +87,11 @@ This installer will:
         $dialogResult = $form.ShowDialog()
 
         # --- Store user decisions ------------------------------------------
+        # Example: 
+        # if (-not $Global:InstallOptions.Chocolatey) {
+        #     Write-LogWarn "Not installing Chocolatey."
+        # }
+
         $Global:InstallOptions = [PSCustomObject]@{
             Continue    = ($dialogResult -eq [System.Windows.Forms.DialogResult]::OK)
             Chocolatey  = $chkChoco.Checked
@@ -126,7 +131,7 @@ Tasks to perform:
     }
 }
 
-# 👋 --- Final summary & goodbye ----------------------------------------------
+# 👋 --- Final Goodbye Form ----------------------------------------------
 # Displays the installation summary and offers optional system restart.
 # Supports both GUI and console fallback modes; skips reboot in CI/CD.
 # Example:
