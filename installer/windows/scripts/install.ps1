@@ -73,73 +73,354 @@ if (-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administra
 }
 
 # --- UI helpers -------------------------------------------------------------
-Add-Type -AssemblyName System.Windows.Forms
-[System.Windows.Forms.Application]::EnableVisualStyles()
+$UIAvailable = $true
+try {
+    Add-Type -AssemblyName System.Windows.Forms -ErrorAction Stop
+    [System.Windows.Forms.Application]::EnableVisualStyles()
+} catch {
+    Write-Warning "⚠️ GUI not available (server or CI mode). Console progress will be used."
+    $UIAvailable = $false
+}
 
 function New-ProgressForm {
-    param([string]$Title = "GNU Make Installer", [int]$Max = 4)
+    param(
+        [string]$Title = "GNU Make Installer",
+        [int]$Max = 4
+    )
+
+    # --- Fallback: console-only mode (no GUI) --------------------------------
+    if (-not $UIAvailable) {
+        $progress = [PSCustomObject]@{
+            Step  = 0
+            Max   = $Max
+            Label = "Preparing..."
+            Update = {
+                param($text)
+                $this.Step++
+                $percent = [math]::Round(($this.Step / $this.Max) * 100)
+                Write-Host ("[{0,2}/{1}] {2,-25} ({3,3}%)" -f $this.Step, $this.Max, $text, $percent)
+            }
+            Close = { Write-Host "✔️  Installation completed." }
+        }
+        $progress.Update.Invoke("Starting in console mode...")
+        return $progress
+    }
+
+    # --- GUI mode ------------------------------------------------------------
     $form = New-Object System.Windows.Forms.Form
     $form.Text = $Title
-    $form.Width = 520; $form.Height = 150
-    $form.StartPosition = "CenterScreen"; $form.TopMost = $true
-    $form.FormBorderStyle = "FixedDialog"; $form.MaximizeBox = $false; $form.MinimizeBox = $false
+    $form.Width = 540; $form.Height = 180
+    $form.StartPosition = "CenterScreen"
+    $form.FormBorderStyle = "FixedDialog"
+    $form.MaximizeBox = $false
+    $form.MinimizeBox = $false
+    $form.TopMost = $true
+    $form.BackColor = [System.Drawing.Color]::FromArgb(245,245,245)
 
+    # Label
     $label = New-Object System.Windows.Forms.Label
-    $label.AutoSize = $false; $label.Width = 480; $label.Height = 30
-    $label.Left = 20; $label.Top = 10; $label.Text = "Preparing..."
+    $label.Width = 500; $label.Height = 30
+    $label.Left = 20; $label.Top = 20
+    $label.Font = New-Object System.Drawing.Font("Segoe UI", 10,[System.Drawing.FontStyle]::Regular)
+    $label.Text = "Preparing installer..."
 
+    # ProgressBar
     $bar = New-Object System.Windows.Forms.ProgressBar
-    $bar.Left = 20; $bar.Top = 50; $bar.Width = 480; $bar.Height = 22
-    $bar.Style = "Continuous"; $bar.Minimum = 0; $bar.Maximum = $Max; $bar.Value = 0
+    $bar.Left = 20; $bar.Top = 60
+    $bar.Width = 480; $bar.Height = 25
+    $bar.Style = "Continuous"
+    $bar.Minimum = 0; $bar.Maximum = $Max; $bar.Value = 0
 
-    $form.Controls.Add($label); $form.Controls.Add($bar)
-    return [PSCustomObject]@{ Form=$form; Label=$label; Bar=$bar }
+    # Cancel button
+    $btnCancel = New-Object System.Windows.Forms.Button
+    $btnCancel.Text = "Cancel"
+    $btnCancel.Left = 400; $btnCancel.Top = 100
+    $btnCancel.Width = 100; $btnCancel.Height = 30
+    $btnCancel.Add_Click({
+        $form.Tag = "Cancelled"
+        $form.Close()
+    })
+
+    # Add controls
+    $form.Controls.AddRange(@($label, $bar, $btnCancel))
+
+    # --- Return composite object ---------------------------------------------
+    return [PSCustomObject]@{
+        Form   = $form
+        Label  = $label
+        Bar    = $bar
+        Cancel = $btnCancel
+        Update = {
+            param($text)
+            $this.Bar.PerformStep()
+            $this.Label.Text = $text
+            $this.Form.Refresh()
+        }
+        Close = {
+            if ($this.Form.Tag -ne "Cancelled") {
+                $this.Label.Text = "Installation complete."
+                Start-Sleep -Milliseconds 800
+            }
+            $this.Form.Close()
+        }
+    }
 }
 
-function Update-ProgressForm($Ui,[int]$Step,[int]$Total,[string]$Msg){
-    $Ui.Label.Text = $Msg
-    $Ui.Bar.Maximum = $Total
-    $Ui.Bar.Value = [Math]::Min($Step,$Total)
-    $Ui.Form.Refresh()
-}
-function Close-ProgressForm($Ui){ $Ui.Form.Close() }
+# --- Progress Form Control Helpers ------------------------------------------
+function Update-ProgressForm($Ui, [int]$Step, [int]$Total, [string]$Msg) {
+    if (-not $Ui) { return }
 
-# --- Logging ---------------------------------------------------------------
+    # --- GUI mode ------------------------------------------------------------
+    if ($Ui.Form -ne $null) {
+        try {
+            $Ui.Label.Text = $Msg
+            $Ui.Bar.Maximum = $Total
+            $Ui.Bar.Value   = [Math]::Min($Step, $Total)
+            $Ui.Form.Refresh()
+        } catch {
+            Write-Warning "Failed to update progress form: $_"
+        }
+    }
+    # --- Console fallback ----------------------------------------------------
+    else {
+        $percent = [math]::Round(($Step / $Total) * 100)
+        Write-Host ("[{0,2}/{1}] {2,-25} ({3,3}%)" -f $Step, $Total, $Msg, $percent)
+    }
+}
+
+function Close-ProgressForm($Ui) {
+    if (-not $Ui) { return }
+
+    if ($Ui.Form -ne $null) {
+        try {
+            $Ui.Close.Invoke()
+        } catch {
+            Write-Warning "Failed to close progress form: $_"
+        }
+    }
+    else {
+        Write-Host "✔️  Installation completed."
+    }
+}
+
+#  call ---------------------------------------------------------------------------
+# $ui = New-ProgressForm -Title "GNU Make Installer" -Max 4
+# if ($ui.Form) { $ui.Form.Show() }
+
+# for ($i=1; $i -le 4; $i++) {
+#     Update-ProgressForm $ui $i 4 "Step $i in progress..."
+#     Start-Sleep -Seconds 1
+# }
+
+# Close-ProgressForm $ui
+#  call ---------------------------------------------------------------------------
+
+# 📝 --- Logging ---------------------------------------------------------------
 $report = New-Object System.Collections.Generic.List[string]
-function Add-Ok($m){ $report.Add("[OK]   $m") | Out-Null }
-function Add-Fail($m){ $report.Add("[FAIL] $m") | Out-Null }
-function Add-Info($m){ $report.Add("[INFO] $m") | Out-Null }
+
+# Detect color capability (safe for old PS and CI)
+$SupportsColor = $Host.UI.SupportsVirtualTerminal -or
+                 ($Host.UI.RawUI -and $Host.UI.RawUI.ForegroundColor -ne $null)
+
+# Define ANSI color codes
+$ColorMap = @{
+    'RESET' = "`e[0m"
+    'OK'    = "`e[92m"    # bright green
+    'INFO'  = "`e[37m"    # light gray / white
+    'WARN'  = "`e[38;5;166m" # cinnamon / dark orange
+    'FAIL'  = "`e[31m"    # dark red
+}
+
+function Write-LogEntry {
+    param(
+        [Parameter(Mandatory)][ValidateSet('OK','FAIL','INFO','WARN','LOG')]
+        [string]$Type,
+        [Parameter(Mandatory)][string]$Message
+    )
+
+    # Compose entry text (uncolored version for file)
+    $prefix = "[{0,-5}]" -f $Type
+    $entry  = "$prefix $Message"
+    $report.Add($entry) | Out-Null
+
+    # Console output
+    if ($SupportsColor) {
+        $color = $ColorMap[$Type]
+        if (-not $color) { $color = $ColorMap['RESET'] }
+
+        $coloredPrefix = "$color$prefix$($ColorMap['RESET'])"
+        Write-Host "$coloredPrefix $Message"
+    }
+    else {
+        Write-Host $entry
+    }
+}
+
+function Write-LogOk   ($m) { Write-LogEntry -Type 'OK'   -Message $m }
+function Write-LogFail ($m) { Write-LogEntry -Type 'FAIL' -Message $m }
+function Write-LogInfo ($m) { Write-LogEntry -Type 'INFO' -Message $m }
+function Write-LogWarn ($m) { Write-LogEntry -Type 'WARN' -Message $m }
+
+function Export-LogReport($Path = "$env:TEMP\installer_log.txt") {
+    try {
+        $report | Out-File -FilePath $Path -Encoding UTF8 -Force
+        Write-Host "🧾 Log saved to $Path"
+    } catch {
+        Write-Warning "Failed to export log file: $_"
+    }
+}
+
+#  call ---------------------------------------------------------------------------
+Write-LogInfo "Starting installer..."
+Write-LogOk   "All dependencies found."
+Write-LogWarn "Low disk space detected."
+Write-LogFail "Could not create Start Menu entry."
+Export-LogReport
+#  call ---------------------------------------------------------------------------
 
 # --- Welcome ---------------------------------------------------------------
-Add-Type -AssemblyName PresentationFramework
-$welcomeText = @"
-This installer will:
+$UIAvailable = $true
+try {
+    Add-Type -AssemblyName System.Windows.Forms -ErrorAction Stop
+    Add-Type -AssemblyName System.Drawing -ErrorAction Stop
+} catch {
+    $UIAvailable = $false
+    Write-Host "⚙️  Headless environment detected — skipping GUI welcome screen."
+}
 
+if ($UIAvailable) {
+    # --- Form setup ---------------------------------------------------------
+    $form = New-Object System.Windows.Forms.Form
+    $form.Text = "MagBridge Project — GNU Make Installer"
+    $form.Width = 600; $form.Height = 420
+    $form.StartPosition = "CenterScreen"
+    $form.FormBorderStyle = "FixedDialog"
+    $form.MaximizeBox = $false; $form.MinimizeBox = $false
+    $form.TopMost = $true
+    $form.BackColor = [System.Drawing.Color]::FromArgb(250,250,250)
+
+    # --- Logo placeholder ---------------------------------------------------
+    $logoBox = New-Object System.Windows.Forms.PictureBox
+    $logoBox.Width = 80; $logoBox.Height = 80
+    $logoBox.Left = 25; $logoBox.Top = 25
+    $logoBox.BorderStyle = "FixedSingle"  # placeholder frame
+    # You can later set: $logoBox.Image = [System.Drawing.Image]::FromFile("logo.png")
+
+    # --- Title label --------------------------------------------------------
+    $title = New-Object System.Windows.Forms.Label
+    $title.Text = "Welcome to the MagBridge Project Installer"
+    $title.Font = New-Object System.Drawing.Font("Segoe UI",14,[System.Drawing.FontStyle]::Bold)
+    $title.Left = 120; $title.Top = 35; $title.Width = 440; $title.Height = 30
+
+    # --- Description --------------------------------------------------------
+    $desc = New-Object System.Windows.Forms.Label
+    $desc.Text =
+"This open-source project streamlines chemists’ workflows through simplicity and thoughtful design focused on user experience.
+
+This installer will:
  • Install Chocolatey (if missing or broken)
  • Install GNU Make via Chocolatey
  • Update PATH
- • Verify installation
+ • Verify installation"
+    $desc.Font = New-Object System.Drawing.Font("Segoe UI",10)
+    $desc.Left = 40; $desc.Top = 110; $desc.Width = 520; $desc.Height = 140
+    $desc.AutoSize = $false
 
-Continue?
+    # --- Checkboxes ---------------------------------------------------------
+    $chkChoco = New-Object System.Windows.Forms.CheckBox
+    $chkChoco.Text = "Chocolatey – Windows Package Manager"
+    $chkChoco.Left = 60; $chkChoco.Top = 260; $chkChoco.Width = 400
+    $chkChoco.Checked = $true
+
+    $chkMake = New-Object System.Windows.Forms.CheckBox
+    $chkMake.Text = "GNU Make for Windows"
+    $chkMake.Left = 60; $chkMake.Top = 290; $chkMake.Width = 400
+    $chkMake.Checked = $true
+
+    # --- Install button -----------------------------------------------------
+    $btnInstall = New-Object System.Windows.Forms.Button
+    $btnInstall.Text = "Install"
+    $btnInstall.Width = 100; $btnInstall.Height = 35
+    $btnInstall.Left = 460; $btnInstall.Top = 340
+    $btnInstall.DialogResult = [System.Windows.Forms.DialogResult]::OK
+    $btnInstall.Font = New-Object System.Drawing.Font("Segoe UI",10,[System.Drawing.FontStyle]::Bold)
+
+    # --- Cancel button ------------------------------------------------------
+    $btnCancel = New-Object System.Windows.Forms.Button
+    $btnCancel.Text = "Cancel"
+    $btnCancel.Width = 100; $btnCancel.Height = 35
+    $btnCancel.Left = 340; $btnCancel.Top = 340
+    $btnCancel.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
+
+    # --- Add controls -------------------------------------------------------
+    $form.Controls.AddRange(@($logoBox,$title,$desc,$chkChoco,$chkMake,$btnInstall,$btnCancel))
+
+    # --- Show dialog --------------------------------------------------------
+    $dialogResult = $form.ShowDialog()
+
+    # --- Store user decisions ----------------------------------------------
+    $Global:InstallOptions = [PSCustomObject]@{
+        Continue    = ($dialogResult -eq [System.Windows.Forms.DialogResult]::OK)
+        Chocolatey  = $chkChoco.Checked
+        Make        = $chkMake.Checked
+    }
+
+    if (-not $InstallOptions.Continue) {
+        Write-Host "❌  Installation cancelled by user."
+        exit 0
+    }
+
+    Write-Host "✅  Proceeding with installation..."
+    Write-Host ("Selected components: " +
+                ("Chocolatey " * [int]$InstallOptions.Chocolatey) +
+                ("GNU Make " * [int]$InstallOptions.Make))
+}
+else {
+    # --- Fallback for CI/CD or no GUI --------------------------------------
+    Write-Host @"
+MagBridge Project — Open Source Initiative
+This tool streamlines chemists’ workflows through simplicity and usability.
+
+Tasks to perform:
+ • Install Chocolatey (if missing)
+ • Install GNU Make via Chocolatey
+ • Update PATH
+ • Verify installation
 "@
-$welcome = [System.Windows.MessageBox]::Show(
-    $welcomeText,
-    "GNU Make Installer",
-    [System.Windows.MessageBoxButton]::YesNo,
-    [System.Windows.MessageBoxImage]::Information
-)
-if ($welcome -ne [System.Windows.MessageBoxResult]::Yes) { exit 0 }
+    $response = Read-Host "Continue installation? (Y/N)"
+    if ($response -notmatch '^[Yy]') { exit 0 }
+
+    $Global:InstallOptions = [PSCustomObject]@{
+        Continue   = $true
+        Chocolatey = $true
+        Make       = $true
+    }
+}
+
+#  call ---------------------------------------------------------------------------
+if ($script:UIAvailable) {
+    Show-WelcomeForm
+} else {
+    Write-Host "Running in headless mode..."
+}
+#  call ---------------------------------------------------------------------------
 
 # --- Progress UI ------------------------------------------------------------
 $steps = 4
 $ui = New-ProgressForm -Title "GNU Make Installer" -Max $steps
-$ui.Form.Show()
-Update-ProgressForm -Ui $ui -Step 0 -Total $steps -Message "Starting installation..."
+if ($ui.Form) { $ui.Form.Show() }
+Update-ProgressForm $ui 0 $steps "Starting installation..."
+
 
 # === Helper: refresh PATH from system ===
 function Refresh-Path {
-    $env:PATH = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' +
-                [System.Environment]::GetEnvironmentVariable('Path','User')
+    try {
+        $env:PATH = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' +
+                    [System.Environment]::GetEnvironmentVariable('Path','User')
+        Write-LogInfo "PATH variable refreshed."
+    } catch {
+        Write-LogWarn "Failed to refresh PATH: $_"
+    }
 }
 
 # === Step 1: Install or repair Chocolatey ===================================
