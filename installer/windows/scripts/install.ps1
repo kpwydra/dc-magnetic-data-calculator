@@ -467,32 +467,34 @@ Update-ProgressForm -Ui $ui -Step $step -Total $steps -Message "Installing GNU M
 try {
     if (Get-Command choco.exe -ErrorAction SilentlyContinue) {
         choco install make -y --no-progress | Out-Null
-        Add-Ok "GNU Make installed via Chocolatey."
+        Write-LogOk "GNU Make installed via Chocolatey."
     } else {
-        Add-Fail "Chocolatey not found — cannot install Make."
+        Write-LogFail "Chocolatey not found — cannot install Make."
     }
 } catch {
-    Add-Fail "Make installation failed: $($_.Exception.Message)"
+    Write-LogFail "Make installation failed: $($_.Exception.Message)"
 }
 
 # === Step 3: Update PATH ====================================================
 $step = 3
 Update-ProgressForm -Ui $ui -Step $step -Total $steps -Message "Updating PATH..."
 try {
-    $makeDir = "C:\ProgramData\chocolatey\lib\make\tools\install\bin"
+    $makeDir  = "C:\ProgramData\chocolatey\lib\make\tools\install\bin"
     $chocoBin = "C:\ProgramData\chocolatey\bin"
-    foreach ($dir in @($chocoBin,$makeDir)) {
+
+    foreach ($dir in @($chocoBin, $makeDir)) {
         if (Test-Path $dir) {
-            $machine = [Environment]::GetEnvironmentVariable('Path','Machine')
+            $machine = [Environment]::GetEnvironmentVariable('Path', 'Machine')
             if (-not ($machine -split ';' | Where-Object { $_ -ieq $dir })) {
-                [Environment]::SetEnvironmentVariable('Path',"$machine;$dir",'Machine')
+                [Environment]::SetEnvironmentVariable('Path', "$machine;$dir", 'Machine')
             }
         }
     }
+
     Refresh-Path
-    Add-Ok "PATH updated successfully."
+    Write-LogOk "PATH updated successfully."
 } catch {
-    Add-Fail "Failed to update PATH: $($_.Exception.Message)"
+    Write-LogFail "Failed to update PATH: $($_.Exception.Message)"
 }
 
 # === Step 4: Verify GNU Make ===============================================
@@ -504,15 +506,15 @@ try {
     if ($makeCmd) {
         $ver = & $makeCmd.Source --version 2>$null
         if ($LASTEXITCODE -eq 0 -and $ver) {
-            Add-Ok ("GNU Make detected: " + ($ver -split "`r?`n")[0])
+            Write-LogOk ("GNU Make detected: " + ($ver -split "`r?`n")[0])
         } else {
-            Add-Fail "'make --version' failed to execute."
+            Write-LogFail "'make --version' failed to execute."
         }
     } else {
-        Add-Fail "make.exe not found on PATH."
+        Write-LogFail "make.exe not found on PATH."
     }
 } catch {
-    Add-Fail "Verification step failed: $($_.Exception.Message)"
+    Write-LogFail "Verification step failed: $($_.Exception.Message)"
 }
 
 # --- Close UI ---------------------------------------------------------------
