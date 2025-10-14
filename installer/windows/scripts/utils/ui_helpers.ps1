@@ -146,3 +146,25 @@ function Close-ProgressForm($Ui) {
         Write-Host "✔️  Installation completed."
     }
 }
+
+# 🖥️ --- UI availability check -------------------------------------------------
+# Detects if Windows Forms and Drawing assemblies are available.
+# Sets $script:UIAvailable to $true or $false for GUI / headless mode detection.
+# Example:
+#   Test-UIAvailable
+#   if ($script:UIAvailable) {
+#       Show-WelcomeForm
+#   } else {
+#       Write-Host "Running in headless mode..."
+#   }
+
+function Test-UIAvailable {
+    $script:UIAvailable = $true
+    try {
+        Add-Type -AssemblyName System.Windows.Forms -ErrorAction Stop
+        Add-Type -AssemblyName System.Drawing       -ErrorAction Stop
+    } catch {
+        $script:UIAvailable = $false
+        Write-Host "⚙️  Headless environment detected — skipping GUI welcome screen."
+    }
+}
