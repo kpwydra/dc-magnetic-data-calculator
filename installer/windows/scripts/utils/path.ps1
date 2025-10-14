@@ -1,4 +1,4 @@
-# 🔁 --- Environment PATH utilities -------------------------------------------
+﻿# 🔁 --- Environment PATH utilities -------------------------------------------
 # Synchronizes the current PowerShell session's PATH variable
 # with the latest Machine + User environment values.
 # Example:

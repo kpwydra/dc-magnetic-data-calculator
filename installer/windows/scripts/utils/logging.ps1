@@ -1,4 +1,4 @@
-# 🧾 --- Logging ---------------------------------------------------------------
+﻿# 🧾 --- Logging ---------------------------------------------------------------
 # Writes a color-coded log entry and stores it in $report.
 # Colors auto-disable in old PS/CI environments.
 # Example:

@@ -1,3 +1,7 @@
+﻿chcp 65001 > $null          # set console code page to UTF-8
+$OutputEncoding = [System.Text.Encoding]::UTF8
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
 # --- Determine script root (works in normal PS and compiled EXE) ---
 if ($MyInvocation.MyCommand.Path) {
     $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -5,21 +9,26 @@ if ($MyInvocation.MyCommand.Path) {
     $ScriptRoot = Split-Path -Parent ([System.Diagnostics.Process]::GetCurrentProcess().MainModule.FileName)
 }
 
+# --- Define utils directory ---
+$UtilsDir = Join-Path $ScriptRoot 'utils'
+Write-Host "ScriptRoot — $ScriptRoot"
+Write-Host "UtilsDir   — $UtilsDir"
+
 # --- Verify required file exists ---
-$checkPath = Join-Path $ScriptRoot 'admin_check.ps1'
+$checkPath = Join-Path $UtilsDir 'admin_check.ps1'
 if (-not (Test-Path $checkPath)) {
-    Write-Host "Invalid ScriptRoot — missing admin_check.ps1 in $ScriptRoot"
-    throw "Invalid ScriptRoot — missing admin_check.ps1 in $ScriptRoot"
+    Write-Host "Invalid ScriptRoot — missing admin_check.ps1 in $UtilsDir"
+    throw "Invalid ScriptRoot — missing admin_check.ps1 in $UtilsDir"
 }
 
 # --- Import Scripts -----------------------------------------------------
-. (Join-Path $ScriptRoot 'admin_check.ps1')
-. (Join-Path $ScriptRoot 'logging.ps1')
-. (Join-Path $ScriptRoot 'ui_helpers.ps1')
-. (Join-Path $ScriptRoot 'path.ps1')
-. (Join-Path $ScriptRoot 'forms.ps1')
-. (Join-Path $ScriptRoot 'choco.ps1')
-. (Join-Path $ScriptRoot 'gnu_make.ps1')
+. (Join-Path $UtilsDir 'admin_check.ps1')
+. (Join-Path $UtilsDir 'logging.ps1')
+. (Join-Path $UtilsDir 'ui_helpers.ps1')
+. (Join-Path $UtilsDir 'path.ps1')
+. (Join-Path $UtilsDir 'forms.ps1')
+. (Join-Path $UtilsDir 'choco.ps1')
+. (Join-Path $UtilsDir 'gnu_make.ps1')
 
 # 🧩 --- Entry Point: Start-MagBridgeInstaller ---------------------------
 # Main controller for the MagBridge GNU Make installer.
@@ -29,7 +38,7 @@ if (-not (Test-Path $checkPath)) {
 
 function Start-MagBridgeInstaller {
     try {
-        Write-Host "🔧 Starting MagBridge Installer..."
+        Write-Host "Starting MagBridge Installer..."
         Initialize-Environment
         Test-UIAvailable
         Show-WelcomeForm
@@ -78,9 +87,9 @@ function Start-MagBridgeInstaller {
 
         Show-FinalSummary
         Close-ProgressForm -Ui $script:InstallerState.Ui
-        Write-Host "✅ Installer finished."
+        Write-Host "Installer finished."
     } catch {
-        Write-Host "❌ Fatal error: $($_.Exception.Message)"
+        Write-Host "Fatal error: $($_.Exception.Message)"
         exit 1
     }
 }

@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$OutDir,
     [string]$InstallSript,
     [string]$Output,

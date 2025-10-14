@@ -1,4 +1,4 @@
-
+﻿
 # 💬 --- Welcome Form ---------------------------------------------------------------
 # Displays the MagBridge Project welcome screen with project info, logo, and component selection.
 # Automatically falls back to console mode if no GUI is available.

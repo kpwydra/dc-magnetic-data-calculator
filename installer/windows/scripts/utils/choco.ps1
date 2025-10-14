@@ -1,4 +1,4 @@
-# 🍫 --- Install or repair Chocolatey ---------------------------------
+﻿# 🍫 --- Install or repair Chocolatey ---------------------------------
 # Ensures Chocolatey is installed and functional.
 # Cleans up broken installations and reinstalls if necessary.
 # Example:

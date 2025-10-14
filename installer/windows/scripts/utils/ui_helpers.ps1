@@ -1,5 +1,4 @@
-
-# 🎨 --- UI helpers ------------------------------------------------------------
+﻿# --- UI helpers ------------------------------------------------------------
 # Provides graphical elements (progress bars, message boxes, forms).
 # Automatically falls back to console mode in CI or headless environments.
 # Example:
@@ -12,7 +11,7 @@ try {
     Add-Type -AssemblyName System.Windows.Forms -ErrorAction Stop
     [System.Windows.Forms.Application]::EnableVisualStyles()
 } catch {
-    Write-Warning "⚠️ GUI not available (server or CI mode). Console progress will be used."
+    Write-Warning "GUI not available (server or CI mode). Console progress will be used."
     $UIAvailable = $false
 }
 
@@ -34,7 +33,7 @@ function New-ProgressForm {
                 $percent = [math]::Round(($this.Step / $this.Max) * 100)
                 Write-Host ("[{0,2}/{1}] {2,-25} ({3,3}%)" -f $this.Step, $this.Max, $text, $percent)
             }
-            Close = { Write-Host "✔️  Installation completed." }
+            Close = { Write-Host "Installation completed." }
         }
         $progress.Update.Invoke("Starting in console mode...")
         return $progress
@@ -101,7 +100,7 @@ function New-ProgressForm {
 }
 
 
-# 📊 --- Progress UI & Control Helpers -----------------------------------------
+# --- Progress UI & Control Helpers -----------------------------------------
 # Manages the installer progress interface (window or console).
 # Handles creation, updates, and closing of the progress form created by New-ProgressForm.
 # Works in both GUI and console fallback modes.
@@ -143,7 +142,7 @@ function Close-ProgressForm($Ui) {
         }
     }
     else {
-        Write-Host "✔️  Installation completed."
+        Write-Host "Installation completed."
     }
 }
 
@@ -165,6 +164,6 @@ function Test-UIAvailable {
         Add-Type -AssemblyName System.Drawing       -ErrorAction Stop
     } catch {
         $script:UIAvailable = $false
-        Write-Host "⚙️  Headless environment detected — skipping GUI welcome screen."
+        Write-Host "Headless environment detected — skipping GUI welcome screen."
     }
 }

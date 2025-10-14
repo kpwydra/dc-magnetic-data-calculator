@@ -1,4 +1,4 @@
-# 🧰 --- Install GNU Make ---------------------------------------------
+﻿# 🧰 --- Install GNU Make ---------------------------------------------
 # Installs GNU Make using Chocolatey if available.
 # Logs success or failure and continues gracefully if Chocolatey is missing.
 # Example:
