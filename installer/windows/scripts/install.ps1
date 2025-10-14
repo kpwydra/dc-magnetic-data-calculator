@@ -1,20 +1,12 @@
-﻿chcp 65001 > $null          # set console code page to UTF-8
-$OutputEncoding = [System.Text.Encoding]::UTF8
-[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-
-# --- Determine script root (works in normal PS and compiled EXE) ---
+﻿# --- Determine script root ----------------------------------------------
 if ($MyInvocation.MyCommand.Path) {
     $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 } else {
     $ScriptRoot = Split-Path -Parent ([System.Diagnostics.Process]::GetCurrentProcess().MainModule.FileName)
 }
-
-# --- Define utils directory ---
 $UtilsDir = Join-Path $ScriptRoot 'utils'
-Write-Host "ScriptRoot — $ScriptRoot"
-Write-Host "UtilsDir   — $UtilsDir"
 
-# --- Verify required file exists ---
+# --- Verify required file exists ----------------------------------------
 $checkPath = Join-Path $UtilsDir 'admin_check.ps1'
 if (-not (Test-Path $checkPath)) {
     Write-Host "Invalid ScriptRoot — missing admin_check.ps1 in $UtilsDir"
@@ -93,3 +85,5 @@ function Start-MagBridgeInstaller {
         exit 1
     }
 }
+
+Start-MagBridgeInstaller

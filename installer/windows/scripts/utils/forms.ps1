@@ -14,6 +14,7 @@ function Show-WelcomeForm {
     try {
         Add-Type -AssemblyName System.Windows.Forms -ErrorAction Stop
         Add-Type -AssemblyName System.Drawing       -ErrorAction Stop
+        Write-Host "⚙️  OK environment detected — GUI welcome screen."
     } catch {
         $script:UIAvailable = $false
         Write-Host "⚙️  Headless environment detected — skipping GUI welcome screen."
