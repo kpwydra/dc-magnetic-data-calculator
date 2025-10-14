@@ -14,12 +14,12 @@ if (-not (Test-Path $checkPath)) {
 
 # --- Import Scripts -----------------------------------------------------
 . (Join-Path $ScriptRoot 'admin_check.ps1')
-# . (Join-Path $ScriptRoot 'logging.ps1')
-# . (Join-Path $ScriptRoot 'ui_helpers.ps1')
-# . (Join-Path $ScriptRoot 'path.ps1')
-# . (Join-Path $ScriptRoot 'forms.ps1')
-# . (Join-Path $ScriptRoot 'choco.ps1')
-# . (Join-Path $ScriptRoot 'gnu_make.ps1')
+. (Join-Path $ScriptRoot 'logging.ps1')
+. (Join-Path $ScriptRoot 'ui_helpers.ps1')
+. (Join-Path $ScriptRoot 'path.ps1')
+. (Join-Path $ScriptRoot 'forms.ps1')
+. (Join-Path $ScriptRoot 'choco.ps1')
+. (Join-Path $ScriptRoot 'gnu_make.ps1')
 
 # 🧩 --- Entry Point: Start-MagBridgeInstaller ---------------------------
 # Main controller for the MagBridge GNU Make installer.
@@ -84,5 +84,3 @@ function Start-MagBridgeInstaller {
         exit 1
     }
 }
-
-# Start-MagBridgeInstaller
