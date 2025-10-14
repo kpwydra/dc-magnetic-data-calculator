@@ -1,13 +1,27 @@
-# --- Import Scripts ------------------------------------------------------------
-. "$PSScriptRoot\utils\admin_check.ps1"
-. "$PSScriptRoot\utils\logging.ps1"
-. "$PSScriptRoot\utils\ui_helpers.ps1"
-. "$PSScriptRoot\utils\path.ps1"
-. "$PSScriptRoot\utils\forms.ps1"
-. "$PSScriptRoot\utils\choco.ps1"
-. "$PSScriptRoot\steps\gnu_make.ps1"
+# --- Determine script root (works in normal PS and compiled EXE) ---
+if ($MyInvocation.MyCommand.Path) {
+    $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+} else {
+    $ScriptRoot = Split-Path -Parent ([System.Diagnostics.Process]::GetCurrentProcess().MainModule.FileName)
+}
 
-# 🧩 --- Entry Point: Start-MagBridgeInstaller -------------------------------
+# --- Verify required file exists ---
+$checkPath = Join-Path $ScriptRoot 'admin_check.ps1'
+if (-not (Test-Path $checkPath)) {
+    Write-Host "Invalid ScriptRoot — missing admin_check.ps1 in $ScriptRoot"
+    throw "Invalid ScriptRoot — missing admin_check.ps1 in $ScriptRoot"
+}
+
+# --- Import Scripts -----------------------------------------------------
+. (Join-Path $ScriptRoot 'admin_check.ps1')
+# . (Join-Path $ScriptRoot 'logging.ps1')
+# . (Join-Path $ScriptRoot 'ui_helpers.ps1')
+# . (Join-Path $ScriptRoot 'path.ps1')
+# . (Join-Path $ScriptRoot 'forms.ps1')
+# . (Join-Path $ScriptRoot 'choco.ps1')
+# . (Join-Path $ScriptRoot 'gnu_make.ps1')
+
+# 🧩 --- Entry Point: Start-MagBridgeInstaller ---------------------------
 # Main controller for the MagBridge GNU Make installer.
 # Initializes environment, runs installation steps, and shows summary.
 # Example:
@@ -71,5 +85,4 @@ function Start-MagBridgeInstaller {
     }
 }
 
-Start-MagBridgeInstaller
-
+# Start-MagBridgeInstaller

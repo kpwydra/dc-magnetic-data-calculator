@@ -1,44 +1,42 @@
 # ============================================================
-# Makefile.windows — Professional PowerShell EXE Builder
+# Makefile.windows — Windows EXE Builder
 # ============================================================
-# Multiline PowerShell recipes use comment blocks (<# \n #>)
-# instead of '\' for safe continuation across shells.
-# ------------------------------------------------------------
 
-SHELL := powershell.exe
-.SHELLFLAGS := -NoLogo -NoProfile -ExecutionPolicy Bypass -Command
+SHELL 			:= cmd.exe
+.SHELLFLAGS 	:= /C
+
+# .SHELLFLAGS 	:= -NoLogo -NoProfile -ExecutionPolicy Bypass -Command
 
 # ------------------------------------------------------------
 # Configurable Variables
 # ------------------------------------------------------------
-BUILD_WRAPPER  		:= build_wrapper.ps1
-SCRIPTS_DIR			:= scripts
-INSTALL_SRC    		:= $(SCRIPTS_DIR)/install.ps1
-UNINSTALL_SRC  		:= $(SCRIPTS_DIR)/uninstall.ps1
-BUILD_DIR      		:= build
-INSTALL_EXE    		:= $(BUILD_DIR)/Install.exe
-UNINSTALL_EXE  		:= $(BUILD_DIR)/Uninstall.exe
-TITLE          		:= MagBridge Dependencies Installer
+ROOT_DIR      	:= $(abspath .)
+BUILD_DIR     	:= $(ROOT_DIR)/build
+SCRIPTS_DIR   	:= $(ROOT_DIR)/scripts
+UTILS_DIR     	:= $(SCRIPTS_DIR)/utils
+BUILD_WRAPPER 	:= $(SCRIPTS_DIR)/build_wrapper.ps1
+
+INSTALL_SRC   	:= $(SCRIPTS_DIR)/install.ps1
+UNINSTALL_SRC 	:= $(SCRIPTS_DIR)/uninstall.ps1
+
+INSTALL_EXE   	:= $(BUILD_DIR)/Install.exe
+UNINSTALL_EXE 	:= $(BUILD_DIR)/Uninstall.exe
+
+TITLE          	:= MagBridge Dependencies Installer
 
 # ------------------------------------------------------------
 # Targets
 # ------------------------------------------------------------
-.PHONY: all installer uninstaller clean
-all: installer uninstaller
+.PHONY: all install build-install uninstall build-uninstall clean
 
-# Build Installer Executable
-# ------------------------------------------------------------
-installer:
-	@$(SHELL) -ExecutionPolicy Bypass -File "$(BUILD_WRAPPER)" -OutDir "$(BUILD_DIR)" -Source "$(INSTALL_SRC)" -Output "$(INSTALL_EXE)" -Title "$(TITLE)"
+build-install:
+	@powershell -ExecutionPolicy Bypass -File "$(BUILD_WRAPPER)" -OutDir "$(BUILD_DIR)" -InstallSript "$(INSTALL_SRC)" -Output "$(INSTALL_EXE)" -Title "$(TITLE)"
 
-# ------------------------------------------------------------
-# Build Uninstaller Executable
-# ------------------------------------------------------------
-uninstaller:
-	@$(SHELL) -ExecutionPolicy Bypass -File "$(BUILD_WRAPPER)" -OutDir "$(BUILD_DIR)" -Source "$(UNINSTALL_SRC)" -Output "$(UNINSTALL_EXE)" -Title "$(TITLE)"
+install:
+	@powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File "$(INSTALL_SRC)"
 
-# ------------------------------------------------------------
-# Clean Build Artifacts
-# ------------------------------------------------------------
+build-uninstall:
+	@powershell -ExecutionPolicy Bypass -File "$(BUILD_WRAPPER)" -OutDir "$(BUILD_DIR)" -InstallSript "$(UNINSTALL_SRC)" -Output "$(UNINSTALL_EXE)" -Title "$(TITLE)"
+
 clean:
-	@$(SHELL) -NoProfile -ExecutionPolicy Bypass -Command "if (Test-Path \"$(OUT_DIR)\") { Remove-Item -Recurse -Force \"$(OUT_DIR)\"; Write-Host \"Cleaned $(OUT_DIR)\" } else { Write-Host \"Nothing to clean.\" }"
+	@powershell -NoProfile -ExecutionPolicy Bypass -Command "if (Test-Path \"$(OUT_DIR)\") { Remove-Item -Recurse -Force \"$(OUT_DIR)\"; Write-Host \"Cleaned $(OUT_DIR)\" } else { Write-Host \"Nothing to clean.\" }"
