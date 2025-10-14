@@ -14,6 +14,7 @@
 . "$PSScriptRoot\utils\ui_helpers.ps1"
 . "$PSScriptRoot\utils\welcome.ps1"
 . "$PSScriptRoot\utils\logging.ps1"
+. "$PSScriptRoot\steps\gnu_make.ps1"
 
 # --- Entry Point ------------------------------------------------------------
 try {
@@ -21,6 +22,7 @@ try {
     Initialize-Environment
     Show-WelcomeForm
     Start-InstallationProcess
+    Install-GnuMake -Ui $ui -Step 2 -Total $steps
     Show-FinalSummary
     Write-Host "✅ Installer finished."
 } catch {
@@ -28,77 +30,6 @@ try {
     exit 1
 }
 
-# === Step 1: Install or repair Chocolatey ===================================
-$step = 1
-Update-ProgressForm -Ui $ui -Step $step -Total $steps -Message "Ensuring Chocolatey..."
-
-try {
-    $chocoRoot = Join-Path $env:ProgramData "chocolatey"
-    $chocoBin  = Join-Path $chocoRoot "bin"
-
-    if (Get-Command choco.exe -ErrorAction SilentlyContinue) {
-        Write-LogInfo "Chocolatey already installed."
-    } else {
-        if (Test-Path $chocoRoot) {
-            Write-LogInfo "Cleaning broken Chocolatey folder..."
-            Remove-Item -Recurse -Force $chocoRoot -ErrorAction SilentlyContinue | Out-Null
-            Start-Sleep -Seconds 1
-        }
-
-        Write-LogInfo "Installing Chocolatey..."
-        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-        $env:ChocolateyUseWindowsCompression = 'false'
-        $env:ChocolateyInstall = $chocoRoot
-        $tmp = Join-Path $env:TEMP 'chocolatey\chocoInstall'
-        Remove-Item -Recurse -Force $tmp -ErrorAction SilentlyContinue | Out-Null
-
-        Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
-        Refresh-Path
-        if (Get-Command choco.exe -ErrorAction SilentlyContinue) {
-            Write-LogOk "Chocolatey installed successfully."
-        } else {
-            Write-LogFail "Chocolatey not detected after install."
-        }
-    }
-} catch {
-    Write-LogFail "Chocolatey installation failed: $($_.Exception.Message)"
-}
-
-# === Step 2: Install GNU Make ===============================================
-$step = 2
-Update-ProgressForm -Ui $ui -Step $step -Total $steps -Message "Installing GNU Make..."
-try {
-    if (Get-Command choco.exe -ErrorAction SilentlyContinue) {
-        choco install make -y --no-progress | Out-Null
-        Write-LogOk "GNU Make installed via Chocolatey."
-    } else {
-        Write-LogFail "Chocolatey not found — cannot install Make."
-    }
-} catch {
-    Write-LogFail "Make installation failed: $($_.Exception.Message)"
-}
-
-# === Step 3: Update PATH ====================================================
-$step = 3
-Update-ProgressForm -Ui $ui -Step $step -Total $steps -Message "Updating PATH..."
-try {
-    $makeDir  = "C:\ProgramData\chocolatey\lib\make\tools\install\bin"
-    $chocoBin = "C:\ProgramData\chocolatey\bin"
-
-    foreach ($dir in @($chocoBin, $makeDir)) {
-        if (Test-Path $dir) {
-            $machine = [Environment]::GetEnvironmentVariable('Path', 'Machine')
-            if (-not ($machine -split ';' | Where-Object { $_ -ieq $dir })) {
-                [Environment]::SetEnvironmentVariable('Path', "$machine;$dir", 'Machine')
-            }
-        }
-    }
-
-    Write-LogOk "PATH updated successfully."
-} catch {
-    Write-LogFail "Failed to update PATH: $($_.Exception.Message)"
-}
 
 # === Step 4: Verify GNU Make ===============================================
 $step = 4
