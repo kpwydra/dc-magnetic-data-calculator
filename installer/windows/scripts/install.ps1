@@ -72,3 +72,4 @@ function Start-MagBridgeInstaller {
 }
 
 Start-MagBridgeInstaller
+
