@@ -424,21 +424,24 @@ function Refresh-Path {
 }
 
 # === Step 1: Install or repair Chocolatey ===================================
+# === Step 1: Install or repair Chocolatey ===================================
 $step = 1
 Update-ProgressForm -Ui $ui -Step $step -Total $steps -Message "Ensuring Chocolatey..."
+
 try {
     $chocoRoot = Join-Path $env:ProgramData "chocolatey"
     $chocoBin  = Join-Path $chocoRoot "bin"
 
     if (Get-Command choco.exe -ErrorAction SilentlyContinue) {
-        Add-Info "Chocolatey already installed."
+        Write-LogInfo "Chocolatey already installed."
     } else {
         if (Test-Path $chocoRoot) {
-            Add-Info "Cleaning broken Chocolatey folder..."
+            Write-LogInfo "Cleaning broken Chocolatey folder..."
             Remove-Item -Recurse -Force $chocoRoot -ErrorAction SilentlyContinue | Out-Null
             Start-Sleep -Seconds 1
         }
-        Add-Info "Installing Chocolatey..."
+
+        Write-LogInfo "Installing Chocolatey..."
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
         $env:ChocolateyUseWindowsCompression = 'false'
         $env:ChocolateyInstall = $chocoRoot
@@ -449,13 +452,13 @@ try {
 
         Refresh-Path
         if (Get-Command choco.exe -ErrorAction SilentlyContinue) {
-            Add-Ok "Chocolatey installed successfully."
+            Write-LogOk "Chocolatey installed successfully."
         } else {
-            Add-Fail "Chocolatey not detected after install."
+            Write-LogFail "Chocolatey not detected after install."
         }
     }
 } catch {
-    Add-Fail "Chocolatey installation failed: $($_.Exception.Message)"
+    Write-LogFail "Chocolatey installation failed: $($_.Exception.Message)"
 }
 
 # === Step 2: Install GNU Make ===============================================
